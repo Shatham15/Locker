@@ -9,4 +9,11 @@ namespace lockerSystem.Controllers
             return View();
         }
     }
+    public class addorderController : Controller
+    {
+        public IActionResult addorder()
+        {
+            return View();
+        }
+    }
 }
