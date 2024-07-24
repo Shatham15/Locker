@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using lockerSystem.Models;
 
 namespace lockerSystem.Models
 {
@@ -36,5 +37,6 @@ namespace lockerSystem.Models
            .Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DBCS"));
         }
+        public DbSet<lockerSystem.Models.BookingLog>? BookingLog { get; set; }
     }
 }

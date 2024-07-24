@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using lockerSystem;
 using lockerSystem.Models;
 using System.Configuration;
+using lockerSystem.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,8 +39,8 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.HttpOnly = HttpOnlyPolicy.Always;
     options.Secure = CookieSecurePolicy.None;
 });
-
-var app = builder.Build();
+builder.Services.AddScoped<UserDomain>();
+var app = builder.Build();//???? ??????
 // Configure the HTTP request pipeline.  
 if (!app.Environment.IsDevelopment())
 {

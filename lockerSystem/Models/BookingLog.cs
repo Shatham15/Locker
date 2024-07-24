@@ -1,4 +1,4 @@
-﻿namespace lockerSystem.Models
+﻿namespace lockerSystem.Models 
 {
     public class BookingLog
     {

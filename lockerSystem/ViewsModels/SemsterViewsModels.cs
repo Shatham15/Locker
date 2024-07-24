@@ -1,4 +1,6 @@
-﻿namespace lockerSystem.Models.ViewsModels
+﻿using lockerSystem.Models;
+
+namespace lockerSystem.ViewsModels
 {
     public class SemsterViewsModels
     {

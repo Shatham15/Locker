@@ -1,0 +1,48 @@
+﻿@model lockerSystem.Models.BookingLog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>BookingLog</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.bookBy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.bookBy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.bookingStatues)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.bookingStatues)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_time)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_time)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking_Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Booking_Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.modifyBy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.modifyBy)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,4 +1,4 @@
-﻿namespace lockerSystem.Models.ViewsModels
+﻿namespace lockerSystem.ViewsModels
 {
     public class UserViewsModels
     {
