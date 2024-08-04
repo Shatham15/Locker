@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace lockerSystem.ViewsModels
+namespace lockerSystem.ViewModels
 {
-    public class UserViewsModels
+    public class UserViweModele
     {
         public int Id { get; set; }
-        [Required(ErrorMessage ="هذا الحقل مطلوب")]
-        [DisplayName("اسم المستخدم")]
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [DisplayName("الاسم")]
         public string fullName { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        [DisplayName("البريد الإلكتروني")]
+        [DisplayName("البريد الالكتروني")]
         public string email { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("كلمة المرور")]
