@@ -27,6 +27,7 @@ namespace lockerSystem.Controllers
             if(ModelState.IsValid)
             {
                 _userDomain.addUser(user);
+                return RedirectToAction("Index");
             }
             return View(user);
         }
