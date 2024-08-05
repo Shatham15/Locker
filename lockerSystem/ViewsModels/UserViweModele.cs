@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace lockerSystem.ViewModels
+namespace lockerSystem.ViewsModels
 {
     public class UserViweModele
     {
