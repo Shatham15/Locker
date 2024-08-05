@@ -1,5 +1,4 @@
 ﻿using lockerSystem.Models;
-
 using lockerSystem.ViewsModels;
 
 namespace lockerSystem.Domain
