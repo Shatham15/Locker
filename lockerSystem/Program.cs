@@ -43,6 +43,9 @@ builder.Services.AddScoped<UserDomain>();
 builder.Services.AddScoped<PermissionDomain>();
 builder.Services.AddScoped<BookingDomain>();
 
+builder.Services.AddScoped<FloorDomain>();
+
+
 
 builder.Services.AddScoped<BuildingDomain>();
 var app = builder.Build();//???? ??????

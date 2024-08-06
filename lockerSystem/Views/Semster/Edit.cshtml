@@ -1,0 +1,90 @@
+﻿ @model SemsterViewsModels
+ 
+<div class="block mb-4">
+    <div class="block-header border-bottom px-4 py-4">
+        <h5 class="m-0"> تعديل فصل دراسي</h5>
+    </div>
+    <div class="block-body py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <script>
+    @{
+        if (@ViewData["Successful"] != null)
+        {
+            <Text>
+                                var result = '@Html.Raw(ViewData["Successful"])';
+            Swal.fire(result, '', 'success')
+                .then(
+                    function () {
+                        window.location.href = '@Url.Action("Index", "Semster")';
+                    }
+                );
+            </Text>
+        }
+        else if (@ViewData["Falied"] != null)
+        {
+            <Text>
+                                var result = '@Html.Raw(ViewData["Falied"])';
+            Swal.fire(result, '', 'error')
+                
+            </Text>
+        }
+    }
+</script>
+                <form asp-action="Edit">
+                    <input hidden asp-for="Guid" />
+                    <div class="row">
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="startSemster" class="mb-1"> </label>
+                                <input asp-for="startSemster" type="date" class="form-control">
+                                <span asp-validation-for="startSemster" class="text-danger"></span>
+                            </div>
+                        </div><!-- END ITEM -->
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="endSemster" class="mb-1"> </label>
+                                <input asp-for="endSemster" type="date" class="form-control">
+                                <span asp-validation-for="endSemster" class="text-danger"></span>
+
+                            </div>
+                        </div><!-- END ITEM -->
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="semsterNameAr" class="mb-1"> </label>
+                                <input asp-for="semsterNameAr" type="text" class="form-control">
+                                <span asp-validation-for="semsterNameAr" class="text-danger"></span>
+
+                            </div>
+                        </div><!-- END ITEM -->
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="semsterNameEn" class="mb-1"> </label>
+                                <input asp-for="semsterNameEn" type="text" class="form-control">
+                                <span asp-validation-for="semsterNameEn" class="text-danger"></span>
+
+                            </div>
+                        </div><!-- END ITEM -->
+
+
+
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary px-5" title="save">حفظ</button>
+                    </div>
+                </form>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
