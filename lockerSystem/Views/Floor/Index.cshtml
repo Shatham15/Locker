@@ -1,0 +1,64 @@
+﻿ @model IEnumerable<lockerSystem.ViewsModels.FloorViewsModels> ;
+<script>
+    @{
+        if (@ViewData["Successful"] != null)
+        {
+            <Text>
+                                                    var result = '@Html.Raw(ViewData["Successful"])';
+                    Swal.fire(result, '', 'success')
+                        .then(
+                            function () {
+                                window.location.href = '@Url.Action("Index", "Floor")';
+                            }
+                        );
+            </Text>
+        }
+        else if (@ViewData["Falied"] != null)
+        {
+            <Text>
+                                                    var result = '@Html.Raw(ViewData["Falied"])';
+                    Swal.fire(result, '', 'error');
+            </Text>
+        }
+    }
+</script>
+<div class="block mb-4">
+    <div class="block-header border-bottom px-4 py-3">
+        <h5 class="m-0">الطوابق</h5>
+        <div class="d-flex gap-2">
+            <div class="form-group">
+                <input type="text" class="form-control table__quick_search"
+                       placeholder="البحث السريع ...">
+            </div>
+            <a asp-action="addFloor" class="btn btn-primary">إضافة طابق</a>
+        </div>
+    </div>
+    <div class="block-body">
+        <table class="table table-hover js-dataTable">
+            <thead>
+                <tr>
+                    <th> @Html.DisplayNameFor(m => m.no)</th>
+                    <th> @Html.DisplayNameFor(m => m.BuildingName)</th>
+                    @* <th> @Html.DisplayNameFor(m => m.userType)</th> *@
+                    <th class=""></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                        <tr class="cursor-pointer">
+                            <td>@x.no</td>
+                            <td>@x.BuildingName</td>
+                        @*  <td>@x.userType</td> *@
+                            <td class="action_td text-end">
+                                <a asp-action="Edit" asp-route-id="@x.Guid" class="btn btn-sm btn-success">تعديل</a>
+                                <a asp-action="delete" asp-route-id="@x.Guid" class="btn btn-sm btn-danger">حذف</a>
+                            </td>
+                        </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
