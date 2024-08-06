@@ -58,36 +58,7 @@
                     </div>
                 </form>
                 
-               <script>
-                @{
-                    <script >
-                                            import Swal from 'sweetalert2'
-
-                        // or via CommonJS
-                        const Swal = require('sweetalert2')
-                    </script>
-                    <text>
-
-
-                        function submitForm()
-                        {
-                        if ($('#fullName').val() === '' || $('#email').val() === '')|| $('#password').val() === '') $('#phone').val() === '') $('#userType').val() === '') {
-                        Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Please fill in all the required fields!'
-                        });
-                        } else
-                        {
-                        $('#addUserForm').submit();
-                        }
-                    
-                    </text>
-                   
-
-
-                }
-                   </script>
+              
                 
 
 
