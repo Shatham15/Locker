@@ -1,6 +1,5 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewsModels;
-using Microsoft.EntityFrameworkCore;
 
 namespace lockerSystem.Domain
 {
@@ -11,43 +10,34 @@ namespace lockerSystem.Domain
         {
             _context = context;
         }
-        public async Task<IEnumerable<UserViewsModels>>   GetAllUsers() {
-
-            return await  _context.tblUser.Select(x=> new UserViewsModels
-            {
-                Id = x.Id,
-                email = x.email, 
-                fullName = x.fullName,
-                password = x.password,
-                phone = x.phone,
-                userType = x.userType
-            }).ToListAsync();// select * from tblUser
-        }
-        public string addUser(UserViewsModels user)
+        public IEnumerable<UserViweModele> GetAllUsers()
         {
-            tblUser userinfo=new tblUser();
+            return _context.tblUser.Select(X => new UserViweModele
+            {
+                Id = X.Id,
+                email = X.email,
+                fullName = X.fullName,
+                password = X.password,
+                phone = X.phone,
+                userType = X.userType
+            });// select * from tblUser
+        }
+        public string addUser(UserViweModele user)
+        {
+            tblUser userinfo = new tblUser();
             userinfo.fullName = user.fullName;
-            userinfo.email = user.email;
             userinfo.password = user.password;
+            userinfo.email = user.email;
             userinfo.phone = user.phone;
-            userinfo.userType = user.
-        userType;
-                
-
-
+            userinfo.userType = user.userType;
             _context.Add(userinfo);
             _context.SaveChanges();
-            return "add";      
+            return "addede";
         }
-        public tblUser getUserById(int id)
+
+        public tblUser GetlUserByUserName(string UserName)
         {
-            return _context.tblUser.FirstOrDefault(x => x.Id== id);
-        }
-        public string editUser(tblUser user)
-        {
-            _context.Update(user);
-            _context.SaveChanges();
-            return "edit";
+            return _context.tblUser.FirstOrDefault(x => x.email == UserName);// select * from tblUser
         }
     }
 }

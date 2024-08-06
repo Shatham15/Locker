@@ -8,13 +8,14 @@ namespace lockerSystem.Controllers
     public class UserController : Controller
     {
         private readonly UserDomain _userDomain;
-        public UserController(UserDomain userDomain) {
+        public UserController(UserDomain userDomain)
+        {
 
             _userDomain = userDomain;
         }
-        public async Task<  IActionResult > Index()
+        public IActionResult Index()
         {
-            return View( await _userDomain.GetAllUsers());
+            return View(_userDomain.GetAllUsers());
         }
         [HttpGet]
         public IActionResult add()
@@ -22,24 +23,17 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult add(UserViewsModels user)
+        public IActionResult add(UserViweModele user)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _userDomain.addUser(user);
+                return RedirectToAction("Index");
             }
             return View(user);
-        }
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            return View(_userDomain.getUserById(id));
-        }
-        [HttpPost]
-        public IActionResult Edit(tblUser user)
-        {
-            _userDomain.editUser(user);
-            return View(user);
+
+
+
         }
 
     }

@@ -1,0 +1,98 @@
+﻿@model PermissionViweModel
+<script>
+    @{
+        if (@ViewData["Successful"] != null)
+        {
+            <Text>
+                                        var result = '@Html.Raw(ViewData["Successful"])';
+                    Swal.fire(result, '', 'success')
+                        .then(
+                            function () {
+                                window.location.href = '@Url.Action("Index", "Permission")';
+                            }
+                        );
+            </Text>
+        }
+        else if (@ViewData["Falied"] != null)
+        {
+            <Text>
+                                        var result = '@Html.Raw(ViewData["Falied"])';
+                    Swal.fire(result, '', 'error');
+            </Text>
+        }
+    }
+</script>
+<div class="block mb-4">
+    <div class="block-header border-bottom px-4 py-4">
+        <h5 class="m-0">إضافة مستخدم </h5>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <h5 class="text-danger">@ViewBag.msg</h5>
+        </div>
+    </div>
+    <div class="block-body py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form asp-action="add">
+                    <div class="row">
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="fullName" class="mb-1"> </label>
+                                <input asp-for="fullName" type="text" class="form-control">
+                                <span asp-validation-for="fullName" class="text-danger">  </span>
+
+                            </div>
+                        </div><!-- END ITEM -->
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="usrName" class="mb-1"> </label>
+                                <input asp-for="usrName" type="text" class="form-control">
+                                <span asp-validation-for="roleName" class="text-danger">  </span>
+
+
+                            </div>
+                        </div><!-- END ITEM -->
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="roleName" class="mb-1"> </label>
+                                <select asp-for="roleId" type="text" class="form-control" asp-items="@ViewBag.roles"> </select>
+                                <span asp-validation-for="roleName" class="text-danger">  </span>
+
+                            </div>
+                        </div><!-- END ITEM -->
+                        <!-- START ITEM -->
+                        @* <div class="col-md-6">
+                        <div class="mb-4">
+                        <label asp-for="phone" class="mb-1"> </label>
+                        <input asp-for="phone" type="number" class="form-control">
+                        <span asp-validation-for="phone" class="text-danger">  </span>
+
+                        </div>
+                        </div><!-- END ITEM -->
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                        <div class="mb-4">
+                        <label asp-for="userType" class="mb-1"> </label>
+                        <input asp-for="userType" type="text" class="form-control">
+                        <span asp-validation-for="userType" class="text-danger">  </span>
+
+                        </div>
+                        </div><!-- END ITEM -->
+                        </div>  *@
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary px-5" title="save">حفظ</button>
+                        </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
