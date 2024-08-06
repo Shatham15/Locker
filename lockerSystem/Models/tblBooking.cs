@@ -8,7 +8,7 @@
         public DateTime  bokingDateTime { get; set; }
         public string fullName { get; set; }
         public string email { get; set; }
-        public int phone { get; set; }
+        public string phone { get; set; }
         public tblBookingState BookingState { get; set; }
         public int BookingStateId { get; set; }
         public tblLocker Locker { get; set; }
