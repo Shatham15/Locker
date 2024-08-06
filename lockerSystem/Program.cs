@@ -41,6 +41,9 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 });
 builder.Services.AddScoped<UserDomain>();
 builder.Services.AddScoped<PermissionDomain>();
+builder.Services.AddScoped<FloorDomain>();
+
+
 
 builder.Services.AddScoped<BuildingDomain>();
 var app = builder.Build();//???? ??????
