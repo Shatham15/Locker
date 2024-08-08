@@ -42,7 +42,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 builder.Services.AddScoped<UserDomain>();
 builder.Services.AddScoped<PermissionDomain>();
 builder.Services.AddScoped<BookingDomain>();
-
+builder.Services.AddScoped<ManagementDomain>();
 builder.Services.AddScoped<FloorDomain>();
 
 
