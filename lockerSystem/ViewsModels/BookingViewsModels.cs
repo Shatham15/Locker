@@ -7,7 +7,7 @@ namespace lockerSystem.ViewsModels
     public class BookingViewsModels
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; } = Guid.NewGuid();
+        public Guid Guid { get; set; }
         public bool IsDeleted { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("التاريخ والوقت المحدد")]
@@ -32,6 +32,15 @@ namespace lockerSystem.ViewsModels
         public tblSemster Semster { get; set; }
         public int SemsterId { get; set; }
         [DisplayName("سبب الرفض")]
-        public string? rejectionReason { get; set; }
+        public string rejectionReason { get; set; }
+        [DisplayName("اسم المبنى")]
+        public string colegename { get; set; }
+        public int  floornumer { get; set; }
+
+        public int BuildingId { get; set; }
+        public IEnumerable<tblBuilding> Buildings { get; set; }
+        public int FloorId { get; set; }
+        public IEnumerable<tblFloor> Floors { get; set; } = new List<tblFloor>();
+
     }
 }
