@@ -1,6 +1,7 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 
 
@@ -11,7 +12,7 @@ namespace lockerSystem.Domain
     {
         private readonly BuildingDomain _buildingDomain;
         private readonly LockerSystemContext _context;
-        public BookingDomain(LockerSystemContext context , BuildingDomain buildingDomain)
+        public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain)
         {
             _context = context;
             _buildingDomain = buildingDomain;
@@ -20,11 +21,8 @@ namespace lockerSystem.Domain
 
         {
 
-            var u = await _context.tblBooking.Include(x => x.BookingState).Include(y => y.Locker).ThenInclude(g => g.Floor).Where(x => x.IsDeleted == false ).ToListAsync();
             return await _context.tblBooking.Include(x => x.BookingState).Include(y => y.Locker).ThenInclude(g => g.Floor).Select(x => new BookingViewsModels
             {
-
-
                 Id = x.Id,
                 bokingDateTime = x.bokingDateTime,
                 Guid = x.Guid,
@@ -40,7 +38,7 @@ namespace lockerSystem.Domain
                 Semster = x.Semster,
                 SemsterId = x.SemsterId,
                 floornumer = x.Locker.Floor.no,
-                colegename =  x.Locker.Floor.Building.NameAr,
+                colegename = x.Locker.Floor.Building.NameAr,
 
             }).ToListAsync();
 
@@ -49,10 +47,10 @@ namespace lockerSystem.Domain
         {
             try
             {
-              tblBuilding booking1 = new tblBuilding();
+                tblBuilding booking1 = new tblBuilding();
                 booking1.NameAr = booking.colegename;
 
-              tblFloor floor = new tblFloor();
+                tblFloor floor = new tblFloor();
                 floor.no = booking.floornumer;
 
                 _context.Add(booking1);
@@ -69,13 +67,13 @@ namespace lockerSystem.Domain
 
 
         }
-
         public IEnumerable<tblBooking> getBook()
         {
             return _context.tblBooking;
         }
-    
+       
 
-    } }
+        }
+    }
 
 
