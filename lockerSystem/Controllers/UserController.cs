@@ -11,10 +11,12 @@ namespace lockerSystem.Controllers
     public class UserController : Controller
     {
         private readonly UserDomain _userDomain;
-        public UserController(UserDomain userDomain)
+        private readonly PermissionDomain _permissionDomain;
+        public UserController(UserDomain userDomain, PermissionDomain permissionDomain)
         {
 
             _userDomain = userDomain;
+            _permissionDomain = permissionDomain;
         }
         public IActionResult Index()
         {
@@ -77,11 +79,16 @@ namespace lockerSystem.Controllers
                 }
                 else
                 {
-
+                    string Role = "";
+                    tblPermission model = _permissionDomain.getUserModelByUserName(User.email);
+                    if (model == null)
+                        Role = "NoRole";
+                    else
+                        Role = model.Role.RoleNameEn;
                     var identity = new ClaimsIdentity(new[]
                     {
                     new Claim(ClaimTypes.Name, User.fullName),
-                    new Claim(ClaimTypes.Role, User.userType),
+                    new Claim(ClaimTypes.Role, Role),
                     new Claim(ClaimTypes.NameIdentifier, User.Id.ToString()),
                     new Claim(ClaimTypes.GivenName, User.fullName)
 
@@ -92,8 +99,8 @@ namespace lockerSystem.Controllers
                     await HttpContext.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         principal);
-                    if(User.userType == "Admin"|| User.userType=="student"|| User.userType=="staff")
-                    return RedirectToAction("Index", "Home");
+                    if(Role == "Admin")
+                        return RedirectToAction("Index", "Home");
                     else
                         return RedirectToAction("authorization", "Home");
 
