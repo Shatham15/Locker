@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+<!DOCTYPE html>
 <html lang="en" dir="rtl" data-theme="light">
 
 <head>
@@ -41,19 +42,24 @@
             </div>
             <div class="menu_links">
                 <ul>
-                    <li>
-                        <a href="@Url.Action("Index","Home")">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
-                                </rect>
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor"></rect>
-                            </svg>
-                            <span>الرئيسية</span>
-                        </a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.FindFirst(ClaimTypes.Role).Value == "Admin"){
+                            <li>
+                                <a href="@Url.Action("Index","Home")">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
+                                        <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
+                                        <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
+                                        </rect>
+                                        <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor"></rect>
+                                    </svg>
+                                    <span>الرئيسية</span>
+                                </a>
+                            </li>
+                    }
+                    }
                     <li>
                         <a href="orders.html" class="active">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
