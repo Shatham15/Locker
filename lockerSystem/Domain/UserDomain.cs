@@ -1,10 +1,12 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using System.Text;
 
 namespace lockerSystem.Domain
 {
-    public class UserDomain
+    public class UserDomain 
     {
+
         private readonly LockerSystemContext _context;
         public UserDomain(LockerSystemContext context)
         {
@@ -40,5 +42,23 @@ namespace lockerSystem.Domain
         {
             return _context.tblUser.FirstOrDefault(x => x.email == UserName);// select * from tblUser
         }
+        public UserViweModele GetUsersForLogin(UserViweModele UsertInfo)
+        {
+           var data= _context.tblUser.FirstOrDefault(x => x.email == UsertInfo.email && x.password == UsertInfo.password )  ;// select * from tblUser
+            
+            return new UserViweModele
+            { userType = data.userType,
+                fullName = data.fullName,
+                Id =data.Id,
+                phone = data.phone,
+
+
+
+
+            };
+        }
+
+
+
     }
 }

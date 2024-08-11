@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using lockerSystem.Models;
 
@@ -11,9 +12,10 @@ using lockerSystem.Models;
 namespace lockerSystem.Migrations
 {
     [DbContext(typeof(LockerSystemContext))]
-    partial class LockerSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20240808004500_changePhoneToString")]
+    partial class changePhoneToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

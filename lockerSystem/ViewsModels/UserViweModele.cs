@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using lockerSystem.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace lockerSystem.ViewsModels
@@ -21,5 +22,7 @@ namespace lockerSystem.ViewsModels
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("نوع المستخدم")]
         public string userType { get; set; }
+
+       
     }
 }

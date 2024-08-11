@@ -1,9 +1,20 @@
-﻿@model IEnumerable<lockerSystem.ViewsModels.BookingViewsModels>;
+﻿@model IEnumerable<BookingViewsModels>;
 
-
+@* 
 <div class="block mb-4">
     
-   <div class="card">
+   <div class="card"> *@
+<div class="block mb-4">
+    <div class="block-header border-bottom px-4 py-3">
+        <h5 class="m-0">المستخدمين</h5>
+        <div class="d-flex gap-2">
+            <div class="form-group">
+                <input type="text" class="form-control table__quick_search"
+                       placeholder="البحث السريع ...">
+            </div>
+            <a asp-action="add" class="btn btn-primary">حجز خزانة</a>
+        </div>
+    </div> 
 
  
     
@@ -16,30 +27,18 @@
                     <table class="table table-hover table-striped table-bordered" id="myTable">
                         <thead>
                             <tr>
-                                @* <th>@Html.DisplayNameFor(m => m.bokingDateTime)</th> *@
                                 <th>@Html.DisplayNameFor(m => m.fullName)</th>
                                 <th> @Html.DisplayNameFor(m => m.email)</th>
                                 <th> @Html.DisplayNameFor(m => m.phone)</th>
                                 <th>  @Html.DisplayNameFor(m => m.BookingState.NameAr) </th>
-                                <th>    @Html.DisplayNameFor(m => m.rejectionReason)  </th>
 
-                           @*      <th> @Html.DisplayNameFor(m => m.BookingState.NameEn)th> *@
                                 <th>@Html.DisplayNameFor(m => m.Locker.Floor.no) </th>
                                 <th>@Html.DisplayNameFor(m => m.Locker.no)</th>
-                                <th>@Html.DisplayNameFor(m => m.Locker.LockerState.stateAr)  </th>
-                             @*    <th>  @Html.DisplayNameFor(m => m.Locker.LockerState.stateEn) </th> 
-                               <th>  @Html.DisplayNameFor(m => m.Locker.Floor.Building.NameEn)  </th>
-                                <th> @Html.DisplayNameFor(m => m.Locker.Floor.Building.NameAr) </th>
-                                <th> @Html.DisplayNameFor(m => m.Locker.Floor.Building.no)   </th>
-                                 <th> @Html.DisplayNameFor(m => m.Locker.Floor.Building.code)   </th>*@
-                                <th> @Html.DisplayNameFor(m => m.Semster.semsterNameAr)  </th>
-
-                                <th> @Html.DisplayNameFor(m => m.Semster.startSemster) </th>
-                                <th> @Html.DisplayNameFor(m => m.Semster.endSemster)    </th>
+                                <th>@Html.DisplayNameFor(m => m.colegename)  </th>
+                                <th></th>
 
 
-@*                                 <th>    @Html.DisplayNameFor(m => m.Semster.semsterNameEn) </th>
- *@                            </tr>
+                           </tr>
                         </thead>
                         <tbody>
                             @{
@@ -51,27 +50,9 @@
                                         <td>@item.email</td>
                                         <td>@item.phone</td>
                                         <td>@item.BookingState.NameAr</td>
-                                        <td>@item.rejectionReason</td>
-
-                                        @*<td>@item.BookingState.NameEn</td>*@
-                                        <td>@item.Locker.no</td>
                                         <td>@item.Locker.Floor.no</td>
-                                        <td>@item.Locker.LockerState.stateAr</td>
-                                        @* <td>@item.Locker.LockerState.stateEn</td>*@
-                                        @* <td>@item.Locker.Floor.Building.NameEn</td*@
-                                        <td>@item.Locker.Floor.Building.NameAr</td>
-                                        @* <td>@item.Locker.Floor.Building.no</td>*@
-                                        @*<td>@item.Locker.Floor.Building.code</td>*@
-                                        <td>@item.Semster.startSemster</td>
-                                        <td>@item.Semster.endSemster</td>
-                                        <td>@item.Semster.semsterNameAr</td>
-
-                                        @*<td>@item.Semster.semsterNameEn</td>*@
-
-
-
-
-
+                                        <td>@item.Locker.no</td>
+                                        <td>@item.colegename</td>
                                         <td>
                                             <a asp-action="add" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> اضافة</a>
 
@@ -86,11 +67,14 @@
                         </tbody>
                     </table>
                        
-
-                            <a asp-action="add" class="btn btn-primary">حجز خزانة</a>
+                
                        
                 </div>
+
             </div>
+
         </div>
-    </div>
+    </div                
+
+
 </div>

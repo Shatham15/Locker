@@ -21,7 +21,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
             .AddCookie(options =>
             {
                 options.AccessDeniedPath = "/Home/Error";
-                options.LoginPath = "/account/login";
+                options.LoginPath = "/User/login";
                 options.ExpireTimeSpan = TimeSpan.FromDays(1);
                 //options.LoginPath = "/accounts/ErrorNotLoggedIn";
                 //options.LogoutPath = "account/logout";
