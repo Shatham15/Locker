@@ -92,14 +92,16 @@
                         <div class="col-md-6">
                             <div class="mb-4">
                                 <label  class="mb-1" asp-for="BuildingId">  اختر الكلية</label>
-                                <select type="text" class="form-control" asp-for="BuildingId" asp-items="@(new SelectList(Model.Buildings, "Id","NameAr"))"> </select>
+                                <select class="form-control" asp-for="BuildingId" id="BuildingId" asp-items="@ViewBag.Building"> </select>
                             </div>
-                        </div><!-- END ITEM -->
+                        </div>
+                        </div>
+                        <!-- END ITEM -->
                         <!-- START ITEM -->
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label class="mb-1" asp-for="FloorId"> اختر الطابق</label>
-                                <select type="text" class="form-control" asp-for="FloorId" asp-items="@(new SelectList(Model.Floors, "Id","no"))"> </select>
+                            <label class="mb-1" asp-for="FloorId"> اختر الطابق</label>
+                            <select class="form-control" id="FloorId" asp-for="FloorId"> </select>
                             </div>
                         </div><!-- END ITEM -->
                         @* <!-- START ITEM -->
@@ -146,17 +148,24 @@
         </div>
     </div>
 </div>
+<script>
+
+    $(document).ready(function () {
+        showValue($("#BuildingId").val());
+    });
 
 
+    $("#BuildingId").on("change", function () {
+        showValue($(this).val());
+    });
 
-                </div>
-            </section><!-- End Page Wrap -->
-<!-- Start Footer -->
-<footer class="d-flex justify-content-center align-items-center">
-    <p class="m-0 d-flex justify-content-center">
-        جميع الحقوق محفوظة لجامعة الملك فيصل 2024 © | تصميم وتطوير
-        عمادة التعلم الإلكتروني وتقنية المعلومات
-    </p>
-</footer><!-- End Footer -->
-        </main><!-- End Content wrapper -->
-    </main>
+    function showValue(val) {
+        $.getJSON('@Url.Action("getFloorByBuildingId", "Booking")/' + val, function (result) {
+            console.log(result);
+            $("#FloorId").html(""); // makes select null before filling process
+            for (var i = 0; i < result.length; i++) {
+                $("#FloorId").append("<option value='" + result[i].id + "'>" + result[i].no + "</option>")
+            }
+        });
+    }
+</script>
