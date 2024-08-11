@@ -56,6 +56,7 @@ namespace lockerSystem.Domain
             };
             return floorViewsModels;
         }
+        //
         public FloorViewsModels getFloorByBuildingId(int BuildingId)
         {
             var FloorById = _context.tblFloor.Include(s => s.Building).FirstOrDefault(x => x.BuildingId == BuildingId);
