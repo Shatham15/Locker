@@ -32,7 +32,7 @@
                         <td>@x.no</td>
                         
                         <td class="action_td text-end">
-                            <a asp-action="Edit" asp-route-id="@x.Guid" class="btn btn-sm btn-success">تعديل</a>
+                            <a asp-action="Edit" asp-route-id="@x.Guid" asp-route-id="@x.Id" class="btn btn-sm btn-success">تعديل</a>
                             <a asp-action="Delete" asp-route-id="@x.Guid" class="btn btn-sm btn-danger">حذف</a>
                         </td>
                     </tr>
