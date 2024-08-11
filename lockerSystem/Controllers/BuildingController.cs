@@ -4,7 +4,7 @@ using lockerSystem.ViewsModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
+//sha
 namespace lockerSystem.Controllers
 {
     public class BuildingController : Controller

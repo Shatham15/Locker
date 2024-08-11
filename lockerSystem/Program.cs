@@ -44,10 +44,10 @@ builder.Services.AddScoped<PermissionDomain>();
 builder.Services.AddScoped<BookingDomain>();
 builder.Services.AddScoped<ManagementDomain>();
 builder.Services.AddScoped<FloorDomain>();
-
-
-
 builder.Services.AddScoped<BuildingDomain>();
+
+
+
 var app = builder.Build();//???? ??????
 // Configure the HTTP request pipeline.  
 if (!app.Environment.IsDevelopment())
