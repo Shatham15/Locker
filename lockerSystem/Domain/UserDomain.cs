@@ -12,6 +12,7 @@ namespace lockerSystem.Domain
         {
             _context = context;
         }
+        //lll
         public IEnumerable<UserViweModele> GetAllUsers()
         {
             return _context.tblUser.Select(X => new UserViweModele

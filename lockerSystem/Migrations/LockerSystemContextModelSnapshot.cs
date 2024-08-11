@@ -22,6 +22,34 @@ namespace lockerSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("lockerSystem.Models.BookingLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Booking_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("bookBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bookingStatues")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("date_time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modifyBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BookingLog");
+                });
+
             modelBuilder.Entity("lockerSystem.Models.tblBooking", b =>
                 {
                     b.Property<int>("Id")
@@ -49,15 +77,13 @@ namespace lockerSystem.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("phone")
-                        .HasColumnType("int");
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("rejectionReason")
                         .HasColumnType("nvarchar(max)");
@@ -88,11 +114,9 @@ namespace lockerSystem.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("NameAr")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameEn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -115,15 +139,12 @@ namespace lockerSystem.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("NameAr")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameEn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("no")
@@ -208,11 +229,9 @@ namespace lockerSystem.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("stateAr")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("stateEn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -235,7 +254,6 @@ namespace lockerSystem.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("value")
@@ -264,11 +282,9 @@ namespace lockerSystem.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("fullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -293,11 +309,9 @@ namespace lockerSystem.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("RoleNameAr")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoleNameEn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -323,11 +337,9 @@ namespace lockerSystem.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("semsterNameAr")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("semsterNameEn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("startSemster")
@@ -352,22 +364,18 @@ namespace lockerSystem.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("phone")
                         .HasColumnType("int");
 
                     b.Property<string>("userType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

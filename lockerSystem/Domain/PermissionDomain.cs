@@ -33,6 +33,7 @@ namespace lockerSystem.Domain
         {
             try
             {
+                //gg//l,ll
                 var user = _UserDomain.GetlUserByUserName(permission.usrName);
                 if (user != null)
                 {

@@ -60,8 +60,26 @@ namespace lockerSystem.Domain
                 Guid = Buildinginfo.Guid,
 
             }; return models;
+            
 
            
+        }
+        public string getBuildingNameById(int id)
+        {
+            var Buildinginfo =  _context.tblBuilding.AsNoTracking().FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
+            BuildingViewsModels models = new BuildingViewsModels
+            {
+                code = Buildinginfo.code,
+                no = Buildinginfo.no,
+                NameAr = Buildinginfo.NameAr,
+                NameEn = Buildinginfo.NameEn,
+                Guid = Buildinginfo.Guid,
+
+            }; 
+            return models.NameAr;
+
+
+
         }
         public tblBuilding getBuildingByGuid(Guid id)
         {
