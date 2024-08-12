@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 namespace lockerSystem.Controllers
+    //sh
 {
     public class UserController : Controller
     {
@@ -80,7 +81,7 @@ namespace lockerSystem.Controllers
                 else
                 {
                     string Role = "";
-                    tblPermission model = _permissionDomain.getUserModelByUserName(User.email);
+                    tblPermission model = _permissionDomain.getUserModelByUserName(UserInfo.email);
                     if (model == null)
                         Role = "NoRole";
                     else
