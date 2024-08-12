@@ -29,69 +29,7 @@
                 </form>
                     </div>
 
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary px-5" title="save">عرض الخزائن</button>
-                    </div>
-            </div>
-        </div>
-    </div>
-<div class="block mb-4">
-    <div class="block-header border-bottom px-4 py-4">
-        <h5 class="m-0">الخزائن</h5>
-    </div>
-    <div class="block-body py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped table-bordered" id="myTable">
-                        <thead>
-                            <tr>
-                                <th>@Html.DisplayNameFor(m => m.fullName)</th>
-                                <th> @Html.DisplayNameFor(m => m.email)</th>
-                                <th> @Html.DisplayNameFor(m => m.phone)</th>
-                                <th>  @Html.DisplayNameFor(m => m.BookingState.NameAr) </th>
-
-                                <th>@Html.DisplayNameFor(m => m.Locker.Floor.no) </th>
-                                <th>@Html.DisplayNameFor(m => m.Locker.no)</th>
-                                <th>@Html.DisplayNameFor(m => m.colegename)  </th>
-                                <th></th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                foreach (var item in Model)
-                                {
-                                    <tr>
-                                        @* <td>@item. bokingDateTime</td>*@
-                                        <td>@item.fullName</td>
-                                        <td>@item.email</td>
-                                        <td>@item.phone</td>
-                                        <td>@item.BookingState.NameAr</td>
-                                        <td>@item.Locker.Floor.no</td>
-                                        <td>@item.Locker.no</td>
-                                        <td>@item.colegename</td>
-                                        <td>
-                                            <a asp-action="add" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> اضافة</a>
-
-                                        </td>
-
-
-                                    </tr>
-
-
-                                }
-                            }
-                        </tbody>
-                    </table>
-
-
-
-                </div>
-        </div>
-    </div>
-</div>
+                   
 <script>
 
     $(document).ready(function () {
