@@ -9,9 +9,15 @@ namespace lockerSystem.Controllers
     public class BookingController : Controller
     {
         private readonly BookingDomain _domain;
-        public BookingController(BookingDomain domain)
+        private readonly BuildingDomain _buildingDomain;
+        private readonly FloorDomain _floorDomain;
+
+
+        public BookingController(BookingDomain domain,BuildingDomain buildingDomain, FloorDomain floorDomain)
         {
             _domain = domain;
+            _buildingDomain = buildingDomain;
+            _floorDomain = floorDomain;
         }
 
         public async Task<IActionResult> Index()
@@ -21,17 +27,21 @@ namespace lockerSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult add()
+        public async Task<IActionResult> add()
         {
-            /*ViewBag.book = new SelectList(_domain.getIdBook(), "Id" , "NameAr");*/// كيف بيجيبه وهو ماله ارتباط مباشر مع جدول البيلدينق؟؟
+            ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");/// كيف بيجيبه وهو ماله ارتباط مباشر مع جدول البيلدينق؟؟
             return View();
         }
 
         [HttpPost]
-        public IActionResult add(BookingViewsModels book)
+        public async Task<IActionResult> add(BookingViewsModels book)
         {
-            //ViewBag.book = new SelectList(_domain.getIdBook(), "Id", "NameAr");
+            ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             return View();
+        }
+        public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildingId(Guid id)
+        {
+            return await _floorDomain.getFloorByBuildinGuid(id);
         }
 
 

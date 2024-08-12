@@ -56,10 +56,36 @@ namespace lockerSystem.Domain
             };
             return floorViewsModels;
         }
+        //
+        public FloorViewsModels getFloorByBuildingId(int BuildingId)
+        {
+            var FloorById = _context.tblFloor.Include(s => s.Building).FirstOrDefault(x => x.BuildingId == BuildingId);
+            FloorViewsModels floorViewsModels = new FloorViewsModels
+            {
+                Id = FloorById.Id,
+                no = FloorById.no,
+                BuildingId = FloorById.BuildingId,
+                Building = FloorById.Building,
+                Guid = FloorById.Guid
+            };
+            return floorViewsModels;
+        }
         public tblFloor getFloorModelById(Guid id)
         {
             var FloorById = _context.tblFloor.Include(s => s.Building).FirstOrDefault(x => x.Guid == id);
             return FloorById;
+        }
+        public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildinGuid(Guid id)
+        {
+            var test =  _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id);
+            return await _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id).Select(x => new FloorViewsModels 
+            {
+                Id = x.Id,
+                no = x.no,
+                BuildingId = x.BuildingId,
+                Building = x.Building,
+                Guid = x.Guid
+            }).ToListAsync();
         }
 
         public IEnumerable<tblBuilding> GetBuilding()
