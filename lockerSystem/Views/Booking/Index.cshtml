@@ -54,16 +54,20 @@
                                         <td>@item.Locker.no</td>
                                         <td>@item.colegename</td>
                                         <td>
-                                            <a asp-action="add" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> اضافة</a>
+                                            <a asp-action="edit" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> تعديل</a>
 
                                         </td>
 
 
                                     </tr>
+     
 
 
                                 }
+                                            <a asp-controller="Home" asp-action="Index"  class="btn btn-sm btn-success"> الصفحة الرئيسية</a>
+
                             }
+
                         </tbody>
                     </table>
                        
