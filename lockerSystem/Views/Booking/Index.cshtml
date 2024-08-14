@@ -1,84 +1,118 @@
-﻿@model IEnumerable<BookingViewsModels>;
-
-@* 
+﻿@model IEnumerable<LockerViewsModels>
 <div class="block mb-4">
-    
-   <div class="card"> *@
-<div class="block mb-4">
-    <div class="block-header border-bottom px-4 py-3">
-        <h5 class="m-0">المستخدمين</h5>
-        <div class="d-flex gap-2">
-            <div class="form-group">
-                <input type="text" class="form-control table__quick_search"
-                       placeholder="البحث السريع ...">
+    <div class="block-header border-bottom px-4 py-4">
+        <h5 class="m-0">حجز جديد</h5>
+    </div>
+    <div class="block-body py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                @* asp-items="@(new SelectList(Model.Locker.Floor.Building.NameAr, "Id","NameAr"))" *@
+                <form asp-action="Index">
+                    <div class="row">
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="mb-1">  اختر المبنى</label>
+                                <select class="form-control" name="BuildingGuid" id="BuildingId" asp-items="@ViewBag.Building">
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- END ITEM -->
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="mb-1"> اختر الطابق</label>
+                                <select class="form-control" name="FloorGuid" id="FloorId"></select>
+                            </div>
+                        </div> <!-- END ITEM -->
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary px-5">عرض الخزائن</button>
+                    </div>
+                </form>
             </div>
-            <a asp-action="add" class="btn btn-primary">حجز خزانة</a>
         </div>
-    </div> 
-
- 
-    
-    <div class="card-body">
-        <div class="row">
-           <h5>عرض معلومات الحجز</h5>
-
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped table-bordered" id="myTable">
-                        <thead>
-                            <tr>
-                                <th>@Html.DisplayNameFor(m => m.fullName)</th>
-                                <th> @Html.DisplayNameFor(m => m.email)</th>
-                                <th> @Html.DisplayNameFor(m => m.phone)</th>
-                                <th>  @Html.DisplayNameFor(m => m.BookingState.NameAr) </th>
-
-                                <th>@Html.DisplayNameFor(m => m.Locker.Floor.no) </th>
-                                <th>@Html.DisplayNameFor(m => m.Locker.no)</th>
-                                <th>@Html.DisplayNameFor(m => m.colegename)  </th>
-                                <th></th>
-
-
-                           </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                foreach (var item in Model)
-                                {
-                                    <tr>
-                                        @* <td>@item. bokingDateTime</td>*@
-                                        <td>@item.fullName</td>
-                                        <td>@item.email</td>
-                                        <td>@item.phone</td>
-                                        <td>@item.BookingState.NameAr</td>
-                                        <td>@item.Locker.Floor.no</td>
-                                        <td>@item.Locker.no</td>
-                                        <td>@item.colegename</td>
-                                        <td>
-                                            <a asp-action="edit" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> تعديل</a>
-
-                                        </td>
-
-
-                                    </tr>
-     
-
-
-                                }
-                                            <a asp-controller="Home" asp-action="Index"  class="btn btn-sm btn-success"> الصفحة الرئيسية</a>
-
-                            }
-
-                        </tbody>
-                    </table>
-                       
-                
-                       
-                </div>
-
-            </div>
-
-        </div>
-    </div                
-
-
+    </div>
 </div>
+@{
+if(Model != null)
+{
+    <div class="block mb-4">
+        <div class="block-header border-bottom px-4 py-4">
+            <h5 class="m-0">الخزائن</h5>
+        </div>
+        <div class="block-body py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped table-bordered" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(m => m.no)</th>
+                                    <th> @Html.DisplayNameFor(m => m.Floor.Building.NameAr)</th>
+                                    <th> @Html.DisplayNameFor(m => m.Floor.no)</th>
+                                    <th> @Html.DisplayNameFor(m => m.LockerState.stateAr)</th>
+                                    <th></th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.no</td>
+                                            <td>@item.Floor.Building.NameAr</td>
+                                            <td>@item.Floor.no</td>
+                                            <td>@item.LockerState.stateAr</td>
+
+                                            <td>
+                                                <a asp-action="SubmitOrder" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
+
+                                            </td>
+
+
+                                        </tr>
+
+
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+}
+<script>
+
+    $(document).ready(function () {
+        // $("#FloorId").append("<option value=0>" "اختر الطابق" "</option>")
+        showValue($("#BuildingId").val());
+    });
+
+
+    $("#BuildingId").on("change", function () {
+        showValue($(this).val());
+    });
+
+    function showValue(val) {
+        $.getJSON('@Url.Action("getFloorByBuildingId", "Booking")/' + val, function (result) {
+            // console.log(result);
+            $("#FloorId").html(""); // makes select null before filling process
+            //$("#FloorId").append("<option value=0>" "اختر الطابق" "</option>")
+            for (var i = 0; i < result.length; i++) {
+                $("#FloorId").append("<option value='" + result[i].guid + "'>" + result[i].no + "</option>")
+            }
+        });
+    }
+</script>
+

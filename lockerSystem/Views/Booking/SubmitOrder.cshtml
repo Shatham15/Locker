@@ -36,8 +36,9 @@
             </div>
         </div>
     </div>
+@if (ViewBag.locker != null){
  <div class="block mb-4">
-
+     
     <div class="block-header border-bottom px-4 py-4">
         <h5 class="m-0">الخزائن</h5>
     </div>
@@ -73,7 +74,7 @@
                                         <td>@item.LockerState.stateAr</td>
                               
                                         <td>
-                                            <a asp-action="add" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
+                                            <a asp-action="subme" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
 
                                         </td>
 
@@ -93,7 +94,7 @@
     </div>
 </div>
 </div>
-
+}
 <script>
 
     $(document).ready(function () {

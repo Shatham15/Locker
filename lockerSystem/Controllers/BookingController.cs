@@ -13,37 +13,43 @@ namespace lockerSystem.Controllers
         private readonly FloorDomain _floorDomain;
 
 
-        public BookingController(BookingDomain domain,BuildingDomain buildingDomain, FloorDomain floorDomain)
+        public BookingController(BookingDomain domain, BuildingDomain buildingDomain, FloorDomain floorDomain)
         {
             _domain = domain;
             _buildingDomain = buildingDomain;
             _floorDomain = floorDomain;
         }
-
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()//index search
         {
-            
-            return View(await _domain.GetAllbooking());
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> add()
-        {
-            ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");/// كيف بيجيبه وهو ماله ارتباط مباشر مع جدول البيلدينق؟؟
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> add(BookingViewsModels book)
-        {
+            //var booking = await _buildingDomain.GetAllBuildings();
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             return View();
         }
-        public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildingId(Guid id)
+        [HttpPost]
+        public async Task<IActionResult> Index(Guid? BuildingGuid, Guid? FloorGuid)
         {
-            return await _floorDomain.getFloorByBuildinGuid(id);
+            ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr", BuildingGuid);
+            //ViewData["locker"];
+            return View(await _domain.getLockerwithFilter(BuildingGuid, FloorGuid));
         }
 
+        public async Task<IActionResult> Orders()//index
+        {
 
+            return View(await _domain.GetAllbooking());
+        }
+
+        public async Task<IActionResult> SubmitOrder()//add
+        {
+
+            return View(await _domain.GetAllbooking());
+        }
+        public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildingId(Guid id)
+        {
+
+            return await _floorDomain.getFloorByBuildinGuid(id);
+        }
     }
 }
+    
+
