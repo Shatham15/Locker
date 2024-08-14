@@ -11,13 +11,15 @@ namespace lockerSystem.Controllers
         private readonly BookingDomain _domain;
         private readonly BuildingDomain _buildingDomain;
         private readonly FloorDomain _floorDomain;
+        private readonly LockerDomain _lockerDomain;
 
 
-        public BookingController(BookingDomain domain, BuildingDomain buildingDomain, FloorDomain floorDomain)
+        public BookingController(BookingDomain domain, BuildingDomain buildingDomain, FloorDomain floorDomain, LockerDomain lockerDomain)
         {
             _domain = domain;
             _buildingDomain = buildingDomain;
             _floorDomain = floorDomain;
+            _lockerDomain = lockerDomain;
         }
         public async Task<IActionResult> Index()//index search
         {
@@ -30,7 +32,7 @@ namespace lockerSystem.Controllers
         {
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr", BuildingGuid);
             //ViewData["locker"];
-            return View(await _domain.getLockerwithFilter(BuildingGuid, FloorGuid));
+            return View(await _lockerDomain.getLockerwithFilter(BuildingGuid, FloorGuid));
         }
 
         public async Task<IActionResult> Orders()//index

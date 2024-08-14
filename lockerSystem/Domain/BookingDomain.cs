@@ -73,20 +73,6 @@ namespace lockerSystem.Domain
         {
             return _context.tblBooking;
         }
-        public async Task<IEnumerable<LockerViewsModels>> getLockerwithFilter(Guid? BuildingGuid, Guid? FloorGuid) {
-            return await _context.tblLocker.Include(F => F.Floor).ThenInclude(B => B.Building).Include(LS => LS.LockerState).Where(x => x.Floor.Guid == FloorGuid).Select(x => new LockerViewsModels
-            {
-                Id = x.Id,
-                LockerState = x.LockerState,
-                Floor = x.Floor,
-                FloorId = x.FloorId,
-                Guid = x.Guid,
-                IsDeleted = x.IsDeleted,
-                LockerStateId = x.LockerStateId,
-                no = x.no
-            }).ToListAsync();
-        }
-       
 
         }
     }
