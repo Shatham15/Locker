@@ -69,7 +69,7 @@ if(Model != null)
                                             <td>@item.LockerState.stateAr</td>
 
                                             <td>
-                                                <a asp-action="SubmitOrder" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
+                                                    <a type=" submit" asp-action="orders" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
 
                                             </td>
 

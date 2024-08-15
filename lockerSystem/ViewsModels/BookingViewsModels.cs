@@ -21,7 +21,7 @@ namespace lockerSystem.ViewsModels
         public string email { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("رقم الجوال")]
-        public string phone { get; set; }
+        public int phone { get; set; }
         [DisplayName("حالة الطلب")]
         public tblBookingState BookingState { get; set; }
         public int BookingStateId { get; set; }
@@ -37,10 +37,10 @@ namespace lockerSystem.ViewsModels
         public string colegename { get; set; }
         public int  floornumer { get; set; }
 
-        public int BuildingId { get; set; }
-        public IEnumerable<tblBuilding> Buildings { get; set; }
-        public int FloorId { get; set; }
-        public IEnumerable<tblFloor> Floors { get; set; } = new List<tblFloor>();
+        //public int BuildingId { get; set; }
+        //public IEnumerable<tblBuilding> Buildings { get; set; }
+        //public int FloorId { get; set; }
+        //public IEnumerable<tblFloor> Floors { get; set; } = new List<tblFloor>();
 
     }
 }
