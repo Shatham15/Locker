@@ -62,6 +62,7 @@ namespace lockerSystem.Controllers
 
             //return View(await _domain.GetAllbooking());
         }
+        //
         public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildingId(Guid id)
         {
 
