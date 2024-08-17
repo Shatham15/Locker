@@ -4,6 +4,7 @@ using lockerSystem.ViewsModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security;
+using System.Security.Claims;
 
 namespace lockerSystem.Controllers
 {
@@ -23,8 +24,10 @@ namespace lockerSystem.Controllers
             _lockerDomain = lockerDomain;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()//index search
+        public async Task<IActionResult> Index(string Successful, string Falied)//index search
         {
+            ViewData["Successful"] = Successful;
+            ViewData["Falied"] = Falied;
             //var booking = await _buildingDomain.GetAllBuildings();
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             return View();
@@ -49,16 +52,19 @@ namespace lockerSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitOrder(BookingViewsModels booking)//add
         {
+            string Successful = "";
+            string Falied = "";
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             if (ModelState.IsValid)
             {
-                string check = _domain.addBooking(booking);
+                string check = _domain.AddBooking(booking,User.FindFirst(ClaimTypes.Name).Value);
                 if (check == "1")
-                    ViewData["Successful"] = "تمت الاضافة بنجاح";
+                    Successful = "تمت الاضافة بنجاح";
                 else
-                    ViewData["Falied"] = check;
+                    Falied = check;
             }
-            return View(booking);
+
+            return RedirectToAction("Index",new { Successful = Successful, Falied = Falied });
 
             //return View(await _domain.GetAllbooking());
         }
@@ -69,11 +75,6 @@ namespace lockerSystem.Controllers
             return await _floorDomain.getFloorByBuildinGuid(id);
         }
 
-        public async Task<IActionResult> Info()//index
-        {
-
-            return View(await _domain.GetAllbooking());
-        }
     }
 }
     
