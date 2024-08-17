@@ -15,17 +15,16 @@ namespace lockerSystem.Domain
         private readonly FloorDomain _floorDomain;
         private readonly UserDomain _UserDomain;
         private readonly SemsterDomain _SemsterDomain;
+        private readonly LockerDomain _LockerDomain;
         //
-        public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain,FloorDomain floorDomain, UserDomain userDomain,SemsterDomain semsterDomain)
+        public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain,FloorDomain floorDomain, UserDomain userDomain,SemsterDomain semsterDomain, LockerDomain lockerDomain)
         {
             _context = context;
             _buildingDomain = buildingDomain;
             _floorDomain = floorDomain;
             _UserDomain = userDomain;
             _SemsterDomain = semsterDomain;
-             
-
-
+            _LockerDomain = lockerDomain;
         }
         public async Task<IEnumerable<BookingViewsModels>> GetAllbooking()
 
@@ -87,12 +86,13 @@ namespace lockerSystem.Domain
 
 
         //}
-        public string AddBooking(BookingViewsModels booking, string userName)
+        public string AddBooking(Guid lookerGuid,string userName)
         {
             try
             {
                 tblUser user = _UserDomain.GetlUserByUserName(userName);
                 int semeterId = _SemsterDomain.getActiveSemster().Id;
+                int loockerId = _LockerDomain.getLockerModelById(lookerGuid).Id;
                 tblBooking bookInfo = new tblBooking
                 {
                     fullName = user.fullName,
@@ -101,20 +101,13 @@ namespace lockerSystem.Domain
                     BookingStateId = 1,
                     IsDeleted = false,
                     bokingDateTime = DateTime.Now,
-                    LockerId = booking.LockerId,
+                    LockerId = loockerId,
                     SemsterId = semeterId
                 };
-
-                tblFloor floor = new tblFloor();
-                floor.no = booking.floornumer;
-
                 _context.Add(bookInfo);
                 _context.SaveChanges();
                 return "1";
             }
-
-
-
             catch (Exception ex)
             {
                 return "حدث خطأ أثناء معالجة طلبك, الرجاء المحاولة في وقت لاحق";

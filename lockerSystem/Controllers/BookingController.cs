@@ -50,14 +50,14 @@ namespace lockerSystem.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SubmitOrder(BookingViewsModels booking)//add
+        public async Task<IActionResult> SubmitOrder(Guid id)//add
         {
             string Successful = "";
             string Falied = "";
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             if (ModelState.IsValid)
             {
-                string check = _domain.AddBooking(booking,User.FindFirst(ClaimTypes.Name).Value);
+                string check = _domain.AddBooking(id, User.FindFirst(ClaimTypes.Name).Value);
                 if (check == "1")
                     Successful = "تمت الاضافة بنجاح";
                 else
