@@ -21,7 +21,7 @@ namespace lockerSystem.ViewsModels
         public string email { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("رقم الجوال")]
-        public int phone { get; set; }
+        public string phone { get; set; }
         [DisplayName("حالة الطلب")]
         public tblBookingState BookingState { get; set; }
         public int BookingStateId { get; set; }
@@ -35,6 +35,7 @@ namespace lockerSystem.ViewsModels
         public string rejectionReason { get; set; }
         [DisplayName("اسم المبنى")]
         public string colegename { get; set; }
+        [DisplayName("رقم الطابق")]
         public int  floornumer { get; set; }
 
         //public int BuildingId { get; set; }

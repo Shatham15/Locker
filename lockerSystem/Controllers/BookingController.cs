@@ -22,7 +22,7 @@ namespace lockerSystem.Controllers
             _floorDomain = floorDomain;
             _lockerDomain = lockerDomain;
         }
-
+        [HttpGet]
         public async Task<IActionResult> Index()//index search
         {
             //var booking = await _buildingDomain.GetAllBuildings();
@@ -52,7 +52,7 @@ namespace lockerSystem.Controllers
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             if (ModelState.IsValid)
             {
-                string check = _domain.addbooking(booking);
+                string check = _domain.addBooking(booking);
                 if (check == "1")
                     ViewData["Successful"] = "تمت الاضافة بنجاح";
                 else
@@ -67,6 +67,12 @@ namespace lockerSystem.Controllers
         {
 
             return await _floorDomain.getFloorByBuildinGuid(id);
+        }
+
+        public async Task<IActionResult> Info()//index
+        {
+
+            return View(await _domain.GetAllbooking());
         }
     }
 }
