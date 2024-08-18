@@ -15,8 +15,10 @@
         public int LockerId { get; set; }
         public tblSemster Semster { get; set; }
         public int SemsterId { get; set; }
-        public string? rejectionReason { get; set; } 
+        public string? rejectionReason { get; set; }
+        public string colegename { get; set; }
 
-        
+        public int floornumer { get; set; }
+
     }
 }

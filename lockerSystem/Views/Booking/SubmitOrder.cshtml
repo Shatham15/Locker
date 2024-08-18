@@ -48,7 +48,7 @@
                 <div class="table-responsive">
                     <table class="table table-hover table-striped table-bordered" id="myTable">
                         <thead>
-                            <tr>
+                            @* <tr>
                                 <th>@Html.DisplayNameFor(m => m.fullName)</th>
                                 <th> @Html.DisplayNameFor(m => m.email)</th>
                                 <th> @Html.DisplayNameFor(m => m.phone)</th>
@@ -60,7 +60,7 @@
                                 <th></th>
 
 
-                            </tr>
+                            </tr> *@
                         </thead>
                        <tbody>
                             @{
@@ -74,13 +74,13 @@
                                         <td>@item.LockerState.stateAr</td>
                               
                                         <td>
-                                            <a asp-action="subme" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
 
+                                                <a type=" submit" asp-action="Info" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
                                         </td>
 
 
                                     </tr>
-
+                                        
 
                                 }
                             }

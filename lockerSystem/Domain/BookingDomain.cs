@@ -13,17 +13,24 @@ namespace lockerSystem.Domain
         private readonly BuildingDomain _buildingDomain;
         private readonly LockerSystemContext _context;
         private readonly FloorDomain _floorDomain;
-        public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain,FloorDomain floorDomain)
+        private readonly UserDomain _UserDomain;
+        private readonly SemsterDomain _SemsterDomain;
+        private readonly LockerDomain _LockerDomain;
+        //
+        public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain,FloorDomain floorDomain, UserDomain userDomain,SemsterDomain semsterDomain, LockerDomain lockerDomain)
         {
             _context = context;
             _buildingDomain = buildingDomain;
             _floorDomain = floorDomain;
+            _UserDomain = userDomain;
+            _SemsterDomain = semsterDomain;
+            _LockerDomain = lockerDomain;
         }
         public async Task<IEnumerable<BookingViewsModels>> GetAllbooking()
 
         {
 
-            return await _context.tblBooking.Include(x => x.BookingState).Include(y => y.Locker).ThenInclude(g => g.Floor).Select(x => new BookingViewsModels
+            return await _context.tblBooking.Include(x => x.BookingState).Include(y => y.Locker).ThenInclude(g => g.Floor).Where(x => x.IsDeleted == false).Select(x => new BookingViewsModels
             {
                 Id = x.Id,
                 bokingDateTime = x.bokingDateTime,
@@ -45,62 +52,32 @@ namespace lockerSystem.Domain
             }).ToListAsync();
 
         }
-        //public string addbooking(BookingViewsModels booking)
-        //{
-        //    try
-        //    {
-        //        tblBuilding booking1 = new tblBuilding();
-        //        booking1.NameAr = booking.colegename;
-
-        //        tblFloor floor = new tblFloor();
-        //        floor.no = booking.floornumer;
-
-        //        _context.Add(booking1);
-        //        _context.SaveChanges();
-        //        return "1";
-        //    }
-
-
-
-        //    catch (Exception ex)
-        //    {
-        //        return "حدث خطأ أثناء معالجة طلبك, الرجاء المحاولة في وقت لاحق";
-        //    }
-
-
-        //}
-
+        //هذا الكود اللي تحت حاطته كومنت هو اللي انا اشتغلت عليه وبرضوا يطلع نفس الخطا اما الكود اللي تحته اللي مو محطوط فليه كومنت هذا الكود حقك انا اضفت المعلومات الثانيه اللي احنا نبي نخليها تطلع بس برضوا يطلع نفس الايرور
 
         //public string addBooking(BookingViewsModels booking)
         //{
         //    try
         //    {
-        //        //gg//l,ll
-        //        var user = _UserDomain.GetlUserByUserName(booking.fullName);
-        //        if (user != null)
-        //        {
-        //            var checkBooking = getUserModelByUserName(booking.fullName);
-        //            if (checkBooking == null)
-        //            {
+                
+               
         //                tblBooking booking1 = new tblBooking();
-        //                booking1.fullName = user.fullName;
-        //                booking1.email = user.email;
-        //                booking1.phone = user.phone;
+        //                booking1.fullName = booking.fullName;
+        //                booking1.email = booking.email;
+        //                booking1.phone = booking.phone;
         //                booking1.BookingState.NameAr = booking.BookingState.NameAr;
-        //                booking1.Locker.no = booking.Locker.no ;
+        //                booking1.Locker.no = booking.Locker.no;
         //                booking1.Locker.Floor.no = booking.Locker.Floor.no;
         //                booking1.colegename = booking.colegename;
+
 
 
         //                _context.Add(booking1);
         //                _context.SaveChanges();
         //                return "1";
-        //            }
-        //            else
-        //                return "توجد لهذا المستخدم صلاحية مسبقا";
-        //        }
-        //        else
-        //            return "هذا المستخدم غير مخزن في قاعدة البيانات";
+                    
+                    
+               
+                    
         //    }
         //    catch (Exception ex)
         //    {
@@ -109,21 +86,10 @@ namespace lockerSystem.Domain
 
 
         //}
-        public string addbooking(BookingViewsModels booking)
+        public string AddBooking(Guid lookerGuid,string userName)
         {
             try
             {
-                tblUser user = new tblUser();
-                user.fullName = booking.fullName;
-                user.email = booking.email;
-                user.phone = booking.phone;
-
-                tblBookingState bookingState = new tblBookingState();
-                bookingState.NameAr = booking.BookingState.NameAr;
-
-                tblLocker bookLocker = new tblLocker();
-                bookLocker.no = booking.Locker.no;
-
                 tblBuilding booking1 = new tblBuilding();
                 booking1.NameAr = booking.colegename;
 
@@ -134,9 +100,6 @@ namespace lockerSystem.Domain
                 _context.SaveChanges();
                 return "1";
             }
-
-
-
             catch (Exception ex)
             {
                 return "حدث خطأ أثناء معالجة طلبك, الرجاء المحاولة في وقت لاحق";
@@ -144,6 +107,11 @@ namespace lockerSystem.Domain
 
 
         }
+        //public tblBooking getUserModelByUserName(string UserName)
+        //{
+        //    var UserById = _context.tblBooking.Include(b => b.fullName).FirstOrDefault(x => x.fullName == UserName && x.IsDeleted == false);
+        //    return UserById;
+        //}
         public IEnumerable<tblBooking> getBook()
         {
             return _context.tblBooking;
