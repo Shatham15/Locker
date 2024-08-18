@@ -45,10 +45,85 @@ namespace lockerSystem.Domain
             }).ToListAsync();
 
         }
+        //public string addbooking(BookingViewsModels booking)
+        //{
+        //    try
+        //    {
+        //        tblBuilding booking1 = new tblBuilding();
+        //        booking1.NameAr = booking.colegename;
+
+        //        tblFloor floor = new tblFloor();
+        //        floor.no = booking.floornumer;
+
+        //        _context.Add(booking1);
+        //        _context.SaveChanges();
+        //        return "1";
+        //    }
+
+
+
+        //    catch (Exception ex)
+        //    {
+        //        return "حدث خطأ أثناء معالجة طلبك, الرجاء المحاولة في وقت لاحق";
+        //    }
+
+
+        //}
+
+
+        //public string addBooking(BookingViewsModels booking)
+        //{
+        //    try
+        //    {
+        //        //gg//l,ll
+        //        var user = _UserDomain.GetlUserByUserName(booking.fullName);
+        //        if (user != null)
+        //        {
+        //            var checkBooking = getUserModelByUserName(booking.fullName);
+        //            if (checkBooking == null)
+        //            {
+        //                tblBooking booking1 = new tblBooking();
+        //                booking1.fullName = user.fullName;
+        //                booking1.email = user.email;
+        //                booking1.phone = user.phone;
+        //                booking1.BookingState.NameAr = booking.BookingState.NameAr;
+        //                booking1.Locker.no = booking.Locker.no ;
+        //                booking1.Locker.Floor.no = booking.Locker.Floor.no;
+        //                booking1.colegename = booking.colegename;
+
+
+        //                _context.Add(booking1);
+        //                _context.SaveChanges();
+        //                return "1";
+        //            }
+        //            else
+        //                return "توجد لهذا المستخدم صلاحية مسبقا";
+        //        }
+        //        else
+        //            return "هذا المستخدم غير مخزن في قاعدة البيانات";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return "حدث خطأ أثناء معالجة طلبك, الرجاء المحاولة في وقت لاحق";
+        //    }
+
+
+        //}
         public string addbooking(BookingViewsModels booking)
         {
             try
             {
+                tblUser user = new tblUser();
+                user.fullName = booking.fullName;
+                user.email = booking.email;
+                user.phone = booking.phone;
+
+                tblBookingState bookingState = new tblBookingState();
+                bookingState.NameAr = booking.BookingState.NameAr;
+
+                tblLocker bookLocker = new tblLocker();
+                bookLocker.no = booking.Locker.no;
+
                 tblBuilding booking1 = new tblBuilding();
                 booking1.NameAr = booking.colegename;
 

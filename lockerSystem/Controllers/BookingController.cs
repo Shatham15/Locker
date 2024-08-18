@@ -24,6 +24,7 @@ namespace lockerSystem.Controllers
         public async Task<IActionResult> Index()//index search
         {
             //var booking = await _buildingDomain.GetAllBuildings();
+            
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             return View();
         }
@@ -36,16 +37,32 @@ namespace lockerSystem.Controllers
         }
 
         public async Task<IActionResult> Orders()//index
-        {
+        { 
 
             return View(await _domain.GetAllbooking());
         }
 
-        public async Task<IActionResult> SubmitOrder()//add
-        {
+        //public async Task<IActionResult> SubmitOrder()//add
+        //{
 
-            return View(await _domain.GetAllbooking());
+        //    return View(await _domain.GetAllbooking());
+        //}
+        public async Task<IActionResult> SubmitOrder(BookingViewsModels booking)//add
+        {
+            ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
+            if (ModelState.IsValid)
+            {
+                string check = _domain.addbooking(booking);
+                if (check == "1")
+                    ViewData["Successful"] = "تمت الاضافة بنجاح";
+                else
+                    ViewData["Falied"] = check;
+            }
+            return View(booking);
+
+            //return View(await _domain.GetAllbooking());
         }
+
         public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildingId(Guid id)
         {
 

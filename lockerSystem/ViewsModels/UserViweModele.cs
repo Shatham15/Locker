@@ -18,7 +18,7 @@ namespace lockerSystem.ViewsModels
         public string password { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("رقم الجوال")]
-        public int phone { get; set; }
+        public string phone { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("نوع المستخدم")]
         public string userType { get; set; }
