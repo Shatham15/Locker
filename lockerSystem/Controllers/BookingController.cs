@@ -29,7 +29,6 @@ namespace lockerSystem.Controllers
             ViewData["Successful"] = Successful;
             ViewData["Falied"] = Falied;
             //var booking = await _buildingDomain.GetAllBuildings();
-            
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             return View();
 
@@ -44,11 +43,11 @@ namespace lockerSystem.Controllers
         }
 
         public async Task<IActionResult> Orders()//index
-        { 
+        {
 
             return View(await _domain.GetAllbooking());
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitOrder(Guid id)//add
@@ -65,10 +64,11 @@ namespace lockerSystem.Controllers
                     Falied = check;
             }
 
-            return RedirectToAction("Index",new { Successful = Successful, Falied = Falied });
+            return RedirectToAction("Index", new { Successful = Successful, Falied = Falied });
 
             //return View(await _domain.GetAllbooking());
         }
+        //
         public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildingId(Guid id)
         {
 
@@ -77,5 +77,3 @@ namespace lockerSystem.Controllers
 
     }
 }
-    
-
