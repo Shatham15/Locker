@@ -24,6 +24,8 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult add(PermissionViweModel permission)
         {
             ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
