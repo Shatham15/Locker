@@ -61,8 +61,8 @@ namespace lockerSystem.Domain
         //{
         //    try
         //    {
-                
-               
+
+
         //                tblBooking booking1 = new tblBooking();
         //                booking1.fullName = booking.fullName;
         //                booking1.email = booking.email;
@@ -77,10 +77,10 @@ namespace lockerSystem.Domain
         //                _context.Add(booking1);
         //                _context.SaveChanges();
         //                return "1";
-                    
-                    
-               
-                    
+
+
+
+
         //    }
         //    catch (Exception ex)
         //    {
@@ -88,7 +88,7 @@ namespace lockerSystem.Domain
         //    }
 
 
-//}
+        //}
         public string AddBooking(Guid lookerGuid, string userName)
         {
             try

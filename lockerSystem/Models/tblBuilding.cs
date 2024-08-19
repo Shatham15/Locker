@@ -10,6 +10,7 @@ namespace lockerSystem.Models
         [DisplayName("اسم المبنى")]
         public string NameAr { get; set; }
         public string NameEn { get; set; }
+       
         public string code { get; set; }
         public int no { get; set; }
         public ICollection<tblFloor> Floor { get;}

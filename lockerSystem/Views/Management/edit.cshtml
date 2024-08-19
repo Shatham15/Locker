@@ -1,9 +1,33 @@
 ﻿@model ManagementViewsModels
 
-
-<!-- Start Page Wrap -->
-<section class="page_wrap">
-    <div class="page_content">
+    <script>
+    @{
+        if (@ViewData["Successful"] != null)
+        {
+            <Text>
+                                                 var result = '@Html.Raw(ViewData["Successful"])';
+            Swal.fire(result, '', 'success')
+                .then(
+                    function () {
+                        window.location.href = '@Url.Action("Index", "Management")';
+                    }
+                );
+            </Text>
+        }
+        else if (@ViewData["Falied"] != null)
+        {
+            <Text>
+                                                 var result = '@Html.Raw(ViewData["Falied"])';
+            Swal.fire(result, '', 'error')
+                .then(
+                    function () {
+                        window.location.href = '@Url.Action("Index", "Management")';
+                    }
+                );
+            </Text>
+        }
+    }
+</script>
 
         <div class="block mb-4">
             <div class="block-header border-bottom px-4 py-4">
@@ -12,34 +36,7 @@
             <div class="block-body py-5">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
-                        <script>
-                            @{
-                                if (@ViewData["Successful"] != null)
-                                {
-                                    <Text>
-                                                                        var result = '@Html.Raw(ViewData["Successful"])';
-                                    Swal.fire(result, '', 'success')
-                                        .then(
-                                            function () {
-                                                window.location.href = '@Url.Action("Index", "Management")';
-                                            }
-                                        );
-                                    </Text>
-                                }
-                                else if (@ViewData["Falied"] != null)
-                                {
-                                    <Text>
-                                                                        var result = '@Html.Raw(ViewData["Falied"])';
-                                    Swal.fire(result, '', 'error')
-                                        .then(
-                                            function () {
-                                                window.location.href = '@Url.Action("Index", "Management")';
-                                            }
-                                        );
-                                    </Text>
-                                }
-                            }
-                        </script>
+                       
                         <form asp-action="edit">
                             <input hidden asp-for="Guid" />
                             <div class="row">
@@ -48,6 +45,7 @@
                                     <div class="mb-4">
                                         <label asp-for="name" class="mb-1">الاسم</label>
                                         <input asp-for="name" type="text" class="form-control">
+                                <span asp-validation-for="name" class="text-danger"></span>
                                     </div>
                                 </div><!-- END ITEM -->
                                 <!-- START ITEM -->
@@ -55,6 +53,7 @@
                                     <div class="mb-4">
                                         <label asp-for="value" class="mb-1">القيمة</label>
                                         <input asp-for="value" type="number" class="form-control">
+                                <span asp-validation-for="value" class="text-danger"></span>
                                     </div>
                                 </div><!-- END ITEM -->
                             </div>
@@ -71,6 +70,6 @@
 
 
 
-    </div>
+   
 
   
