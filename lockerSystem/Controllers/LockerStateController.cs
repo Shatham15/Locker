@@ -25,6 +25,7 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
+        //Validation??
         public IActionResult add(LockerStateViewsModels state)
         {
             if (ModelState.IsValid)
@@ -48,14 +49,14 @@ namespace lockerSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(LockerStateViewsModels state)
         {
-
+            //if??
             string check = _LockerStateDomain.editLockerState(state);
             if (check == "1")
                 ViewData["Successful"] = "تم التعديل بنجاح";
             else
                 ViewData["Falied"] = check;
 
-            _LockerStateDomain.editLockerState(state);
+            _LockerStateDomain.editLockerState(state);//this sentence id repeated??
             return View(state);
         }
 
