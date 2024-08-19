@@ -47,6 +47,9 @@ builder.Services.AddScoped<FloorDomain>();
 builder.Services.AddScoped<BuildingDomain>();
 builder.Services.AddScoped<LockerStateDomain>();
 builder.Services.AddScoped<LockerDomain>();
+builder.Services.AddScoped<SemsterDomain>();
+
+
 
 
 

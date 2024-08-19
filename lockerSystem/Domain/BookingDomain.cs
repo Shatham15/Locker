@@ -1,4 +1,7 @@
 ﻿using lockerSystem.Models;
+
+using lockerSystem.ViewsModels;
+using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
@@ -17,7 +20,7 @@ namespace lockerSystem.Domain
         private readonly SemsterDomain _SemsterDomain;
         private readonly LockerDomain _LockerDomain;
         //
-        public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain,FloorDomain floorDomain, UserDomain userDomain,SemsterDomain semsterDomain, LockerDomain lockerDomain)
+        public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain, FloorDomain floorDomain, UserDomain userDomain, SemsterDomain semsterDomain, LockerDomain lockerDomain)
         {
             _context = context;
             _buildingDomain = buildingDomain;
@@ -85,18 +88,26 @@ namespace lockerSystem.Domain
         //    }
 
 
-        //}
-        public string AddBooking(Guid lookerGuid,string userName)
+//}
+        public string AddBooking(Guid lookerGuid, string userName)
         {
             try
             {
-                tblBuilding booking1 = new tblBuilding();
-                booking1.NameAr = booking.colegename;
-
-                tblFloor floor = new tblFloor();
-                floor.no = booking.floornumer;
-
-                _context.Add(booking1);
+                tblUser user = _UserDomain.GetlUserByUserName(userName);
+                int semeterId = _SemsterDomain.getActiveSemster().Id;
+                int loockerId = _LockerDomain.getLockerModelById(lookerGuid).Id;
+                tblBooking bookInfo = new tblBooking
+                {
+                    fullName = user.fullName,
+                    email = user.email,
+                    phone = user.phone,
+                    BookingStateId = 1,
+                    IsDeleted = false,
+                    bokingDateTime = DateTime.Now,
+                    LockerId = loockerId,
+                    SemsterId = semeterId
+                };
+                _context.Add(bookInfo);
                 _context.SaveChanges();
                 return "1";
             }
@@ -117,7 +128,8 @@ namespace lockerSystem.Domain
             return _context.tblBooking;
         }
 
-        }
     }
+}
+
 
 
