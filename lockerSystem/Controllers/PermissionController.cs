@@ -38,7 +38,7 @@ namespace lockerSystem.Controllers
                     ViewData["Falied"] = check;
             }
             return View(permission);
-
+            //oooo
         }
         [HttpGet]
         public IActionResult Edit(Guid id)
