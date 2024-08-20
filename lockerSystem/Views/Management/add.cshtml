@@ -1,9 +1,34 @@
 ﻿@model ManagementViewsModels
 
-<!-- Start Page Wrap -->
-<section class="page_wrap">
-    <div class="page_content">
 
+        <script>
+            @{
+                if (@ViewData["Successful"] != null)
+                {
+                    <Text>
+                                                                        var result = '@Html.Raw(ViewData["Successful"])';
+                    Swal.fire(result, '', 'success')
+                        .then(
+                            function () {
+                                window.location.href = '@Url.Action("Index", "Management")';
+                            }
+                        );
+                    </Text>
+                }
+                else if (@ViewData["Falied"] != null)
+                {
+                    <Text>
+                                                                        var result = '@Html.Raw(ViewData["Falied"])';
+                    Swal.fire(result, '', 'error')
+                        .then(
+                            function () {
+                                window.location.href = '@Url.Action("Index", "Management")';
+                            }
+                        );
+                    </Text>
+                }
+            }
+        </script>
         <div class="block mb-4">
             <div class="block-header border-bottom px-4 py-4">
                 <h5 class="m-0">إضافة اعددادات النظام</h5>
@@ -11,34 +36,7 @@
             <div class="block-body py-5">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
-                        <script>
-                            @{
-                                if (@ViewData["Successful"] != null)
-                                {
-                                    <Text>
-                                                    var result = '@Html.Raw(ViewData["Successful"])';
-                                                    Swal.fire(result,'','success')
-                                                        .then(
-                                                            function () {
-                                                        window.location.href = '@Url.Action("Index", "Management")';
-                                                            }
-                                                        );
-                                    </Text>
-                                }
-                                else if (@ViewData["Falied"] != null)
-                                {
-                                    <Text>
-                                                    var result = '@Html.Raw(ViewData["Falied"])';
-                                                    Swal.fire(result, '', 'error')
-                                                        .then(
-                                                            function () {
-                                                                window.location.href = '@Url.Action("Index", "Management")';
-                                                            }
-                                                        );
-                                    </Text>
-                                }
-                            }
-                        </script>
+                        
                         <form asp-action="add">
                             <div class="row">
                                 <!-- START ITEM -->
@@ -70,7 +68,5 @@
         </div>
 
 
-
-    </div>
 
     

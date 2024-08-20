@@ -32,7 +32,11 @@ namespace lockerSystem.Domain
             
             try
             {
-                tblBuilding Buildinginfo = new tblBuilding();
+
+                tblBuilding checkRepetedCode = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.code == Building.code);
+                if (checkRepetedCode != null)
+                    return "3";
+                    tblBuilding Buildinginfo = new tblBuilding();
                 Buildinginfo.code = Building.code;
                 Buildinginfo.no = Building.no;
                 Buildinginfo.NameAr = Building.NameAr;
@@ -98,6 +102,8 @@ namespace lockerSystem.Domain
                 Buildinginfo.no = Building.no;
                 Buildinginfo.NameEn = Building.NameEn;
                 Buildinginfo.NameAr = Building.NameAr;
+                
+
 
                 _context.Update(Buildinginfo);
                 _context.SaveChanges();

@@ -47,7 +47,7 @@ namespace lockerSystem.Controllers
 
             return View(await _domain.GetAllbooking());
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitOrder(Guid id)//add
@@ -64,7 +64,7 @@ namespace lockerSystem.Controllers
                     Falied = check;
             }
 
-            return RedirectToAction("Index",new { Successful = Successful, Falied = Falied });
+            return RedirectToAction("Index", new { Successful = Successful, Falied = Falied });
 
             //return View(await _domain.GetAllbooking());
         }
@@ -77,5 +77,3 @@ namespace lockerSystem.Controllers
 
     }
 }
-    
-

@@ -14,8 +14,6 @@ namespace lockerSystem.Controllers
             _floorDomain = floorDomain;
         }
 
-
-
         public async Task<IActionResult> Index()
         {
             return View(await _floorDomain.GetAllFloor());
@@ -26,7 +24,7 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
-        
+        [ValidateAntiForgeryToken]
         public IActionResult addFloor(FloorViewsModels floor)
         {
             ViewBag.Building = new SelectList(_floorDomain.GetBuilding(), "Id", "NameAr");
@@ -34,7 +32,7 @@ namespace lockerSystem.Controllers
             {
                 string check = _floorDomain.addFloor(floor);
                 if (check == "1")
-                    ViewData["Successful"] = "تمت عملية الاضافه بنجاح";
+                    ViewData["Successful"] = "تمت عملية الاضافه ";
                 else
                     ViewData["Falied"] = check;
             }
@@ -48,15 +46,19 @@ namespace lockerSystem.Controllers
             return View(_floorDomain.getFloorById(id));
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult Edit(FloorViewsModels floor)
         {
-            string check = _floorDomain.editFloor(floor);
-            if (check == "1")
+            if (ModelState.IsValid)
+            {
+                string check = _floorDomain.editFloor(floor);
+                if (check == "1")
 
-                ViewData["Successful"] = " تمت عملية التعديل بنجاح";
-            else
-                ViewData["Falied"] = check;
-
+                    ViewData["Successful"] = " تمت عملية التعديل ";
+                else
+                    ViewData["Falied"] = check;
+            }
             ViewBag.Building = new SelectList(_floorDomain.GetBuilding(), "Id", "NameAr");//نفس الاسم اللي بالداتا
             _floorDomain.editFloor(floor);
             return View(floor);
@@ -68,12 +70,11 @@ namespace lockerSystem.Controllers
             string check = _floorDomain.deleteFloor(id);
             if (check == "1")
 
-                ViewData["Successful"] = " تمت عملية الحذف بنجاح";
+                ViewData["Successful"] = " تمت عملية الحذف ";
 
             else
 
                 ViewData["Falied"] = check;
-
 
             _floorDomain.deleteFloor(id);
             return View();

@@ -6,7 +6,7 @@ namespace lockerSystem.ViewsModels
 {
     public class LockerStateViewsModels
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public Guid Guid { get; set; } = Guid.NewGuid();
         public bool IsDeleted { get; set; }
 

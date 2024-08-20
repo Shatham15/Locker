@@ -76,8 +76,14 @@ namespace lockerSystem.Migrations
                     b.Property<DateTime>("bokingDateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("colegename")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("floornumer")
+                        .HasColumnType("int");
 
                     b.Property<string>("fullName")
                         .HasColumnType("nvarchar(max)");
@@ -372,8 +378,8 @@ namespace lockerSystem.Migrations
                     b.Property<string>("password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("phone")
-                        .HasColumnType("int");
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userType")
                         .HasColumnType("nvarchar(max)");

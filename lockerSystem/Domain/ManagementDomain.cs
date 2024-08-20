@@ -15,16 +15,16 @@ namespace lockerSystem.Domain
             _managementContext = managementcontext;
         }
 
-        public async Task<IEnumerable<ManagementViewsModels>> GetAllMangement() //مافهمت فكرةTask 
+        public async Task<IEnumerable<ManagementViewsModels>> GetAllMangement() 
 
         {
             return await _managementContext.tblManagement.Where(m => m.IsDeleted == false).Select(x => new ManagementViewsModels
             {
-                // Id = x.Id,
+                
                 Guid = x.Guid,
                 name = x.name,
                 value = x.value
-            }).ToListAsync();// I do not understand what the ToList??
+            }).ToListAsync();
 
         }
 
@@ -32,6 +32,11 @@ namespace lockerSystem.Domain
         {
             try
             {
+                var checkManagement = _managementContext.tblManagement.FirstOrDefault(m => m.name == management.name &&  m.IsDeleted == false);
+                if (checkManagement != null)
+                {
+                    return "تم اضافة هذه الاعدادات الى النظام مسبقا";
+                }
                 tblManagement managementInfo = new tblManagement();
                 managementInfo.name = management.name;
                 managementInfo.value = management.value;
@@ -53,7 +58,7 @@ namespace lockerSystem.Domain
             var managementInfo = _managementContext.tblManagement.FirstOrDefault(x => x.Guid == id);
             ManagementViewsModels models = new ManagementViewsModels
             {
-                //Id = managementInfo.Id,
+                
                 Guid = managementInfo.Guid,
                 name = managementInfo.name,
                 value = managementInfo.value
@@ -65,10 +70,7 @@ namespace lockerSystem.Domain
         public tblManagement getManagementByGuid(Guid? id)
         {
 
-
             return _managementContext.tblManagement.FirstOrDefault(x => x.Guid == id);
-
-
 
         }
 
@@ -80,7 +82,7 @@ namespace lockerSystem.Domain
 
                 managementInfo.name = management.name;
                 managementInfo.value = management.value;
-                //management.IsDeleted = false;
+                
 
                 _managementContext.Update(managementInfo);
                 _managementContext.SaveChanges();

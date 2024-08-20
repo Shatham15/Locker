@@ -1,6 +1,7 @@
 ﻿using lockerSystem.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Data;
 
 namespace lockerSystem.ViewsModels
 {
@@ -16,10 +17,14 @@ namespace lockerSystem.ViewsModels
         public string NameEn { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("رمز المبنى")]
+      
         public string code { get; set; }
-        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        
+        [Required(ErrorMessage = "هذا الحقل مطلوب" )]
         [DisplayName("رقم المبنى")]
+        [Range(1,999999999999999999)]
+
         public int no { get; set; }
-        public ICollection<tblFloor> Floor { get; }
+        public ICollection<tblFloor> ? Floor { get; }
     }
 }

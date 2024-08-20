@@ -7,39 +7,11 @@
             <div class="block-header border-bottom px-4 py-3">
                 <h5 class="m-0">ادارة النظام</h5>
                 <div class="d-flex gap-2">
-
-                    <a asp-action="add" class="btn btn-primary">اضافة </a>
-                   @*  //sha *@
-                    <!-- Add Section Modal -->
-                    <div class="modal fade" id="add_section" tabindex="-1"
-                         aria-labelledby="add_sectionLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                            <div class="modal-content">
-
-                                <div class="modal-body">
-
-                                    <div class="form-group">
-                                        <label for="">اسم المستخدم</label>
-                                        <input type="text" name="" id="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">البريد الإلكتروني</label>
-                                        <input type="text" name="" id="" class="form-control">
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">
-                                        إلغاء
-                                    </button>
-                                    <button type="button" class="btn btn-primary">حفظ</button>
-
-
-                                </div>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control table__quick_search"
+                               placeholder="البحث السريع ...">
                     </div>
+                    <a asp-action="add" class="btn btn-primary">اضافة </a>
                 </div>
             </div>
             <div class="block-body">
@@ -76,8 +48,6 @@
                 </table>
             </div>
         </div>
-
-        <
 
     </div>
 </section><!-- End Page Wrap -->

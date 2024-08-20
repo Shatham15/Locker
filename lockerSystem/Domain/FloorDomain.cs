@@ -17,20 +17,30 @@ namespace lockerSystem.Domain
 
             return await _context.tblFloor.Include(x => x.Building).Where(d => d.IsDeleted == false).Select(x => new FloorViewsModels
             {
-                Id = x.Id,
+                // Id = x.Id,
                 no = x.no,
                 BuildingId = x.BuildingId,
                 Building = x.Building,
                 BuildingName = x.Building.NameAr,
                 Guid = x.Guid
 
-            }).ToListAsync();// select * from tblUser
+            }).ToListAsync();
         }
 
         public string addFloor(FloorViewsModels floor)
         {
             try
             {
+                // Check if the floor already exists in the specified building
+                var existingFloor = _context.tblFloor
+                    .FirstOrDefault(f => f.no == floor.no
+                    && f.BuildingId == floor.BuildingId && f.IsDeleted == false);
+
+                if (existingFloor != null)
+                {
+                    return "هذا الطابق موجود بالفعل في هذا المبنى";
+                }
+
                 tblFloor floorinfo = new tblFloor();
                 floorinfo.no = floor.no;
                 floorinfo.BuildingId = floor.BuildingId;
@@ -40,15 +50,16 @@ namespace lockerSystem.Domain
             }
             catch (Exception ex)
             {
-                return "حدث خطأ أثناء معالجة طلبك, الرجاء المحاولة في وقت لاحق";
+                return "فشلت عملية الاضافه!!";
             }
+           
         }
         public FloorViewsModels getFloorById(Guid id)
         {
             var FloorById = _context.tblFloor.Include(s => s.Building).FirstOrDefault(x => x.Guid == id);
             FloorViewsModels floorViewsModels = new FloorViewsModels
             {
-                Id = FloorById.Id,
+                // Id = FloorById.Id,
                 no = FloorById.no,
                 BuildingId = FloorById.BuildingId,
                 Building = FloorById.Building,
@@ -62,7 +73,7 @@ namespace lockerSystem.Domain
             var FloorById = _context.tblFloor.Include(s => s.Building).FirstOrDefault(x => x.BuildingId == BuildingId);
             FloorViewsModels floorViewsModels = new FloorViewsModels
             {
-                Id = FloorById.Id,
+                // Id = FloorById.Id,
                 no = FloorById.no,
                 BuildingId = FloorById.BuildingId,
                 Building = FloorById.Building,
@@ -76,10 +87,10 @@ namespace lockerSystem.Domain
             return FloorById;
         }
         public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildinGuid(Guid id)
-         {
-            return await _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id && !x.IsDeleted).Select(x => new FloorViewsModels 
+        {
+            return await _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id && !x.IsDeleted).Select(x => new FloorViewsModels
             {
-                Id = x.Id,
+                // Id = x.Id,
                 no = x.no,
                 BuildingId = x.BuildingId,
                 Building = x.Building,
@@ -104,7 +115,7 @@ namespace lockerSystem.Domain
             }
             catch (Exception ex)
             {
-                return "حدث خطأ , الرجاء المحاولة في وقت لاحق";
+                return "فشلت عملية التعديل!!";
             }
 
         }
@@ -121,7 +132,7 @@ namespace lockerSystem.Domain
             }
             catch (Exception ex)
             {
-                return "حدث خطأ , الرجاء المحاولة في وقت لاحق";
+                return "فشلت عملية الحذف!!";
             }
 
         }

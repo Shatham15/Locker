@@ -16,7 +16,7 @@ namespace lockerSystem.Domain
 
             return await _context.tblLockerState.Where(x => x.IsDeleted == false).Select(x => new LockerStateViewsModels
             {
-                Id = x.Id,
+                //  Id = x.Id,
                 Guid = x.Guid,
                 IsDeleted = x.IsDeleted,
                 stateAr = x.stateAr,
@@ -29,17 +29,31 @@ namespace lockerSystem.Domain
 
             try
             {
-                tblLockerState Stateinfo = new tblLockerState();
-                Stateinfo.stateAr = State.stateAr;
-                Stateinfo.stateEn = State.stateEn;
+                // Check if the locker state already exists
+                var existingState = _context.tblLockerState
+                    .FirstOrDefault(s => s.stateAr == State.stateAr && s.stateEn
+                    == State.stateEn && s.IsDeleted == false);
 
+                if (existingState != null)
+                {
+                    return "هذه الحالة موجودة بالفعل.";
+                }
+
+                // Create a new locker state record
+                tblLockerState Stateinfo = new tblLockerState
+                {
+                    stateAr = State.stateAr,
+                    stateEn = State.stateEn
+                };
+
+                // Add the new locker state to the context and save changes
                 _context.Add(Stateinfo);
                 _context.SaveChanges();
-                return "1";
+                return "1"; // Indicate success
             }
             catch (Exception ex)
             {
-                return "حدث خطأ الرجاء المحاوله مره اخرى";
+                return "فشلت عملية الاضافه!!";
             }
         }
         public LockerStateViewsModels getlockerstateById(Guid id)
@@ -74,7 +88,7 @@ namespace lockerSystem.Domain
             }
             catch (Exception ex)
             {
-                return "حدث خطأ الرجاء المحاوله مره اخرى";
+                return "فشلت عملية التعديل!!";
             }
         }
 
@@ -93,7 +107,7 @@ namespace lockerSystem.Domain
             }
             catch (Exception ex)
             {
-                return "حدث خطأ الرجاء المحاوله مره اخرى";
+                return "فشلت عملية الحذف!!";
             }
 
         }

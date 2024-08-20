@@ -42,14 +42,14 @@ namespace lockerSystem.Domain
         {
             return _context.tblUser.FirstOrDefault(x => x.email == UserName);// select * from tblUser
         }
-        public UserViweModele GetUsersForLogin(UserViweModele UsertInfo)
+        public  UserViweModele GetUsersForLogin(UserViweModele UsertInfo)
         {
-           var data= _context.tblUser.FirstOrDefault(x => x.email == UsertInfo.email && x.password == UsertInfo.password )  ;// select * from tblUser
+           var data=  _context.tblUser.FirstOrDefault(x => x.email == UsertInfo.email && x.password == UsertInfo.password  )  ;// select * from tblUser
             
             return new UserViweModele
             { userType = data.userType,
                 fullName = data.fullName,
-                Id =data.Id,
+                Id = data.Id,
                 phone = data.phone,
 
 

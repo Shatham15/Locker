@@ -1,4 +1,7 @@
 ﻿using lockerSystem.Models;
+
+using lockerSystem.ViewsModels;
+using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
@@ -17,7 +20,7 @@ namespace lockerSystem.Domain
         private readonly SemsterDomain _SemsterDomain;
         private readonly LockerDomain _LockerDomain;
         //
-        public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain,FloorDomain floorDomain, UserDomain userDomain,SemsterDomain semsterDomain, LockerDomain lockerDomain)
+        public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain, FloorDomain floorDomain, UserDomain userDomain, SemsterDomain semsterDomain, LockerDomain lockerDomain)
         {
             _context = context;
             _buildingDomain = buildingDomain;
@@ -58,8 +61,8 @@ namespace lockerSystem.Domain
         //{
         //    try
         //    {
-                
-               
+
+
         //                tblBooking booking1 = new tblBooking();
         //                booking1.fullName = booking.fullName;
         //                booking1.email = booking.email;
@@ -74,10 +77,10 @@ namespace lockerSystem.Domain
         //                _context.Add(booking1);
         //                _context.SaveChanges();
         //                return "1";
-                    
-                    
-               
-                    
+
+
+
+
         //    }
         //    catch (Exception ex)
         //    {
@@ -86,7 +89,7 @@ namespace lockerSystem.Domain
 
 
         //}
-        public string AddBooking(Guid lookerGuid,string userName)
+        public string AddBooking(Guid lookerGuid, string userName)
         {
             try
             {
@@ -125,7 +128,8 @@ namespace lockerSystem.Domain
             return _context.tblBooking;
         }
 
-        }
     }
+}
+
 
 

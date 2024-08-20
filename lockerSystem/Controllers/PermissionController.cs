@@ -24,6 +24,8 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult add(PermissionViweModel permission)
         {
             ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
@@ -36,7 +38,8 @@ namespace lockerSystem.Controllers
                     ViewData["Falied"] = check;
             }
             return View(permission);
-
+            //oooo
+            //ll
         }
         [HttpGet]
         public IActionResult Edit(Guid id)

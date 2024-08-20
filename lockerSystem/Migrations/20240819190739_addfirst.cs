@@ -5,10 +5,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace lockerSystem.Migrations
 {
-    public partial class addDbFirst : Migration
+    public partial class addfirst : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "BookingLog",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    bookBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bookingStatues = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    date_time = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Booking_Id = table.Column<int>(type: "int", nullable: false),
+                    modifyBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookingLog", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "tblBookingState",
                 columns: table => new
@@ -17,8 +34,8 @@ namespace lockerSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    NameAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NameEn = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NameAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NameEn = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,9 +50,9 @@ namespace lockerSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    NameAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NameEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NameAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NameEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     no = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -51,8 +68,8 @@ namespace lockerSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    stateAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    stateEn = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    stateAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    stateEn = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,7 +84,7 @@ namespace lockerSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     value = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -83,8 +100,8 @@ namespace lockerSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    RoleNameAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RoleNameEn = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    RoleNameAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoleNameEn = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -101,8 +118,8 @@ namespace lockerSystem.Migrations
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     startSemster = table.Column<DateTime>(type: "datetime2", nullable: false),
                     endSemster = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    semsterNameAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    semsterNameEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    semsterNameAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    semsterNameEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     tblSemsterId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -121,11 +138,11 @@ namespace lockerSystem.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    fullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    phone = table.Column<int>(type: "int", nullable: false),
-                    userType = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    fullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userType = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -151,7 +168,7 @@ namespace lockerSystem.Migrations
                         column: x => x.BuildingId,
                         principalTable: "tblBuilding",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,9 +179,9 @@ namespace lockerSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    userName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    userName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoleId = table.Column<int>(type: "int", nullable: false),
-                    fullName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    fullName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -174,7 +191,7 @@ namespace lockerSystem.Migrations
                         column: x => x.RoleId,
                         principalTable: "tblRole",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,13 +214,13 @@ namespace lockerSystem.Migrations
                         column: x => x.FloorId,
                         principalTable: "tblFloor",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tblLocker_tblLockerState_LockerStateId",
                         column: x => x.LockerStateId,
                         principalTable: "tblLockerState",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,13 +232,15 @@ namespace lockerSystem.Migrations
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     bokingDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    fullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    phone = table.Column<int>(type: "int", nullable: false),
+                    fullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BookingStateId = table.Column<int>(type: "int", nullable: false),
                     LockerId = table.Column<int>(type: "int", nullable: false),
                     SemsterId = table.Column<int>(type: "int", nullable: false),
-                    rejectionReason = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    rejectionReason = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    colegename = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    floornumer = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -231,19 +250,19 @@ namespace lockerSystem.Migrations
                         column: x => x.BookingStateId,
                         principalTable: "tblBookingState",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tblBooking_tblLocker_LockerId",
                         column: x => x.LockerId,
                         principalTable: "tblLocker",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tblBooking_tblSemster_SemsterId",
                         column: x => x.SemsterId,
                         principalTable: "tblSemster",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -289,6 +308,9 @@ namespace lockerSystem.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BookingLog");
+
             migrationBuilder.DropTable(
                 name: "tblBooking");
 
