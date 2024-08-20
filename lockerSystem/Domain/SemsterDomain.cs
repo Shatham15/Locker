@@ -40,7 +40,6 @@ namespace lockerSystem.Domain
                 Semsterinfo.endSemster = Semster.endSemster;
                 Semsterinfo.semsterNameAr = Semster.semsterNameAr;
                 Semsterinfo.semsterNameEn = Semster.semsterNameEn;
-
                 _context.Add(Semsterinfo);
                 _context.SaveChanges();
                 return "1";
@@ -69,9 +68,6 @@ namespace lockerSystem.Domain
         public tblSemster getSemsterByGuid(Guid id)
         {
             return _context.tblSemster.FirstOrDefault(x => x.Guid == id);
-
-
-
 
         }
         public string editSemster(SemsterViewsModels Semster)
@@ -115,6 +111,10 @@ namespace lockerSystem.Domain
 
             }
 
+        }
+        public tblSemster getActiveSemster()
+        {
+            return _context.tblSemster.FirstOrDefault(x => x.IsActive);
 
         }
 

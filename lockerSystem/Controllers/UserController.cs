@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 namespace lockerSystem.Controllers
+    //sh
 {
     public class UserController : Controller
     {
@@ -80,7 +81,7 @@ namespace lockerSystem.Controllers
                 else
                 {
                     string Role = "";
-                    tblPermission model = _permissionDomain.getUserModelByUserName(User.email);
+                    tblPermission model = _permissionDomain.getUserModelByUserName(UserInfo.email);
                     if (model == null)
                         Role = "NoRole";
                     else
@@ -88,6 +89,8 @@ namespace lockerSystem.Controllers
                     var identity = new ClaimsIdentity(new[]
                     {
                     new Claim(ClaimTypes.Name, User.fullName),
+                    new Claim(ClaimTypes.Email, User.email),
+
                     new Claim(ClaimTypes.Role, Role),
                     new Claim(ClaimTypes.NameIdentifier, User.Id.ToString()),
                     new Claim(ClaimTypes.GivenName, User.fullName)

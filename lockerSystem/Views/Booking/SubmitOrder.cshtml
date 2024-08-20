@@ -1,4 +1,5 @@
-﻿@model BookingViewsModels
+﻿@model BookingViewsModels 
+
 <div class="block mb-4">
     <div class="block-header border-bottom px-4 py-4">
         <h5 class="m-0">حجز جديد</h5>
@@ -35,7 +36,9 @@
             </div>
         </div>
     </div>
-<div class="block mb-4">
+@if (ViewBag.locker != null){
+ <div class="block mb-4">
+     
     <div class="block-header border-bottom px-4 py-4">
         <h5 class="m-0">الخزائن</h5>
     </div>
@@ -45,7 +48,7 @@
                 <div class="table-responsive">
                     <table class="table table-hover table-striped table-bordered" id="myTable">
                         <thead>
-                            <tr>
+                            @* <tr>
                                 <th>@Html.DisplayNameFor(m => m.fullName)</th>
                                 <th> @Html.DisplayNameFor(m => m.email)</th>
                                 <th> @Html.DisplayNameFor(m => m.phone)</th>
@@ -57,33 +60,31 @@
                                 <th></th>
 
 
-                            </tr>
+                            </tr> *@
                         </thead>
-                        <tbody>
+                       <tbody>
                             @{
-                                foreach (var item in Model)
+                                foreach (LockerViewsModels item in ViewBag.locker)
                                 {
                                     <tr>
-                                        @* <td>@item. bokingDateTime</td>*@
-                                        <td>@item.fullName</td>
-                                        <td>@item.email</td>
-                                        <td>@item.phone</td>
-                                        <td>@item.BookingState.NameAr</td>
-                                        <td>@item.Locker.Floor.no</td>
-                                        <td>@item.Locker.no</td>
-                                        <td>@item.colegename</td>
+                                       <td>@item. bokingDateTime</td>
+                                      <td>@item.no</td>
+                                        <td>@item.Floor.Building.NameAr</td>
+                                        <td>@item.Floor.no</td>
+                                        <td>@item.LockerState.stateAr</td>
+                              
                                         <td>
-                                            <a asp-action="add" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> اضافة</a>
 
+                                                <a type=" submit" asp-action="Info" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
                                         </td>
 
 
                                     </tr>
-
+                                        
 
                                 }
                             }
-                        </tbody>
+                        </tbody> 
                     </table>
 
 
@@ -92,6 +93,8 @@
         </div>
     </div>
 </div>
+</div>
+}
 <script>
 
     $(document).ready(function () {

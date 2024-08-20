@@ -76,9 +76,8 @@ namespace lockerSystem.Domain
             return FloorById;
         }
         public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildinGuid(Guid id)
-        {
-            var test =  _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id);
-            return await _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id).Select(x => new FloorViewsModels 
+         {
+            return await _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id && !x.IsDeleted).Select(x => new FloorViewsModels 
             {
                 Id = x.Id,
                 no = x.no,

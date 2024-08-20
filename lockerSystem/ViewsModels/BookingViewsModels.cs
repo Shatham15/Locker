@@ -35,12 +35,13 @@ namespace lockerSystem.ViewsModels
         public string rejectionReason { get; set; }
         [DisplayName("اسم المبنى")]
         public string colegename { get; set; }
+        [DisplayName("رقم الطابق")]
         public int  floornumer { get; set; }
 
-        public int BuildingId { get; set; }
-        public IEnumerable<tblBuilding> Buildings { get; set; }
-        public int FloorId { get; set; }
-        public IEnumerable<tblFloor> Floors { get; set; } = new List<tblFloor>();
+        //public int BuildingId { get; set; }
+        //public IEnumerable<tblBuilding> Buildings { get; set; }
+        //public int FloorId { get; set; }
+        //public IEnumerable<tblFloor> Floors { get; set; } = new List<tblFloor>();
 
     }
 }
