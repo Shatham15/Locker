@@ -42,8 +42,15 @@ namespace lockerSystem.Controllers
 
                         return View(Building);
                     }
-                    else
+                    else if (check == "-1")
+                    {
                         ViewData["Falied"] = "حدث خطأ أثناء معالجتك طلبك الرجاء المحاولة في وقت لاحق";
+                    }
+                    else {
+                        ViewData["Falied"] = "هذا الرمز يخص مبنى اخر";
+
+                    }
+
                 }
 
                
@@ -66,19 +73,35 @@ namespace lockerSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(BuildingViewsModels Building)
         {
+            try
+            {
+                if (Building.code!=null && Building.NameEn != null && Building.NameAr != null&& Building.no != null)
+                {
+                    //_BuildingDomain.editBuilding(Building);
 
-            string check = _BuildingDomain.editBuilding(Building);
-            if (check == "1")
+                    string check = _BuildingDomain.editBuilding(Building);
 
-                  ViewData["Successful"] = "تم التعديل بنجاح";
+                    if (check == "1")
 
-            else
-                ViewData["Falied"] = check;
+                    {
+                        ViewData["Successful"] = "تم التعديل بنجاح";
+                        return View(Building);
+                    }
 
-            _BuildingDomain.editBuilding(Building);
+
+                    else
+                        ViewData["Falied"] = check;
+
+
+                }
+                
+            }
+
+            catch (Exception ex) {
+                ViewData["Falied"] = "حدث خطأ أثناء معالجتك طلبك الرجاء المحاولة في وقت لاحق";
+            }
             return View(Building);
         }
-        //ijj
        
         [HttpGet]
         public IActionResult Delete(Guid id)

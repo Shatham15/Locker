@@ -25,6 +25,6 @@ namespace lockerSystem.ViewsModels
         [Range(1,999999999999999999)]
 
         public int no { get; set; }
-        public ICollection<tblFloor> Floor { get; }
+        public ICollection<tblFloor> ? Floor { get; }
     }
 }
