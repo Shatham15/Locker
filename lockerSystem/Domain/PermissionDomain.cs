@@ -1,5 +1,5 @@
 ﻿using lockerSystem.Models;
-using lockerSystem.ViewsModels;
+using lockerSystem.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace lockerSystem.Domain
@@ -14,9 +14,9 @@ namespace lockerSystem.Domain
             _UserDomain = userDomain;
         }
 
-        public async Task<IEnumerable<PermissionViweModel>> getpermissions()
+        public async Task<IEnumerable<PermissionViewsModels>> getpermissions()
         {
-            return await _Context.tblPermission.Include(r => r.Role).Where(x => x.IsDeleted == false).Select(m => new PermissionViweModel
+            return await _Context.tblPermission.Include(r => r.Role).Where(x => x.IsDeleted == false).Select(m => new PermissionViewsModels
             {
                 fullName = m.fullName,
                 Guid = m.Guid,
@@ -29,11 +29,10 @@ namespace lockerSystem.Domain
             }
             ).ToListAsync();
         }
-        public string addPermission(PermissionViweModel permission)
+        public string addPermission(PermissionViewsModels permission)
         {
             try
             {
-                //gg//l,ll
                 var user = _UserDomain.GetlUserByUserName(permission.usrName);
                 if (user != null)
                 {
@@ -67,10 +66,10 @@ namespace lockerSystem.Domain
             return _Context.tblRole;
 
         }
-        public PermissionViweModel getUserById(Guid id)
+        public PermissionViewsModels getUserById(Guid id)
         {
             var UserById = _Context.tblPermission.Include(r => r.Role).FirstOrDefault(x => x.Guid == id && x.IsDeleted == false);
-            PermissionViweModel permissionViweModel = new PermissionViweModel
+            PermissionViewsModels permissionViweModel = new PermissionViewsModels
             {
                 //Id = UserById.Id,
                 roleId = UserById.RoleId,
@@ -93,7 +92,7 @@ namespace lockerSystem.Domain
             var UserById = _Context.tblPermission.Include(r => r.Role).FirstOrDefault(x => x.userName == UserName && x.IsDeleted == false);
             return UserById;
         }
-        public string editUser(PermissionViweModel user)
+        public string editUser(PermissionViewsModels user)
         {
             try
             {
@@ -132,3 +131,4 @@ namespace lockerSystem.Domain
 
     }
 }
+

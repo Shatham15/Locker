@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using lockerSystem.Models;
+using lockerSystem.ViewModels;
 using System.ComponentModel;
-
-namespace lockerSystem.ViewsModels
+using System.ComponentModel.DataAnnotations;
+namespace lockerSystem.ViewModels
 {
-    public class PermissionViweModel
+    public class PermissionViewsModels
     {
         //public int? Id { get; set; }
 

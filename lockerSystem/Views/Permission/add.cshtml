@@ -1,23 +1,23 @@
-﻿@model PermissionViweModel
+﻿@model lockerSystem.ViewModels.PermissionViewsModels
 <script>
     @{
         if (@ViewData["Successful"] != null)
         {
             <Text>
-                                        var result = '@Html.Raw(ViewData["Successful"])';
-                    Swal.fire(result, '', 'success')
-                        .then(
-                            function () {
-                                window.location.href = '@Url.Action("Index", "Permission")';
-                            }
-                        );
+                                            var result = '@Html.Raw(ViewData["Successful"])';
+            Swal.fire(result, '', 'success')
+                .then(
+                    function () {
+                        window.location.href = '@Url.Action("Index", "Permission")';
+                    }
+                );
             </Text>
         }
         else if (@ViewData["Falied"] != null)
         {
             <Text>
-                                        var result = '@Html.Raw(ViewData["Falied"])';
-                    Swal.fire(result, '', 'error');
+                                            var result = '@Html.Raw(ViewData["Falied"])';
+            Swal.fire(result, '', 'error');
             </Text>
         }
     }
@@ -60,7 +60,7 @@
                         <!-- START ITEM -->
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="roleName" class="mb-1"> الفصل الدراسي </label>
+                                <label asp-for="roleName" class="mb-1"> </label>
                                 <select asp-for="roleId" type="text" class="form-control" asp-items="@ViewBag.roles"> </select>
                                 <span asp-validation-for="roleName" class="text-danger">  </span>
 

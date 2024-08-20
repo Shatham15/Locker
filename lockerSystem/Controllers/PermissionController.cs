@@ -1,7 +1,10 @@
 ﻿using lockerSystem.Domain;
-using lockerSystem.ViewsModels;
+using lockerSystem.Models;
+using lockerSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security;
 
 namespace lockerSystem.Controllers
 {
@@ -24,9 +27,7 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        public IActionResult add(PermissionViweModel permission)
+        public IActionResult add(PermissionViewsModels permission)
         {
             ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
             if (ModelState.IsValid)
@@ -38,8 +39,7 @@ namespace lockerSystem.Controllers
                     ViewData["Falied"] = check;
             }
             return View(permission);
-            //oooo
-            //ll
+
         }
         [HttpGet]
         public IActionResult Edit(Guid id)
@@ -50,7 +50,7 @@ namespace lockerSystem.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult Edit(PermissionViweModel permission)
+        public IActionResult Edit(PermissionViewsModels permission)
         {
             ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
 
