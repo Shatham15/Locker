@@ -49,7 +49,7 @@ namespace lockerSystem.Domain
                 return "-1";
             }
         }
-        public SemsterViewsModels getSemsterById(Guid id)
+        public SemsterViewsModels getSemsterByGuId(Guid id)
         {
             var Semsterinfo = _context.tblSemster.FirstOrDefault(x => x.Guid == id);
             SemsterViewsModels models = new SemsterViewsModels

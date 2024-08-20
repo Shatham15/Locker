@@ -48,7 +48,7 @@ namespace lockerSystem.Controllers
         [HttpGet]
         public IActionResult Edit(Guid id) //باستخدام GUID وليس ID
         {
-            return View(_SemsterDomain.getSemsterById(id));
+            return View(_SemsterDomain.getSemsterByGuId(id));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
