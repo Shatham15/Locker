@@ -17,8 +17,8 @@ namespace lockerSystem.Domain
 
             return await _context.tblBuilding.Where(x=>x.IsDeleted==false).Select(x => new BuildingViewsModels
             {
-                
-                Id = x.Id,
+
+                BuildingId = x.Id,
                 code=x.code,
                 no=x.no,
                 NameAr=x.NameAr,

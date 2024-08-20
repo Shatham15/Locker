@@ -75,7 +75,7 @@ namespace lockerSystem.Controllers
         {
             try
             {
-                if (Building.code!=null && Building.NameEn != null && Building.NameAr != null&& Building.no != null)
+                if (ModelState.IsValid)
                 {
                     //_BuildingDomain.editBuilding(Building);
 

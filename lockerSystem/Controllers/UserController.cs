@@ -89,6 +89,7 @@ namespace lockerSystem.Controllers
                     var identity = new ClaimsIdentity(new[]
                     {
                     new Claim(ClaimTypes.Name, User.fullName),
+                                        new Claim(ClaimTypes.Email, User.email),
 
                     new Claim(ClaimTypes.Role, Role),
                     new Claim(ClaimTypes.NameIdentifier, User.Id.ToString()),

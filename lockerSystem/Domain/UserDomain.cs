@@ -51,9 +51,8 @@ namespace lockerSystem.Domain
                 fullName = data.fullName,
                 Id = data.Id,
                 phone = data.phone,
-
-
-
+                email = data.email
+                
 
             };
         }

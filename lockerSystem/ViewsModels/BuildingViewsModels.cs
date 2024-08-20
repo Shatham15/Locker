@@ -7,7 +7,7 @@ namespace lockerSystem.ViewsModels
 {
     public class BuildingViewsModels
     {
-        public int Id { get; set; }
+        public int BuildingId { get; set; }
         public Guid Guid { get; set; } = Guid.NewGuid();
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("اسم المبنى باللغة العربية")]
@@ -25,6 +25,6 @@ namespace lockerSystem.ViewsModels
         [Range(1,999999999999999999)]
 
         public int no { get; set; }
-        public ICollection<tblFloor> ? Floor { get; }
+        public ICollection<tblFloor>  Floor { get; }
     }
 }
