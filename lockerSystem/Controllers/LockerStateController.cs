@@ -25,7 +25,7 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
-        //Validation??
+        [ValidateAntiForgeryToken]
         public IActionResult add(LockerStateViewsModels state)
         {
             if (ModelState.IsValid)
@@ -36,6 +36,7 @@ namespace lockerSystem.Controllers
                 else
                     ViewData["Falied"] = check;
             }
+            _LockerStateDomain.addLockerState(state);
             return View(state);
         }
 
@@ -49,15 +50,16 @@ namespace lockerSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(LockerStateViewsModels state)
         {
-            //if??
-            string check = _LockerStateDomain.editLockerState(state);
-            if (check == "1")
-                ViewData["Successful"] = "تم التعديل بنجاح";
-            else
-                ViewData["Falied"] = check;
-
-            _LockerStateDomain.editLockerState(state);//this sentence id repeated??
-            return View(state);
+            if (ModelState.IsValid)
+            {
+                string check = _LockerStateDomain.editLockerState(state);
+                if (check == "1")
+                    ViewData["Successful"] = "تم التعديل بنجاح";
+                else
+                    ViewData["Falied"] = check;
+            }
+            //_LockerStateDomain.editLockerState(state);
+            return View();
         }
 
         [HttpGet]
