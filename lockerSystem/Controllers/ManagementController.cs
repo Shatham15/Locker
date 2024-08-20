@@ -74,12 +74,10 @@ namespace lockerSystem.Controllers
 
         }
 
-
-
         public IActionResult Delete(Guid id)
         {
 
-            //_managementdomain.deleteManagement(id);
+            
             string check = _managementdomain.DeleteManagement(id);
             if (check == "1")
 

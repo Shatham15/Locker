@@ -19,7 +19,11 @@
                                     <Text>
                                             var result = '@Html.Raw(ViewData["Falied"])';
                                     Swal.fire(result, '', 'error')
-                                       
+                .then(
+                    function () {
+                        window.location.href = '@Url.Action("Index", "Management")';
+                    }
+                );
                                     </Text>
                                 }
                             }
