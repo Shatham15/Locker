@@ -13,6 +13,8 @@ namespace lockerSystem.ViewsModels
         public string name { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("القيمة")]
-        public int value { get; set; }
+        [Range(1, 999999999999999999, ErrorMessage = "القيمة المدخلة غير صحيحة!")]
+
+        public string value { get; set; }
     }
 }
