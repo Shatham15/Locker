@@ -52,6 +52,7 @@
                             <div class="mb-4">
                                 <label asp-for="usrName" class="mb-1"> </label>
                                 <input asp-for="usrName" type="text" class="form-control">
+                                @*هنا حاطة اسم ثاني مو حق اليوزر نيم وبكذا ما قاعد يفعل الفالديشن عليها ؟؟*@
                                 <span asp-validation-for="roleName" class="text-danger">  </span>
 
 
@@ -60,6 +61,7 @@
                         <!-- START ITEM -->
                         <div class="col-md-6">
                             <div class="mb-4">
+                                @*انتي مدخلة في الداتا بيس النوع بالعربي مكان الانجليزي والعكس وعشان كذا قاعد يطلع في النظام بالانجليزي ؟؟*@
                                 <label asp-for="roleName" class="mb-1"> </label>
                                 <select asp-for="roleId" type="text" class="form-control" asp-items="@ViewBag.roles"> </select>
                                 <span asp-validation-for="roleName" class="text-danger">  </span>

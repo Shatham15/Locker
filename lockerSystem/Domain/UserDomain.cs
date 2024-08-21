@@ -39,6 +39,7 @@ namespace lockerSystem.Domain
         }
 
         public tblUser GetlUserByUserName(string UserName)
+        
         {
             return _context.tblUser.FirstOrDefault(x => x.email == UserName);// select * from tblUser
         }

@@ -18,19 +18,19 @@ namespace lockerSystem.Controllers
             return View(await _managementdomain.GetAllMangement());
         }
         [HttpGet]
-        public IActionResult add()
+        public async Task<IActionResult> add()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult add(ManagementViewsModels management)
+        public async Task<IActionResult> add(ManagementViewsModels management)
         {
 
 
             if (ModelState.IsValid)
             {
-                string check = _managementdomain.addMangement(management);
+                string check = await _managementdomain.addMangement(management);
                 if (check == "1")
 
                     ViewData["Successful"] = "تمت الاضافة بنجاح";
@@ -44,22 +44,22 @@ namespace lockerSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult edit(Guid id)
+        public async Task<IActionResult> edit(Guid id)
         {
 
-            return View(_managementdomain.getManagementById(id));
+            return View( await _managementdomain.getManagementById(id));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult edit(ManagementViewsModels management)
+        public async Task<IActionResult> edit(ManagementViewsModels management)
         {
 
 
 
             if (ModelState.IsValid)
             {
-                string check = _managementdomain.editManagement(management);
+                string check = await _managementdomain.editManagement(management);
                 if (check == "1")
 
                     ViewData["Successful"] = "تم التعديل بنجاح";
@@ -74,11 +74,11 @@ namespace lockerSystem.Controllers
 
         }
 
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
 
             
-            string check = _managementdomain.DeleteManagement(id);
+            string check = await _managementdomain.DeleteManagement(id);
             if (check == "1")
 
                 ViewData["Successful"] = "تم الحذف بنجاح";
@@ -87,7 +87,7 @@ namespace lockerSystem.Controllers
 
                 ViewData["Falied"] = check;
 
-            _managementdomain.DeleteManagement(id);
+            await _managementdomain.DeleteManagement(id);
             return View();
         }
     }

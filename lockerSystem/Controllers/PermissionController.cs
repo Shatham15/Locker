@@ -8,6 +8,7 @@ using System.Security;
 
 namespace lockerSystem.Controllers
 {
+    //اضيفي async  على كل الفنكشن؟؟
     public class PermissionController : Controller
     {
         private readonly PermissionDomain _domain;
@@ -27,6 +28,7 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
+        //Validation??
         public IActionResult add(PermissionViewsModels permission)
         {
             ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
@@ -61,14 +63,15 @@ namespace lockerSystem.Controllers
                     ViewData["Successful"] = "تم التعديل  بنجاح";
                 else
                     ViewData["Falied"] = check;
+                //هل يحتاج هذي الجملة هنا اتوقع مالها داعي ؟؟
                 _domain.editUser(permission);
             }
             return View(permission);
 
         }
-
+        //تغير اسم الفنكشن الى دليت؟؟
         public IActionResult removePermission(Guid id)
-        {
+        {  
             string check = _domain.removeUser(id);
             if (check == "1")
 
