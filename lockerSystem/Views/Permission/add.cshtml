@@ -3,22 +3,22 @@
     @{
         if (@ViewData["Successful"] != null)
         {
-            <Text>
-                                            var result = '@Html.Raw(ViewData["Successful"])';
-            Swal.fire(result, '', 'success')
-                .then(
-                    function () {
-                        window.location.href = '@Url.Action("Index", "Permission")';
-                    }
-                );
-            </Text>
+                    <Text>
+                                                    var result = '@Html.Raw(ViewData["Successful"])';
+                    Swal.fire(result, '', 'success')
+                        .then(
+                            function () {
+                                window.location.href = '@Url.Action("Index", "Permission")';
+                            }
+                        );
+                    </Text>
         }
         else if (@ViewData["Falied"] != null)
         {
-            <Text>
-                                            var result = '@Html.Raw(ViewData["Falied"])';
-            Swal.fire(result, '', 'error');
-            </Text>
+                    <Text>
+                                                    var result = '@Html.Raw(ViewData["Falied"])';
+                    Swal.fire(result, '', 'error');
+                    </Text>
         }
     }
 </script>
@@ -36,26 +36,38 @@
     <div class="block-body py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <div class="col-md-6">
+                    <div class="mb-4">
+                        <label id="UserNameCheck" asp-for="usrName" class="mb-1" style="color:red; display:none">هذا المستخدم غير موجود في قاعدة البيانات </label>
+                        <label asp-for="usrName" class="mb-1"> </label>
+                        <input id="UserNamecheck" type="text" class="form-control">
+                        <button type="submit" id="btnSerach" class="btn btn-primary px-5">بحث</button>
+                    </div>
+                </div><!-- END ITEM -->
                 <form asp-action="add">
                     <div class="row">
                         <!-- START ITEM -->
-                        <div class="col-md-6">
+                         <input asp-for="usrName" id="UserName" type="text" class="form-control" hidden>
+                       <!-- END ITEM -->
+@*                         <div class="col-md-6">
                             <div class="mb-4">
                                 <label asp-for="fullName" class="mb-1"> </label>
                                 <input asp-for="fullName" type="text" class="form-control">
                                 <span asp-validation-for="fullName" class="text-danger">  </span>
 
                             </div>
-                        </div><!-- END ITEM -->
+                        </div><!-- END ITEM --> *@
                         <!-- START ITEM -->
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="usrName" class="mb-1"> </label>
-                                <input asp-for="usrName" type="text" class="form-control">
-                                @*هنا حاطة اسم ثاني مو حق اليوزر نيم وبكذا ما قاعد يفعل الفالديشن عليها ؟؟*@
-                                <span asp-validation-for="roleName" class="text-danger">  </span>
-
-
+                                <label class="mb-1" asp-for="fullName"></label>
+                                <input readonly id="FullName" type="text" class="form-control">
+                            </div>
+                        </div><!-- END ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="mb-1">رقم الجوال </label>
+                                <input readonly id="Phone" type="text" class="form-control">
                             </div>
                         </div><!-- END ITEM -->
                         <!-- START ITEM -->
@@ -68,6 +80,7 @@
 
                             </div>
                         </div><!-- END ITEM -->
+  
                         <!-- START ITEM -->
                         @* <div class="col-md-6">
                         <div class="mb-4">
@@ -90,6 +103,7 @@
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary px-5" title="save">حفظ</button>
                         </div>
+                    </div>
                 </form>
 
 
@@ -97,4 +111,28 @@
         </div>
     </div>
 </div>
+<script>
+        $("#btnSerach").on("click", function () {
+            var UserName = $("#UserNamecheck").val();
+            showValue(UserName);
+    });
+
+    function showValue(val) {
+        $("#FullName").val("");
+        $("#Phone").val("");
+        $("#UserName").val("");
+        $.getJSON('@Url.Action("getUserInfo", "Permission")/' + val, function (result) {
+             console.log(result);
+            if (result == null) {
+                $("#UserNameCheck").toggle(true);
+            }
+            else {
+                $("#UserNameCheck").toggle(false);
+                $("#FullName").val(result.fullName);
+                $("#Phone").val(result.phone);
+                $("#UserName").val(result.email);
+            }
+        });
+    }
+</script>
 

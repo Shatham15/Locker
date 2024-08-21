@@ -8,14 +8,13 @@ namespace lockerSystem.ViewModels
     {
         //public int? Id { get; set; }
 
-        [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("الاسم")]
         public string fullName { get; set; }
 
         public Guid? Guid { get; set; }
         public bool? IsDeleted { get; set; }
-        [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("اسم المستخدم")]
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
         public string usrName { get; set; }
         [DisplayName("نوع الصلاحية")]
         [Required(ErrorMessage = "هذا الحقل مطلوب")]

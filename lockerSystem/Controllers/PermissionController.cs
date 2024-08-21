@@ -1,6 +1,7 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewModels;
+using lockerSystem.ViewsModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,9 +13,11 @@ namespace lockerSystem.Controllers
     public class PermissionController : Controller
     {
         private readonly PermissionDomain _domain;
-        public PermissionController(PermissionDomain domain)
+        private readonly UserDomain _userDomain;
+        public PermissionController(PermissionDomain domain, UserDomain userDomain)
         {
             _domain = domain;
+            _userDomain = userDomain;
         }
 
         public async Task<IActionResult> Index()
@@ -87,6 +90,10 @@ namespace lockerSystem.Controllers
             return View();
 
             //dff
+        }
+        public async Task<UserViweModele> getUserInfo(string id)
+        {
+            return await _userDomain.GetlUserVMByUserName(id);
         }
 
 
