@@ -29,17 +29,27 @@ namespace lockerSystem.Domain
 
             }).ToListAsync();// select * from tblBuilding
         }
+
+
         public string addSemster(SemsterViewsModels Semster)
         {
 
             try
             {
+
+                tblSemster checkRepetedStartDate = _context.tblSemster.AsNoTracking().SingleOrDefault(D => D.startSemster == Semster.startSemster);
+                if (checkRepetedStartDate != null)
+                    return "3";
+                tblSemster checkRepetedEndDate = _context.tblSemster.AsNoTracking().SingleOrDefault(D => D.endSemster == Semster.endSemster);
+                if (checkRepetedEndDate != null)
+                    return "4";
                 tblSemster Semsterinfo = new tblSemster();
                 Semsterinfo.Guid = Semster.Guid;
                 Semsterinfo.startSemster = Semster.startSemster;
                 Semsterinfo.endSemster = Semster.endSemster;
                 Semsterinfo.semsterNameAr = Semster.semsterNameAr;
                 Semsterinfo.semsterNameEn = Semster.semsterNameEn;
+
                 _context.Add(Semsterinfo);
                 _context.SaveChanges();
                 return "1";
@@ -49,6 +59,26 @@ namespace lockerSystem.Domain
                 return "-1";
             }
         }
+        //public string addSemster(SemsterViewsModels Semster)
+        //{
+
+        //    try
+        //    {
+        //        tblSemster Semsterinfo = new tblSemster();
+        //        Semsterinfo.Guid = Semster.Guid;
+        //        Semsterinfo.startSemster = Semster.startSemster;
+        //        Semsterinfo.endSemster = Semster.endSemster;
+        //        Semsterinfo.semsterNameAr = Semster.semsterNameAr;
+        //        Semsterinfo.semsterNameEn = Semster.semsterNameEn;
+        //        _context.Add(Semsterinfo);
+        //        _context.SaveChanges();
+        //        return "1";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return "-1";
+        //    }
+        //}
         public SemsterViewsModels getSemsterByGuId(Guid id)
         {
             var Semsterinfo = _context.tblSemster.FirstOrDefault(x => x.Guid == id);

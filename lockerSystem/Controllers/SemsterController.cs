@@ -26,26 +26,64 @@ namespace lockerSystem.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public IActionResult add(SemsterViewsModels Semster)
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                string check = _SemsterDomain.addSemster(Semster);
 
-                if (check == "1") //Sweet alert
+                if (ModelState.IsValid)
+                {
+                    string check = _SemsterDomain.addSemster(Semster);
+                    
 
-                    ViewData["Successful"] = ".تمت الإضافة بنجاح";
-                else
-                    ViewData["Falied"] = check;
+
+                    if (check == "1")
+                    {
+                        ViewData["Successful"] = "تمت الإضافة بنجاح";
+
+                        return View(Semster);
+                    }
+                    else if (check == "-1")
+                    {
+                        ViewData["Falied"] = "حدث خطأ أثناء معالجتك طلبك الرجاء المحاولة في وقت لاحق";
+                    }
+                    else
+                    {
+                        ViewData["Falied"] = "هذا التاريخ مسجل مسبقاً";
+
+                    }
+
+                }
+
+
             }
-
+            catch
+            {
+                ViewData["Falied"] = "حدث خطأ أثناء معالجتك طلبك الرجاء المحاولة في وقت لاحق";
+            }
             return View(Semster);
-
-
-
         }
-        [HttpGet]
+            //public IActionResult add(SemsterViewsModels Semster)
+            //{
+
+            //    if (ModelState.IsValid)
+            //    {
+            //        string check = _SemsterDomain.addSemster(Semster);
+
+            //        if (check == "1") //Sweet alert
+
+            //            ViewData["Successful"] = ".تمت الإضافة بنجاح";
+            //        else
+            //            ViewData["Falied"] = check;
+            //    }
+
+            //    return View(Semster);
+
+
+
+            //}
+            [HttpGet]
         public IActionResult Edit(Guid id) //باستخدام GUID وليس ID
         {
             return View(_SemsterDomain.getSemsterByGuId(id));
