@@ -27,7 +27,7 @@ namespace lockerSystem.Domain
              
             }).ToListAsync();// select * from tblBuilding
         }
-        public string addBuilding(BuildingViewsModels Building)
+        public async Task<string> addBuilding(BuildingViewsModels Building)
         { 
             
             try
@@ -36,7 +36,11 @@ namespace lockerSystem.Domain
                 tblBuilding checkRepetedCode = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.code == Building.code);
                 if (checkRepetedCode != null)
                     return "3";
-                    tblBuilding Buildinginfo = new tblBuilding();
+                tblBuilding checkRepetedno = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.no == Building.no);
+                if (checkRepetedno != null)
+                    return "4";
+
+                tblBuilding Buildinginfo = new tblBuilding();
                 Buildinginfo.code = Building.code;
                 Buildinginfo.no = Building.no;
                 Buildinginfo.NameAr = Building.NameAr;
@@ -44,7 +48,7 @@ namespace lockerSystem.Domain
                 Buildinginfo.Guid = Building.Guid;
 
                 _context.Add(Buildinginfo);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -52,7 +56,7 @@ namespace lockerSystem.Domain
                 return "-1";
             }
         }
-        public BuildingViewsModels getBuildingById(Guid id)
+        public async Task<BuildingViewsModels> getBuildingById(Guid id)
         {
             var Buildinginfo = _context.tblBuilding.FirstOrDefault(x => x.Guid == id && x.IsDeleted== false);
             BuildingViewsModels models = new BuildingViewsModels
@@ -62,13 +66,13 @@ namespace lockerSystem.Domain
                 NameAr = Buildinginfo.NameAr,
                 NameEn = Buildinginfo.NameEn,
                 Guid = Buildinginfo.Guid,
-
-            }; return models;
+                
+            }; return  models;
             
 
            
         }
-        public string getBuildingNameById(int id)
+        public async Task<string> getBuildingNameById(int id)
         {
             var Buildinginfo =  _context.tblBuilding.AsNoTracking().FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
             BuildingViewsModels models = new BuildingViewsModels
@@ -87,16 +91,23 @@ namespace lockerSystem.Domain
         }
         public tblBuilding getBuildingByGuid(Guid id)
         {
-            return _context.tblBuilding.FirstOrDefault(x => x.Guid == id);
+            return  _context.tblBuilding.FirstOrDefault(x => x.Guid == id);
 
 
 
 
         }
-        public string editBuilding(BuildingViewsModels Building)
+        public async Task<string> editBuilding(BuildingViewsModels Building)
         {
             try
             {
+                tblBuilding checkRepetedCode = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.code == Building.code );
+                if (checkRepetedCode != null && checkRepetedCode.Guid != Building.Guid)
+                    return "3";
+                tblBuilding checkRepetedno = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.no == Building.no);
+                if (checkRepetedno != null && checkRepetedno.Guid != Building.Guid)
+                    return "4";
+
                 tblBuilding Buildinginfo = getBuildingByGuid(Building.Guid);
                 Buildinginfo.code = Building.code;
                 Buildinginfo.no = Building.no;
@@ -106,12 +117,12 @@ namespace lockerSystem.Domain
 
 
                 _context.Update(Buildinginfo);
-                _context.SaveChanges();
+              await  _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
             {
-                return "حدث خطأ أثناء معالجتك طلبك الرجاء المحاولة في وقت لاحق";
+                return "-1";
             }
         }
         //public tblBuilding GetBuildingModelId(Guid id) {
@@ -119,7 +130,7 @@ namespace lockerSystem.Domain
         //    return BuildingById;
         //}
 
-        public string DeleteBuilding(Guid Id)
+        public async Task<string> DeleteBuilding(Guid Id)
 
         {
             try
@@ -128,7 +139,7 @@ namespace lockerSystem.Domain
                 Buildinginfo.IsDeleted = true;
 
                 _context.Update(Buildinginfo);
-                _context.SaveChanges();
+              await  _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)

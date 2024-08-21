@@ -20,39 +20,39 @@ namespace lockerSystem.Controllers
             return View(await _LockerStateDomain.GetLockerState());
         }
         [HttpGet]
-        public IActionResult add()
+        public async Task<IActionResult> add()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult add(LockerStateViewsModels state)
+        public async Task<IActionResult> add(LockerStateViewsModels state)
         {
             if (ModelState.IsValid)
             {
-                string check = _LockerStateDomain.addLockerState(state);
+                string check = await _LockerStateDomain.addLockerState(state);
                 if (check == "1")
                     ViewData["Successful"] = "تمت عملية الاضافه بنجاح";
                 else
                     ViewData["Falied"] = check;
             }
-            _LockerStateDomain.addLockerState(state);
+            await _LockerStateDomain.addLockerState(state);
             return View(state);
         }
 
 
         [HttpGet]
-        public IActionResult Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            return View(_LockerStateDomain.getlockerstateById(id));
+            return View(await _LockerStateDomain.getlockerstateById(id));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(LockerStateViewsModels state)
+        public async Task<IActionResult> Edit(LockerStateViewsModels state)
         {
             if (ModelState.IsValid)
             {
-                string check = _LockerStateDomain.editLockerState(state);
+                string check = await _LockerStateDomain.editLockerState(state);
                 if (check == "1")
                     ViewData["Successful"] = "تم التعديل بنجاح";
                 else
@@ -63,15 +63,15 @@ namespace lockerSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            string check = _LockerStateDomain.DeleteLockerState(id);
+            string check = await _LockerStateDomain.DeleteLockerState(id);
 
             if (check == "1")
                 ViewData["Successful"] = "تم الحذف بنجاح";
             else
                 ViewData["Falied"] = check;
-            _LockerStateDomain.DeleteLockerState(id);
+            await _LockerStateDomain.DeleteLockerState(id);
             return View();
         }
 

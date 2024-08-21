@@ -1,6 +1,7 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewModels;
+using lockerSystem.ViewsModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,12 +9,15 @@ using System.Security;
 
 namespace lockerSystem.Controllers
 {
+    //اضيفي async  على كل الفنكشن؟؟
     public class PermissionController : Controller
     {
         private readonly PermissionDomain _domain;
-        public PermissionController(PermissionDomain domain)
+        private readonly UserDomain _userDomain;
+        public PermissionController(PermissionDomain domain, UserDomain userDomain)
         {
             _domain = domain;
+            _userDomain = userDomain;
         }
 
         public async Task<IActionResult> Index()
@@ -27,6 +31,7 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
+        //Validation??
         public IActionResult add(PermissionViewsModels permission)
         {
             ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
@@ -61,14 +66,15 @@ namespace lockerSystem.Controllers
                     ViewData["Successful"] = "تم التعديل  بنجاح";
                 else
                     ViewData["Falied"] = check;
+                //هل يحتاج هذي الجملة هنا اتوقع مالها داعي ؟؟
                 _domain.editUser(permission);
             }
             return View(permission);
 
         }
-
+        //تغير اسم الفنكشن الى دليت؟؟
         public IActionResult removePermission(Guid id)
-        {
+        {  
             string check = _domain.removeUser(id);
             if (check == "1")
 
@@ -84,6 +90,10 @@ namespace lockerSystem.Controllers
             return View();
 
             //dff
+        }
+        public async Task<UserViweModele> getUserInfo(string id)
+        {
+            return await _userDomain.GetlUserVMByUserName(id);
         }
 
 

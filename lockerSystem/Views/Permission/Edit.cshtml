@@ -66,6 +66,7 @@
                             <div class="mb-4">
                                 <label asp-for="roleName" class="mb-1"> </label>
                                 <select asp-for="roleId" type="text" class="form-control" asp-items="@ViewBag.roles"> </select>
+                                @*هنا حاطة اسم ثاني مو حق اليوزر نيم وبكذا ما قاعد يفعل الفالديشن عليها ؟؟*@
                                 <span asp-validation-for="roleName" class="text-danger">  </span>
 
                             </div>
@@ -90,6 +91,7 @@
                         </div><!-- END ITEM -->
                         </div>  *@
                         <div class="d-flex justify-content-end">
+                            @*  هنا اسم البوتن المفروض يكون موحد في كل الصفحات فالمفروض يكون اسمه "تعديل"؟؟*@
                             <button type="submit" class="btn btn-primary px-5" title="save">تحديث</button>
                         </div>
                 </form>

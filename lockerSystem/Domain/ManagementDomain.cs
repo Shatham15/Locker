@@ -28,11 +28,11 @@ namespace lockerSystem.Domain
 
         }
 
-        public string addMangement(ManagementViewsModels management)
+        public async Task<string> addMangement(ManagementViewsModels management)
         {
             try
             {
-                var checkManagement = _managementContext.tblManagement.FirstOrDefault(m => m.name == management.name &&  m.IsDeleted == false);
+                var checkManagement = await _managementContext.tblManagement.FirstOrDefaultAsync(m => m.name == management.name &&  m.IsDeleted == false);
                 if (checkManagement != null)
                 {
                     return "تم اضافة هذه الاعدادات الى النظام مسبقا";
@@ -53,9 +53,9 @@ namespace lockerSystem.Domain
 
 
         }
-        public ManagementViewsModels getManagementById(Guid? id)
+        public async Task<ManagementViewsModels> getManagementById(Guid? id)
         {
-            var managementInfo = _managementContext.tblManagement.FirstOrDefault(x => x.Guid == id);
+            var managementInfo = await _managementContext.tblManagement.FirstOrDefaultAsync(x => x.Guid == id);
             ManagementViewsModels models = new ManagementViewsModels
             {
                 
@@ -67,18 +67,18 @@ namespace lockerSystem.Domain
 
         }
 
-        public tblManagement getManagementByGuid(Guid? id)
+        public async Task<tblManagement> getManagementByGuid(Guid? id)
         {
 
-            return _managementContext.tblManagement.FirstOrDefault(x => x.Guid == id);
+            return  await _managementContext.tblManagement.FirstOrDefaultAsync(x => x.Guid == id);
 
         }
 
-        public string editManagement(ManagementViewsModels management)
+        public async Task<string> editManagement(ManagementViewsModels management)
         {
             try
             {
-                tblManagement managementInfo = getManagementByGuid(management.Guid);
+                tblManagement managementInfo = await getManagementByGuid(management.Guid);
 
                 managementInfo.name = management.name;
                 managementInfo.value = management.value;
@@ -90,18 +90,18 @@ namespace lockerSystem.Domain
             }
             catch (Exception ex)
             {
-                return "فشلت عملية التعديل ";
+                return "فشلت عملية التعديل!! ";
             }
 
         }
 
 
-        public string DeleteManagement(Guid id)
+        public async Task<string> DeleteManagement(Guid id)
 
         {
             try
             {
-                tblManagement managementInfo = getManagementByGuid(id);
+                tblManagement managementInfo = await getManagementByGuid(id);
                 managementInfo.IsDeleted = true;
                 _managementContext.Update(managementInfo);
                 _managementContext.SaveChanges();

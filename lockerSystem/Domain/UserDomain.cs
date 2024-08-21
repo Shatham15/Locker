@@ -1,5 +1,6 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 
 namespace lockerSystem.Domain
@@ -38,7 +39,8 @@ namespace lockerSystem.Domain
             return "addede";
         }
 
-        public tblUser GetlUserByUserName(string UserName)
+        public  tblUser GetlUserByUserName(string UserName)
+        
         {
             return _context.tblUser.FirstOrDefault(x => x.email == UserName);// select * from tblUser
         }
@@ -55,6 +57,22 @@ namespace lockerSystem.Domain
                 
 
             };
+        }
+        public async Task<UserViweModele> GetlUserVMByUserName(string UserName)
+
+        {
+            tblUser userinfo = await _context.tblUser.FirstOrDefaultAsync(x => x.email == UserName);
+            if (userinfo == null) return null;
+            else
+            {
+                return new UserViweModele
+                {
+                    fullName = userinfo.fullName,
+                    Id = userinfo.Id,
+                    phone = userinfo.phone,
+                    email = userinfo.email
+                };
+            }
         }
 
 

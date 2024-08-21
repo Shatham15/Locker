@@ -24,14 +24,13 @@ namespace lockerSystem.Domain
 
             }).ToListAsync();
         }
-        public string addLockerState(LockerStateViewsModels State)
+        public async Task<string> addLockerState(LockerStateViewsModels State)
         {
 
             try
             {
-                // Check if the locker state already exists
-                var existingState = _context.tblLockerState
-                    .FirstOrDefault(s => s.stateAr == State.stateAr && s.stateEn
+                var existingState = await _context.tblLockerState
+                    .FirstOrDefaultAsync(s => s.stateAr == State.stateAr && s.stateEn
                     == State.stateEn && s.IsDeleted == false);
 
                 if (existingState != null)
@@ -39,26 +38,24 @@ namespace lockerSystem.Domain
                     return "هذه الحالة موجودة بالفعل.";
                 }
 
-                // Create a new locker state record
                 tblLockerState Stateinfo = new tblLockerState
                 {
                     stateAr = State.stateAr,
                     stateEn = State.stateEn
                 };
 
-                // Add the new locker state to the context and save changes
                 _context.Add(Stateinfo);
                 _context.SaveChanges();
-                return "1"; // Indicate success
+                return "1";
             }
             catch (Exception ex)
             {
                 return "فشلت عملية الاضافه!!";
             }
         }
-        public LockerStateViewsModels getlockerstateById(Guid id)
+        public async Task<LockerStateViewsModels> getlockerstateById(Guid id)
         {
-            var Stateinfo = _context.tblLockerState.FirstOrDefault(x => x.Guid == id && x.IsDeleted == false);
+            var Stateinfo = await _context.tblLockerState.FirstOrDefaultAsync(x => x.Guid == id && x.IsDeleted == false);
             LockerStateViewsModels models = new LockerStateViewsModels
             {
 
@@ -70,20 +67,32 @@ namespace lockerSystem.Domain
 
 
         }
-        public tblLockerState getLockerStateByGuid(Guid id)
+        public async Task<tblLockerState> getLockerStateByGuid(Guid id)
         {
-            return _context.tblLockerState.FirstOrDefault(x => x.Guid == id);
+            return await _context.tblLockerState.FirstOrDefaultAsync(x => x.Guid == id);
         }
-        public string editLockerState(LockerStateViewsModels state)
+        public async Task<string> editLockerState(LockerStateViewsModels state)
         {
             try
             {
-                tblLockerState Stateinfo = getLockerStateByGuid(state.Guid);
+                tblLockerState Stateinfo = await getLockerStateByGuid(state.Guid);
+
+                var existingState = await _context.tblLockerState
+                    .FirstOrDefaultAsync(
+                    s => s.stateAr == state.stateAr
+                    && s.stateEn == state.stateEn
+                    && s.IsDeleted == false);
+
+                if (existingState != null)
+                {
+                    return "هذه الحالة موجودة بالفعل.";
+                }
+
                 Stateinfo.stateAr = state.stateAr;
                 Stateinfo.stateEn = state.stateEn;
 
                 _context.Update(Stateinfo);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -93,12 +102,13 @@ namespace lockerSystem.Domain
         }
 
 
-        public string DeleteLockerState(Guid Id)
+        public async Task<string> DeleteLockerState(Guid Id)
 
         {
             try
             {
-                tblLockerState Stateinfo = getLockerStateByGuid(Id);
+
+                tblLockerState Stateinfo = await getLockerStateByGuid(Id);
                 Stateinfo.IsDeleted = true;
 
                 _context.Update(Stateinfo);
