@@ -75,7 +75,7 @@ namespace lockerSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            return View(_BuildingDomain.getBuildingById(id));
+            return View(await _BuildingDomain.getBuildingById(id));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -131,7 +131,7 @@ namespace lockerSystem.Controllers
                 ViewData["Successful"] = "تم الحذف بنجاح";
             else
                 ViewData["Falied"] = check;
-            _BuildingDomain.DeleteBuilding(id);
+          await   _BuildingDomain.DeleteBuilding(id);
             return View();
         }
 
