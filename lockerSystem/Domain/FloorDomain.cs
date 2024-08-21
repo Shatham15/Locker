@@ -27,13 +27,13 @@ namespace lockerSystem.Domain
             }).ToListAsync();
         }
 
-        public string addFloor(FloorViewsModels floor)
+        public async Task<string> addFloor(FloorViewsModels floor)
         {
             try
             {
                 // Check if the floor already exists in the specified building
-                var existingFloor = _context.tblFloor
-                    .FirstOrDefault(f => f.no == floor.no
+                var existingFloor = await _context.tblFloor
+                    .FirstOrDefaultAsync(f => f.no == floor.no
                     && f.BuildingId == floor.BuildingId && f.IsDeleted == false);
 
                 if (existingFloor != null)
@@ -52,11 +52,11 @@ namespace lockerSystem.Domain
             {
                 return "فشلت عملية الاضافه!!";
             }
-           
+
         }
-        public FloorViewsModels getFloorById(Guid id)
+        public async Task<FloorViewsModels> getFloorById(Guid id)
         {
-            var FloorById = _context.tblFloor.Include(s => s.Building).FirstOrDefault(x => x.Guid == id);
+            var FloorById = await _context.tblFloor.Include(s => s.Building).FirstOrDefaultAsync(x => x.Guid == id);
             FloorViewsModels floorViewsModels = new FloorViewsModels
             {
                 // Id = FloorById.Id,
@@ -68,9 +68,9 @@ namespace lockerSystem.Domain
             return floorViewsModels;
         }
         //
-        public FloorViewsModels getFloorByBuildingId(int BuildingId)
+        public async Task<FloorViewsModels> getFloorByBuildingId(int BuildingId)
         {
-            var FloorById = _context.tblFloor.Include(s => s.Building).FirstOrDefault(x => x.BuildingId == BuildingId);
+            var FloorById = await _context.tblFloor.Include(s => s.Building).FirstOrDefaultAsync(x => x.BuildingId == BuildingId);
             FloorViewsModels floorViewsModels = new FloorViewsModels
             {
                 // Id = FloorById.Id,
@@ -81,9 +81,9 @@ namespace lockerSystem.Domain
             };
             return floorViewsModels;
         }
-        public tblFloor getFloorModelById(Guid id)
+        public async Task<tblFloor> getFloorModelById(Guid id)
         {
-            var FloorById = _context.tblFloor.Include(s => s.Building).FirstOrDefault(x => x.Guid == id);
+            var FloorById = await _context.tblFloor.Include(s => s.Building).FirstOrDefaultAsync(x => x.Guid == id);
             return FloorById;
         }
         public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildinGuid(Guid id)
@@ -98,33 +98,42 @@ namespace lockerSystem.Domain
             }).ToListAsync();
         }
 
-        public IEnumerable<tblBuilding> GetBuilding()
+        public async Task<IEnumerable<tblBuilding>> GetBuilding()
         {
-            return _context.tblBuilding;
+            return await _context.tblBuilding.ToListAsync();
         }
-        public string editFloor(FloorViewsModels floor)
+        public async Task<string> editFloor(FloorViewsModels floor)
         {
             try
             {
-                var floorByGuid = getFloorModelById(floor.Guid);
+                var floorByGuid = await getFloorModelById(floor.Guid);
+
+                var existingFloor = await _context.tblFloor
+                    .FirstOrDefaultAsync(f => f.no == floor.no && f.BuildingId == floor.BuildingId && f.IsDeleted == false);
+
+                if (existingFloor != null)
+                {
+                    return "رقم الطابق موجود بالفعل في هذا المبنى.";
+                }
+
+
                 floorByGuid.no = floor.no;
                 floorByGuid.BuildingId = floor.BuildingId;
                 _context.Update(floorByGuid);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
             {
                 return "فشلت عملية التعديل!!";
             }
-
         }
 
-        public string deleteFloor(Guid id)
+        public async Task<string> deleteFloor(Guid id)
         {
             try
             {
-                tblFloor floor = getFloorModelById(id);
+                tblFloor floor = await getFloorModelById(id);
                 floor.IsDeleted = true;
                 _context.Update(floor);
                 _context.SaveChanges();
