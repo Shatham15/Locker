@@ -39,7 +39,7 @@ namespace lockerSystem.Domain
         }
 
         public tblUser GetlUserByUserName(string UserName)
-        @*كيف يصير اليوزر نيم هو الايميل ؟؟*@
+        
         {
             return _context.tblUser.FirstOrDefault(x => x.email == UserName);// select * from tblUser
         }
