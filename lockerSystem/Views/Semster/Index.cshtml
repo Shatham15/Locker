@@ -30,8 +30,8 @@
                 @foreach (var x in Model)
                 {
                     <tr class="cursor-pointer">
-                        <td>@x.startSemster</td>
-                        <td>@x.endSemster</td>
+                        <td>@x.startSemster.ToString("yyyy-MM-dd")</td>
+                        <td>@x.endSemster.ToString("yyyy-MM-dd")</td>
                         <td>@x.semsterNameAr</td>
                         <td>@x.semsterNameEn</td>
                         <td class="action_td text-end">
