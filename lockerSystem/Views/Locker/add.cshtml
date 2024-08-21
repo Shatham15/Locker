@@ -50,7 +50,17 @@
                             </div>
                         </div>
                         <!-- START ITEM -->
+
                         <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="LockerState" class="mb-1"> </label>
+                                <select asp-for="LockerStateId" type="text" class="form-control" asp-items="@ViewBag.LockerState">
+                                </select>
+                                <span asp-validation-for="LockerStateId" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                        @* <div class="col-md-6">
                             <div class="mb-4">
                                 <label asp-for="LockerState" class="mb-1"></label>
                                 <select asp-for="LockerState" class="form-control" asp-items="ViewBag.LockerStates">
@@ -58,7 +68,18 @@
                                 </select>
                                 <span asp-validation-for="LockerState" class="text-danger"></span>
                             </div>
-                        </div><!-- END ITEM -->
+                        </div> *@<!-- END ITEM -->
+                        <!-- START ITEM -->
+
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="BuildingId" class="mb-1"> </label>
+                                <select asp-for="BuildingId" type="number" class="form-control" asp-items="@ViewBag.Building">
+                                </select>
+                                <span asp-validation-for="BuildingId" class="text-danger"></span>
+
+                            </div>
+                        </div>
                         @*خليه اذا خذ رقم اللوكر يظهر هو في اي طابق ويظهر حالته*@
 
                         <!-- END ITEM -->
