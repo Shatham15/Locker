@@ -20,19 +20,19 @@ namespace lockerSystem.Controllers
             return View(await _BuildingDomain.GetAllBuildings());
         }
         [HttpGet]
-        public IActionResult add()
+        public async Task<IActionResult> add()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult add(BuildingViewsModels Building)
+        public async Task<IActionResult> add(BuildingViewsModels Building)
         {
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    string check = _BuildingDomain.addBuilding(Building);
+                    string check = await _BuildingDomain.addBuilding(Building);
                     //ViewData["Successful"] = "تمت الإضافة بنجاح";
 
 
@@ -46,10 +46,18 @@ namespace lockerSystem.Controllers
                     {
                         ViewData["Falied"] = "حدث خطأ أثناء معالجتك طلبك الرجاء المحاولة في وقت لاحق";
                     }
-                    else {
-                        ViewData["Falied"] = "هذا الرمز يخص مبنى اخر";
+                    else if (check == "3")
+                    {
+                        ViewData["Falied"] = "هذا الرمز يخص مبنى آخر";
 
                     }
+                    else if (check == "4")
+                    {
+                        ViewData["Falied"] = "رقم المبنى يخص مبنى آخر";
+
+                    }
+                   
+
 
                 }
 
@@ -65,13 +73,13 @@ namespace lockerSystem.Controllers
           
         }
         [HttpGet]
-        public IActionResult Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             return View(_BuildingDomain.getBuildingById(id));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(BuildingViewsModels Building)
+        public async Task<IActionResult> Edit(BuildingViewsModels Building)
         {
             try
             {
@@ -79,7 +87,7 @@ namespace lockerSystem.Controllers
                 {
                     //_BuildingDomain.editBuilding(Building);
 
-                    string check = _BuildingDomain.editBuilding(Building);
+                    string check =await _BuildingDomain.editBuilding(Building);
 
                     if (check == "1")
 
@@ -88,9 +96,20 @@ namespace lockerSystem.Controllers
                         return View(Building);
                     }
 
+                    else if (check == "-1")
+                    {
+                        ViewData["Falied"] = "حدث خطأ أثناء معالجتك طلبك الرجاء المحاولة في وقت لاحق";
+                    }
+                    else if (check == "3")
+                    {
+                        ViewData["Falied"] = "هذا الرمز يخص مبنى آخر";
 
-                    else
-                        ViewData["Falied"] = check;
+                    }
+                    else if (check == "4")
+                    {
+                        ViewData["Falied"] = "رقم المبنى يخص مبنى آخر";
+
+                    }
 
 
                 }
@@ -104,9 +123,9 @@ namespace lockerSystem.Controllers
         }
        
         [HttpGet]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-          string check = _BuildingDomain.DeleteBuilding(id);
+          string check =await _BuildingDomain.DeleteBuilding(id);
 
             if (check == "1")
                 ViewData["Successful"] = "تم الحذف بنجاح";

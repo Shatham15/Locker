@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace lockerSystem.Models
 {
@@ -12,6 +13,9 @@ namespace lockerSystem.Models
         public string NameEn { get; set; }
        
         public string code { get; set; }
+        [DisplayName("رقم المبنى")]
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+
         public int no { get; set; }
         public ICollection<tblFloor> Floor { get;}
 
