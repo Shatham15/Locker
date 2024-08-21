@@ -18,19 +18,19 @@ namespace lockerSystem.Controllers
         {
             return View(await _floorDomain.GetAllFloor());
         }
-        public IActionResult addFloor()
+        public async Task<IActionResult> addFloor()
         {
-            ViewBag.Building = new SelectList(_floorDomain.GetBuilding(), "Id", "NameAr");
+            ViewBag.Building = new SelectList(await _floorDomain.GetBuilding(), "Id", "NameAr");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult addFloor(FloorViewsModels floor)
+        public async Task<IActionResult> addFloor(FloorViewsModels floor)
         {
-            ViewBag.Building = new SelectList(_floorDomain.GetBuilding(), "Id", "NameAr");
+            ViewBag.Building = new SelectList(await _floorDomain.GetBuilding(), "Id", "NameAr");
             if (ModelState.IsValid)
             {
-                string check = _floorDomain.addFloor(floor);
+                string check = await _floorDomain.addFloor(floor);
                 if (check == "1")
                     ViewData["Successful"] = "تمت عملية الاضافه ";
                 else
@@ -40,34 +40,33 @@ namespace lockerSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            ViewBag.Building = new SelectList(_floorDomain.GetBuilding(), "Id", "NameAr");//نفس الاسم اللي بالداتا
-            return View(_floorDomain.getFloorById(id));
+            ViewBag.Building = new SelectList(await _floorDomain.GetBuilding(), "Id", "NameAr");//نفس الاسم اللي بالداتا
+            return View(await _floorDomain.getFloorById(id));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        public IActionResult Edit(FloorViewsModels floor)
+        public async Task<IActionResult> Edit(FloorViewsModels floor)
         {
             if (ModelState.IsValid)
             {
-                string check = _floorDomain.editFloor(floor);
+                string check = await _floorDomain.editFloor(floor);
                 if (check == "1")
 
                     ViewData["Successful"] = " تمت عملية التعديل ";
                 else
                     ViewData["Falied"] = check;
+
             }
-            ViewBag.Building = new SelectList(_floorDomain.GetBuilding(), "Id", "NameAr");//نفس الاسم اللي بالداتا
-            _floorDomain.editFloor(floor);
+            ViewBag.Building = new SelectList(await _floorDomain.GetBuilding(), "Id", "NameAr");//نفس الاسم اللي بالداتا
+
             return View(floor);
         }
 
-
-        public IActionResult delete(Guid id)
+        public async Task<IActionResult> delete(Guid id)
         {
-            string check = _floorDomain.deleteFloor(id);
+            string check = await _floorDomain.deleteFloor(id);
             if (check == "1")
 
                 ViewData["Successful"] = " تمت عملية الحذف ";
@@ -76,7 +75,7 @@ namespace lockerSystem.Controllers
 
                 ViewData["Falied"] = check;
 
-            _floorDomain.deleteFloor(id);
+            await _floorDomain.deleteFloor(id);
             return View();
         }
 
