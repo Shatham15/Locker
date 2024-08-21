@@ -11,7 +11,7 @@ namespace lockerSystem.Controllers
     {
         private readonly BuildingDomain _BuildingDomain;
         public BuildingController(BuildingDomain BuildingDomain)
-        {
+        {//kjj
 
             _BuildingDomain = BuildingDomain;
         }
