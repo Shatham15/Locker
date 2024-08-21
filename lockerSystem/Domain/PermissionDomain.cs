@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace lockerSystem.Domain
 {
+    //اضيفي async  على كل الفنكشن؟؟
     public class PermissionDomain
     {
         private readonly LockerSystemContext _Context;

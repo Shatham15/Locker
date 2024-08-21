@@ -4,12 +4,14 @@
 
 <div class="block mb-4">
     <div class="block-header border-bottom px-4 py-3">
+        @*هل اسم المستخدمين صح ؟؟*@
         <h5 class="m-0">المستخدمين</h5>
         <div class="d-flex gap-2">
             <div class="form-group">
                 <input type="text" class="form-control table__quick_search"
                        placeholder="البحث السريع ...">
             </div>
+            @*هل من الصحيح ان تكون اسمها اضافة مستخدم  ؟؟*@
             <a asp-action="add" class="btn btn-primary">إضافة مستخدم</a>
         </div>
     </div>
@@ -18,6 +20,7 @@
             <thead>
                 <tr>
                     <th> @Html.DisplayNameFor(m => m.fullName)</th>
+                    @*هنا هو عبارة عن اليوزر نيم ليه يطلع الايميل في مكانه ؟؟*@
                     <th> @Html.DisplayNameFor(m => m.usrName)</th>
                     <th> @Html.DisplayNameFor(m => m.roleName)</th>
                     <th class=""></th>
@@ -31,6 +34,7 @@
                         <td>@x.usrName</td>
                         <td>@x.roleName</td>
                         <td>
+                            @*يبيلك تعدلين موقعهم بحيث يكونون في نهاية الصفحة من اليسار يعني حركيهم لليسار زيادة ؟؟*@
                             <a asp-action="Edit" asp-route-id="@x.Guid" class="btn btn-sm btn-success">تعديل</a>
 
                             <a asp-action="removePermission" asp-route-id="@x.Guid" class="btn btn-sm btn-danger">حذف</a>
