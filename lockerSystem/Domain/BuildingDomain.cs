@@ -33,10 +33,10 @@ namespace lockerSystem.Domain
             try
             {
 
-                tblBuilding checkRepetedCode = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.code == Building.code);
+                tblBuilding checkRepetedCode = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.code == Building.code && A.IsDeleted==false );
                 if (checkRepetedCode != null)
                     return "3";
-                tblBuilding checkRepetedno = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.no == Building.no);
+                tblBuilding checkRepetedno = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.no == Building.no && A.IsDeleted == false);
                 if (checkRepetedno != null)
                     return "4";
 
@@ -58,7 +58,7 @@ namespace lockerSystem.Domain
         }
         public async Task<BuildingViewsModels> getBuildingById(Guid id)
         {
-            var Buildinginfo = _context.tblBuilding.FirstOrDefault(x => x.Guid == id && x.IsDeleted== false);
+            var Buildinginfo = await _context.tblBuilding.FirstOrDefaultAsync(x => x.Guid == id && x.IsDeleted== false);
             BuildingViewsModels models = new BuildingViewsModels
             {
                 code = Buildinginfo.code,
@@ -89,9 +89,9 @@ namespace lockerSystem.Domain
 
 
         }
-        public tblBuilding getBuildingByGuid(Guid id)
+        public async Task<tblBuilding> getBuildingByGuid(Guid id)
         {
-            return  _context.tblBuilding.FirstOrDefault(x => x.Guid == id);
+            return await _context.tblBuilding.FirstOrDefaultAsync(x => x.Guid == id);
 
 
 
@@ -101,14 +101,14 @@ namespace lockerSystem.Domain
         {
             try
             {
-                tblBuilding checkRepetedCode = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.code == Building.code );
+                tblBuilding checkRepetedCode = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.code == Building.code && A.IsDeleted == false);
                 if (checkRepetedCode != null && checkRepetedCode.Guid != Building.Guid)
                     return "3";
-                tblBuilding checkRepetedno = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.no == Building.no);
+                tblBuilding checkRepetedno = _context.tblBuilding.AsNoTracking().SingleOrDefault(A => A.no == Building.no && A.IsDeleted == false);
                 if (checkRepetedno != null && checkRepetedno.Guid != Building.Guid)
                     return "4";
 
-                tblBuilding Buildinginfo = getBuildingByGuid(Building.Guid);
+                tblBuilding Buildinginfo = await getBuildingByGuid(Building.Guid);
                 Buildinginfo.code = Building.code;
                 Buildinginfo.no = Building.no;
                 Buildinginfo.NameEn = Building.NameEn;
@@ -135,7 +135,7 @@ namespace lockerSystem.Domain
         {
             try
             {
-                tblBuilding Buildinginfo = getBuildingByGuid(Id);
+                tblBuilding Buildinginfo = await getBuildingByGuid(Id);
                 Buildinginfo.IsDeleted = true;
 
                 _context.Update(Buildinginfo);
