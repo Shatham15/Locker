@@ -38,7 +38,9 @@
             <thead>
                 <tr>
                     <th> @Html.DisplayNameFor(m => m.no)</th>
-                    <th> @Html.DisplayNameFor(m => m.no)</th>
+                    <th> @Html.DisplayNameFor(m => m.FloorId)</th>
+                    <th> @Html.DisplayNameFor(m => m.BuildingId)</th>
+                    <th> @Html.DisplayNameFor(m => m.LockerStateId)</th>
                     @* <th> @Html.DisplayNameFor(m => m.userType)</th> *@
                     <th class=""></th>
                 </tr>
@@ -49,6 +51,8 @@
                     <tr class="cursor-pointer">
                         <td>@x.no</td>
                         <td>@x.no</td>
+                        <td>@x.BuildingId</td>
+                        <td>@x.LockerStateId</td>
                         @*  <td>@x.userType</td> *@
                         <td class="action_td text-end">
                             <a asp-action="Edit" asp-route-id="@x.Guid" class="btn btn-sm btn-success">تعديل</a>

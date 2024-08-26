@@ -56,12 +56,12 @@ namespace lockerSystem.Controllers
                         ViewData["Falied"] = "رقم المبنى يخص مبنى آخر";
 
                     }
-                   
+
 
 
                 }
 
-               
+
             }
             catch
             {
@@ -125,14 +125,25 @@ namespace lockerSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
-          string check =await _BuildingDomain.DeleteBuilding(id);
+            try
+            {
+                string check = await _BuildingDomain.DeleteBuilding(id);
 
-            if (check == "1")
-                ViewData["Successful"] = "تم الحذف بنجاح";
-            else
-                ViewData["Falied"] = check;
-          await   _BuildingDomain.DeleteBuilding(id);
+                if (check == "1")
+                    ViewData["Successful"] = "تم الحذف بنجاح";
+                else
+                    ViewData["Falied"] = check;
+                await _BuildingDomain.DeleteBuilding(id);
+
+                return View();
+            }
+
+            catch (Exception ex)
+            {
+                ViewData["Falied"] = "حدث خطأ أثناء معالجتك طلبك الرجاء المحاولة في وقت لاحق";
+            }
             return View();
+
         }
 
     }

@@ -9,12 +9,26 @@ namespace lockerSystem.ViewsModels
         public int Id { get; set; }
         public Guid Guid { get; set; } = Guid.NewGuid();
         public bool IsDeleted { get; set; }
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("رقم الخزنة")]
         public int no { get; set; }
         public tblFloor Floor { get; set; }
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("رقم الطابق")]
         public int FloorId { get; set; }
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [DisplayName("حالة الخزنة")]
         public tblLockerState LockerState { get; set; }
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [DisplayName("حالة الخزنة")]
         public int LockerStateId { get; set; }
+
+        public tblBuilding Building { get; set; }
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [DisplayName("رمز المبنى")]
+        public int BuildingId { get; set; }
+
+        //[DisplayName("اسم المبنى")]
+        //public string BuildingName { get; set; }
     }
 }

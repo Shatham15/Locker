@@ -49,7 +49,6 @@ namespace lockerSystem.Controllers
         }
 
         [HttpGet]
-        
         public async Task<IActionResult> SubmitOrder(Guid id)//add
         {
             string Successful = "";
