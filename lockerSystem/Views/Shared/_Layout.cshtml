@@ -45,9 +45,10 @@
             </div>
             <div class="menu_links">
                 <ul>
-                    @if (User.Identity.IsAuthenticated)
+                  @*   @if (User.Identity.IsAuthenticated)
                     {
-                        if (User.FindFirst(ClaimTypes.Role).Value == "Admin"){
+                        if (User.FindFirst(ClaimTypes.Role).Value == "Admin")
+                        { *@
                             <li>
                                 <a href="@Url.Action("Index","Home")">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -61,8 +62,8 @@
                                     <span>الرئيسية</span>
                                 </a>
                             </li>
-                    }
-                    }
+                    @*     }
+                    } *@
                     <li>
                         <a href="orders.html" class="active">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
@@ -92,20 +93,27 @@
                             </svg>
                             <span>إدارة</span>
                         </a>
-                        <ul>
+                        @*   @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.FindFirst(ClaimTypes.Role).Value == "Admin")
+                            { *@
+                                <ul>
 
-                            <li><a href="@Url.Action("Index","User")"><span>المستخدمين</span></a></li>
-                            <li><a href="@Url.Action("Index","Management")"><span>النظام</span></a></li>
-                            <li><a href="@Url.Action("Index","Permission")"><span>الصلاحيات</span></a></li>
-                            <li><a href="@Url.Action("Index","Building")"><span>المباني</span></a></li>
-                            <li><a href="@Url.Action("Index","Floor")"><span> الطوابق</span></a></li>
-                            <li><a href="@Url.Action("Index","Locker")"><span> الخزانات</span></a></li>
-                            <li><a href="@Url.Action("Index","LockerState")"><span> حالات الخزانة</span></a></li>
-                            <li><a href="@Url.Action("Index","Semster")"><span>الفصول</span></a></li>
-                            <li><a href="@Url.Action("Index","Booking")"><span>الحجوزات</span></a></li>
-                            
+                                    <li><a href="@Url.Action("Index","User")"><span>المستخدمين</span></a></li>
+                                    <li><a href="@Url.Action("Index","Management")"><span>النظام</span></a></li>
+                                    <li><a href="@Url.Action("Index","Permission")"><span>الصلاحيات</span></a></li>
+                                    <li><a href="@Url.Action("Index","Building")"><span>المباني</span></a></li>
+                                    <li><a href="@Url.Action("Index","Floor")"><span> الطوابق</span></a></li>
+                                    <li><a href="@Url.Action("Index","Locker")"><span> الخزانات</span></a></li>
+                                    <li><a href="@Url.Action("Index","LockerState")"><span> حالات الخزانة</span></a></li>
+                                    <li><a href="@Url.Action("Index","Semster")"><span>الفصول</span></a></li>
+                                    <li><a href="@Url.Action("Index","Booking")"><span>الحجوزات</span></a></li>
 
-                        </ul>
+
+                                </ul>
+                        @*     }
+
+                        } *@
                     </li>
                 </ul>
             </div>
@@ -172,10 +180,16 @@
                        
                         <ul class="dropdown-menu account_dd br-stand border-1 border-gray-300 p-4 shadow" aria-labelledby="account">
                             <li>
+                                @if(User.Identity.IsAuthenticated){
                                 <div class="d-flex flex-column">
-                                    <h6 class="mb-0">عبد الرحمن ال عبد اللطيف</h6>
-                                    <small class="text-muted m-0">aaaalatif@kfu.edu.sa</small>
+                                    <h6 class="mb-0">
+                                            <span>@User.FindFirst(ClaimTypes.GivenName).Value</span>
+                                    </h6>
+                                        <small class="text-muted m-0">
+                                            <span>@User.FindFirst(ClaimTypes.Email).Value</span>
+                                        </small>
                                 </div>
+                                }
                             </li>
                             <li>
                                 <hr class="dropdown-divider w-100">
@@ -217,6 +231,14 @@
     <script src="~/Assets/lib/DataTable/js/dataTables.min.js"></script>
     <!-- customization -->
     <script src="~/Assets/js/app.js"></script>
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/datatable.min.js"></script>
+    <script src="~/js/validation.js"></script>
+    <script src="~/js/OrderScript.js"></script>
+    <script src="~/js/site.js"></script>
 
 
 </body>
