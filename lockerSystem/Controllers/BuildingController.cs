@@ -56,12 +56,12 @@ namespace lockerSystem.Controllers
                         ViewData["Falied"] = "رقم المبنى يخص مبنى آخر";
 
                     }
-                   
+
 
 
                 }
 
-               
+
             }
             catch
             {
