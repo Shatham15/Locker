@@ -7,6 +7,10 @@ namespace lockerSystem.Domain
     public class LockerDomain
     {
         private readonly LockerSystemContext _context;
+        private readonly BuildingDomain _BuildingDomain;  
+        private readonly FloorDomain _FloorDomain;
+        private readonly SemsterDomain _SemsterDomain;
+       
 
         public LockerDomain(LockerSystemContext context)
         {
@@ -82,6 +86,15 @@ namespace lockerSystem.Domain
         {
             return await _context.tblFloor.ToListAsync();
         }
+        public async Task<IEnumerable<tblBuilding>> GetBuilding()
+        {
+            return await _context.tblBuilding.ToListAsync();
+        }
+        public async Task<IEnumerable<tblLockerState>> GetLockerState()
+        {
+            return await _context.tblLockerState.ToListAsync();
+        }
+
         public async Task<string> editLocker(LockerViewsModels Locker)
         {
             try
