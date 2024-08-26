@@ -48,8 +48,7 @@ namespace lockerSystem.Controllers
             return View(await _domain.GetAllbooking());
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public async Task<IActionResult> SubmitOrder(Guid id)//add
         {
             string Successful = "";
