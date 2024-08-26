@@ -20,19 +20,20 @@ namespace lockerSystem.Controllers
         {
             return View(await _LockerDomain.GetAllLockers());
         }
-        public IActionResult add()
+        public async Task<IActionResult> add()
         {
-            ViewBag.Floor = new SelectList(_LockerDomain.GetFloor(), "Id", "no");
+            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Id", "no");
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
 
-        public IActionResult add(LockerViewsModels Locker)
+        public async Task<IActionResult> add(LockerViewsModels Locker)
         {
-            ViewBag.Floor = new SelectList(_LockerDomain.GetFloor(), "Id", "no");
+            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Id", "no");
             if (ModelState.IsValid)
             {
-                string check = _LockerDomain.addLocker(Locker);
+                string check = await _LockerDomain.addLocker(Locker);
                 if (check == "1")
                     ViewData["Successful"] = "تمت عملية الاضافه بنجاح";
                 else
@@ -42,30 +43,31 @@ namespace lockerSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            ViewBag.Floor = new SelectList(_LockerDomain.GetFloor(), "Id", "no");
-            return View(_LockerDomain.getLockerById(id));
+            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Id", "no");
+            return View(await _LockerDomain.getLockerById(id));
         }
         [HttpPost]
-        public IActionResult Edit(LockerViewsModels Locker)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(LockerViewsModels Locker)
         {
-            string check = _LockerDomain.editLocker(Locker);
+            string check = await _LockerDomain.editLocker(Locker);
             if (check == "1")
 
                 ViewData["Successful"] = " تمت عملية التعديل بنجاح";
             else
                 ViewData["Falied"] = check;
 
-            ViewBag.Floor = new SelectList(_LockerDomain.GetFloor(), "Id", "no");
+            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Id", "no");
             _LockerDomain.editLocker(Locker);
             return View(Locker);
         }
 
 
-        public IActionResult delete(Guid id)
+        public async Task<IActionResult> delete(Guid id)
         {
-            string check = _LockerDomain.deleteLocker(id);
+            string check = await _LockerDomain.deleteLocker(id);
             if (check == "1")
 
                 ViewData["Successful"] = " تمت عملية الحذف بنجاح";

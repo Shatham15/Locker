@@ -30,10 +30,19 @@ namespace lockerSystem.Domain
             }).ToListAsync();// select * from tblUser
         }
 
-        public string addLocker(LockerViewsModels Locker)
+        public async Task<string> addLocker(LockerViewsModels Locker)
         {
             try
             {
+                var existingLocker = await _context.tblLocker
+                    .FirstOrDefaultAsync(l => l.no == Locker.no
+                    && l.FloorId == Locker.FloorId && l.IsDeleted == false);
+
+                if (existingLocker != null)
+                {
+                    return "هذه الخزانه موجود بالفعل في هذا الطابق";
+                }
+
                 tblLocker Lockerinfo = new tblLocker();
                 Lockerinfo.no = Locker.no;
                 Lockerinfo.FloorId = Locker.FloorId;
@@ -46,9 +55,9 @@ namespace lockerSystem.Domain
                 return "حدث خطأ أثناء معالجة طلبك, الرجاء المحاولة في وقت لاحق";
             }
         }
-        public LockerViewsModels getLockerById(Guid id)
+        public async Task<LockerViewsModels> getLockerById(Guid id)
         {
-            var LockerById = _context.tblLocker.Include(s => s.Floor).FirstOrDefault(x => x.Guid == id);
+            var LockerById = await _context.tblLocker.Include(s => s.Floor).FirstOrDefaultAsync(x => x.Guid == id);
             LockerViewsModels lockerViewsModels = new LockerViewsModels
             {
                 Id = LockerById.Id,
@@ -63,21 +72,21 @@ namespace lockerSystem.Domain
             };
             return lockerViewsModels;
         }
-        public tblLocker getLockerModelById(Guid id)
+        public async Task<tblLocker> getLockerModelById(Guid id)
         {
-            var LockerById = _context.tblLocker.Include(s => s.Floor).FirstOrDefault(x => x.Guid == id);
+            var LockerById = await _context.tblLocker.Include(s => s.Floor).FirstOrDefaultAsync(x => x.Guid == id);
             return LockerById;
         }
 
-        public IEnumerable<tblFloor> GetFloor()
+        public async Task<IEnumerable<tblFloor>> GetFloor()
         {
-            return _context.tblFloor;
+            return await _context.tblFloor.ToListAsync();
         }
-        public string editLocker(LockerViewsModels Locker)
+        public async Task<string> editLocker(LockerViewsModels Locker)
         {
             try
             {
-                var LockerByGuid = getLockerModelById(Locker.Guid);
+                var LockerByGuid = await getLockerModelById(Locker.Guid);
                 LockerByGuid.no = Locker.no;
                 LockerByGuid.FloorId = Locker.FloorId;
                 _context.Update(LockerByGuid);
@@ -91,11 +100,11 @@ namespace lockerSystem.Domain
 
         }
 
-        public string deleteLocker(Guid id)
+        public async Task<string> deleteLocker(Guid id)
         {
             try
             {
-                tblLocker Locker = getLockerModelById(id);
+                tblLocker Locker = await getLockerModelById(id);
                 Locker.IsDeleted = true;
                 _context.Update(Locker);
                 _context.SaveChanges();
