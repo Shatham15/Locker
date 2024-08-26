@@ -31,14 +31,17 @@
             <div class="col-md-8">
                 <form asp-action="add">
                     <div class="row">
-                        <!-- START ITEM -->
+
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="no" class="mb-1"> </label>
-                                <input asp-for="no" type="number" class="form-control">
-                                <span asp-validation-for="no" class="text-danger"></span>
+                                <label asp-for="BuildingId" class="mb-1"> </label>
+                                <select asp-for="BuildingId" type="number" class="form-control" asp-items="@ViewBag.Building">
+                                </select>
+                                <span asp-validation-for="BuildingId" class="text-danger"></span>
+
                             </div>
-                        </div><!-- END ITEM -->
+                        </div>
+
                         <!-- START ITEM -->
                         <div class="col-md-6">
                             <div class="mb-4">
@@ -49,6 +52,16 @@
 
                             </div>
                         </div>
+
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="no" class="mb-1"> </label>
+                                <input asp-for="no" type="number" class="form-control">
+                                <span asp-validation-for="no" class="text-danger"></span>
+                            </div>
+                        </div><!-- END ITEM -->
+                        
                         <!-- START ITEM -->
 
                         <div class="col-md-6">
@@ -71,15 +84,7 @@
                         </div> *@<!-- END ITEM -->
                         <!-- START ITEM -->
 
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <label asp-for="BuildingId" class="mb-1"> </label>
-                                <select asp-for="BuildingId" type="number" class="form-control" asp-items="@ViewBag.Building">
-                                </select>
-                                <span asp-validation-for="BuildingId" class="text-danger"></span>
-
-                            </div>
-                        </div>
+                       
                         @*خليه اذا خذ رقم اللوكر يظهر هو في اي طابق ويظهر حالته*@
 
                         <!-- END ITEM -->
