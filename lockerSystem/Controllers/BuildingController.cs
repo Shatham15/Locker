@@ -15,9 +15,15 @@ namespace lockerSystem.Controllers
 
             _BuildingDomain = BuildingDomain;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string seaechString)
         {
-            return View(await _BuildingDomain.GetAllBuildings());
+            var building = await _BuildingDomain.GetAllBuildings();
+            if (!String.IsNullOrEmpty(seaechString)) {
+                building = building.Where(n => n.code.Contains(seaechString)).ToList();
+            
+            }
+            return View(building);
+
         }
         [HttpGet]
         public async Task<IActionResult> add()
