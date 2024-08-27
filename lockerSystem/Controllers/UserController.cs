@@ -93,6 +93,8 @@ namespace lockerSystem.Controllers
 
                     new Claim(ClaimTypes.Role, Role),
                     new Claim(ClaimTypes.NameIdentifier, User.Id.ToString()),
+                    
+
                     new Claim(ClaimTypes.GivenName, User.fullName)
 
                 }, CookieAuthenticationDefaults.AuthenticationScheme);

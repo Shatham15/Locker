@@ -31,18 +31,13 @@ namespace lockerSystem.Domain
         }
 
 
-        public string addSemster(SemsterViewsModels Semster)
+        public async Task<string> addSemster(SemsterViewsModels Semster)
         {
 
             try
             {
 
-                tblSemster checkRepetedStartDate = _context.tblSemster.AsNoTracking().SingleOrDefault(D => D.startSemster == Semster.startSemster);
-                if (checkRepetedStartDate != null)
-                    return "3";
-                tblSemster checkRepetedEndDate = _context.tblSemster.AsNoTracking().SingleOrDefault(D => D.endSemster == Semster.endSemster);
-                if (checkRepetedEndDate != null)
-                    return "4";
+              
                 tblSemster Semsterinfo = new tblSemster();
                 Semsterinfo.Guid = Semster.Guid;
                 Semsterinfo.startSemster = Semster.startSemster;
@@ -51,7 +46,7 @@ namespace lockerSystem.Domain
                 Semsterinfo.semsterNameEn = Semster.semsterNameEn;
 
                 _context.Add(Semsterinfo);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -59,29 +54,10 @@ namespace lockerSystem.Domain
                 return "-1";
             }
         }
-        //public string addSemster(SemsterViewsModels Semster)
-        //{
-
-        //    try
-        //    {
-        //        tblSemster Semsterinfo = new tblSemster();
-        //        Semsterinfo.Guid = Semster.Guid;
-        //        Semsterinfo.startSemster = Semster.startSemster;
-        //        Semsterinfo.endSemster = Semster.endSemster;
-        //        Semsterinfo.semsterNameAr = Semster.semsterNameAr;
-        //        Semsterinfo.semsterNameEn = Semster.semsterNameEn;
-        //        _context.Add(Semsterinfo);
-        //        _context.SaveChanges();
-        //        return "1";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return "-1";
-        //    }
-        //}
-        public SemsterViewsModels getSemsterByGuId(Guid id)
+        
+        public async Task<SemsterViewsModels> getSemsterByGuId(Guid id)
         {
-            var Semsterinfo = _context.tblSemster.FirstOrDefault(x => x.Guid == id);
+            var Semsterinfo = await _context.tblSemster.FirstOrDefaultAsync(x => x.Guid == id);
             SemsterViewsModels models = new SemsterViewsModels
             {
 
@@ -95,25 +71,25 @@ namespace lockerSystem.Domain
 
 
         }
-        public tblSemster getSemsterByGuid(Guid id)
+        public async Task<tblSemster> getSemsterByGuid(Guid id)
         {
-            return _context.tblSemster.FirstOrDefault(x => x.Guid == id);
+            return await _context.tblSemster.FirstOrDefaultAsync(x => x.Guid == id);
 
         }
-        public string editSemster(SemsterViewsModels Semster)
+        public async Task<string> editSemster(SemsterViewsModels Semster)
         {
 
 
             try
             {
-                tblSemster Semsterinfo = getSemsterByGuid(Semster.Guid);
+                tblSemster Semsterinfo = await getSemsterByGuid(Semster.Guid);
                 Semsterinfo.startSemster = Semster.startSemster;
                 Semsterinfo.endSemster = Semster.endSemster;
                 Semsterinfo.semsterNameAr = Semster.semsterNameAr;
                 Semsterinfo.semsterNameEn = Semster.semsterNameEn;
 
                 _context.Update(Semsterinfo);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -125,14 +101,14 @@ namespace lockerSystem.Domain
 
 
 
-        public string DeleteSemster(Guid id/*, bool permanentDelete = false*/)
+        public async Task<string> DeleteSemster(Guid id/*, bool permanentDelete = false*/)
         {
             try
             {
-                var semsterInfo = getSemsterByGuid(id);
+                var semsterInfo = await getSemsterByGuid(id);
                 semsterInfo.IsActive = true;
                 _context.Update(semsterInfo);
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -142,7 +118,7 @@ namespace lockerSystem.Domain
             }
 
         }
-        public tblSemster getActiveSemster()
+        public async Task<tblSemster> getActiveSemster()
         {
             return _context.tblSemster.FirstOrDefault(x => x.IsActive);
 

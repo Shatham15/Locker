@@ -5,6 +5,7 @@ using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 
 
@@ -19,6 +20,7 @@ namespace lockerSystem.Domain
         private readonly UserDomain _UserDomain;
         private readonly SemsterDomain _SemsterDomain;
         private readonly LockerDomain _LockerDomain;
+
         //
         public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain, FloorDomain floorDomain, UserDomain userDomain, SemsterDomain semsterDomain, LockerDomain lockerDomain)
         {
@@ -55,6 +57,7 @@ namespace lockerSystem.Domain
             }).ToListAsync();
 
         }
+
         //هذا الكود اللي تحت حاطته كومنت هو اللي انا اشتغلت عليه وبرضوا يطلع نفس الخطا اما الكود اللي تحته اللي مو محطوط فليه كومنت هذا الكود حقك انا اضفت المعلومات الثانيه اللي احنا نبي نخليها تطلع بس برضوا يطلع نفس الايرور
 
         //public string addBooking(BookingViewsModels booking)
@@ -102,6 +105,7 @@ namespace lockerSystem.Domain
                     email = user.email,
                     phone = user.phone,
                     BookingStateId = 1,
+                    
                     IsDeleted = false,
                     bokingDateTime = DateTime.Now,
                     LockerId = loockerId,
@@ -127,6 +131,64 @@ namespace lockerSystem.Domain
         {
             return _context.tblBooking;
         }
+        public async Task<tblBookingState> getBookingStateByGuid(Guid id)
+        {
+            return await _context.tblBookingState.FirstOrDefaultAsync(x => x.Guid == id);
+        }
+        public async Task<tblBooking> getBookingByGuid(Guid id)
+        {
+            return await _context.tblBooking.FirstOrDefaultAsync(x => x.Guid == id);
+        }
+        public async Task<BookingViewsModels> GetBookingByGuid(Guid guid)
+        {
+            var booking = await _context.tblBooking
+                .Where(b => b.Guid == guid)
+                .Include(b => b.BookingState)
+                .Include(b => b.Locker)
+                .ThenInclude(l => l.Floor)
+                .ThenInclude(f => f.Building)
+                .Include(b => b.Semster)
+                .Select(b => new BookingViewsModels
+                {
+                    Guid = b.Guid,
+                    bokingDateTime= b.bokingDateTime,
+                    fullName = b.fullName,
+                    email = b.email,
+                    phone = b.phone,
+                    BookingStateId = b.BookingStateId,
+                    IsDeleted = b.IsDeleted,
+                    LockerId = b.LockerId,
+                    rejectionReason = b.rejectionReason,
+                    SemsterId = b.SemsterId,
+                    floornumer = b.Locker.Floor.no,
+                    colegename = b.Locker.Floor.Building.NameAr,
+                    BookingState = b.BookingState,
+                    Locker = b.Locker,
+                    Semster = b.Semster
+                })
+                .FirstOrDefaultAsync();
+
+            return booking;
+        }
+      
+        public async Task<string> UpdateBooking(BookingViewsModels bookingViewModel)
+        {
+            try
+            {
+                var stateInfo = await getBookingByGuid(bookingViewModel.Guid);
+                stateInfo.BookingStateId = bookingViewModel.BookingStateId;
+                _context.Update(stateInfo);
+                await _context.SaveChangesAsync();
+                return "1";
+            }
+            catch (Exception ex)
+            {
+                
+                return "فشلت عملية التحديث ";
+            }
+        }
+
+       
 
     }
 }

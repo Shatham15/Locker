@@ -20,21 +20,21 @@ namespace lockerSystem.Controllers
             return View(await _SemsterDomain.GetAllSemsters());
         }
         [HttpGet]
-        public IActionResult add()
+        public async Task<IActionResult> add()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult add(SemsterViewsModels Semster)
+        public async Task<IActionResult> add(SemsterViewsModels Semster)
         {
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    string check = _SemsterDomain.addSemster(Semster);
+                    string check = await _SemsterDomain.addSemster(Semster);
                     
 
 
@@ -64,43 +64,21 @@ namespace lockerSystem.Controllers
             }
             return View(Semster);
         }
-            //public IActionResult add(SemsterViewsModels Semster)
-            //{
-
-            //    if (ModelState.IsValid)
-            //    {
-            //        string check = _SemsterDomain.addSemster(Semster);
-
-            //        if (check == "1") //Sweet alert
-
-            //            ViewData["Successful"] = ".تمت الإضافة بنجاح";
-            //        else
-            //            ViewData["Falied"] = check;
-            //    }
-
-            //    return View(Semster);
-
-
-
-            //}
+         
             [HttpGet]
-        public IActionResult Edit(Guid id) //باستخدام GUID وليس ID
+        public async Task<IActionResult> Edit(Guid id) //باستخدام GUID وليس ID
         {
-            return View(_SemsterDomain.getSemsterByGuId(id));
+            return View(await _SemsterDomain.getSemsterByGuId(id));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(SemsterViewsModels Semster)
+        public async Task<IActionResult> Edit(SemsterViewsModels Semster)
         {
-
-
-            //_SemsterDomain.editSemster(Semster);
-            //return View(Semster);
 
 
             if (ModelState.IsValid)
             {
-                string check = _SemsterDomain.editSemster(Semster);
+                string check = await _SemsterDomain.editSemster(Semster);
 
 
                 if (check == "1") //Sweet alert
@@ -115,18 +93,16 @@ namespace lockerSystem.Controllers
 
             return View();
 
-
-            //return View(Semster);
         }
 
 
         //[HttpGet]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
 
 
 
-            string check = _SemsterDomain.DeleteSemster(id);
+            string check = await _SemsterDomain.DeleteSemster(id);
 
 
             if (check == "1") //Sweet alert
@@ -138,7 +114,7 @@ namespace lockerSystem.Controllers
             else
                 ViewData["Falied"] = check;
 
-            _SemsterDomain.DeleteSemster(id);
+            await _SemsterDomain.DeleteSemster(id);
             return View();
         }
 

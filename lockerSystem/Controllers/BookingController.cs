@@ -42,14 +42,13 @@ namespace lockerSystem.Controllers
             return View(await _lockerDomain.getLockerwithFilter(BuildingGuid, FloorGuid));
         }
 
-        public async Task<IActionResult> Orders()//index
+        public async Task<IActionResult> orders()//index
         {
 
             return View(await _domain.GetAllbooking());
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public async Task<IActionResult> SubmitOrder(Guid id)//add
         {
             string Successful = "";
@@ -57,7 +56,7 @@ namespace lockerSystem.Controllers
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             if (ModelState.IsValid)
             {
-                string check = _domain.AddBooking(id, User.FindFirst(ClaimTypes.Name).Value);
+                string check = _domain.AddBooking(id, User.FindFirst(ClaimTypes.Email).Value);
                 if (check == "1")
                     Successful = "تمت الاضافة بنجاح";
                 else
