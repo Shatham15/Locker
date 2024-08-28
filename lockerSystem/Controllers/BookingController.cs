@@ -44,7 +44,6 @@ namespace lockerSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> orders()//index
         {
-
             return View(await _domain.GetAllbooking());
         }
 
@@ -56,11 +55,11 @@ namespace lockerSystem.Controllers
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             if (ModelState.IsValid)
             {
-                string check = await _domain.AddBooking(id, User.FindFirst(ClaimTypes.Email).Value);
-                if (check == "1")
+               ViewBag.check = await _domain.AddBooking(id, User.FindFirst(ClaimTypes.Email).Value);
+                if (ViewBag.check == "1")
                     Successful = "تمت الاضافة بنجاح";
                 else
-                    Falied = check;
+                    Falied = ViewBag.check;
             }
 
             return RedirectToAction("Index", new { Successful = Successful, Falied = Falied });
