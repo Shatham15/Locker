@@ -5,6 +5,7 @@ using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
+using Microsoft.VisualBasic;
 
 
 
@@ -89,13 +90,13 @@ namespace lockerSystem.Domain
 
 
         //}
-        public string AddBooking(Guid lookerGuid, string userName)
+        public async Task<string> AddBooking(Guid lookerGuid, string userName)
         {
             try
             {
-                tblUser user = _UserDomain.GetlUserByUserName(userName);
-                int semeterId = _SemsterDomain.getActiveSemster().Id;
-                int loockerId = _LockerDomain.getLockerModelById(lookerGuid).Id;
+                tblUser user = await _UserDomain.GetlUserByUserNamAsynce(userName);
+                var semeter = await _SemsterDomain.getActiveSemster();
+                var loocker = await _LockerDomain.getLockerModelById(lookerGuid);
                 tblBooking bookInfo = new tblBooking
                 {
                     fullName = user.fullName,
@@ -104,12 +105,12 @@ namespace lockerSystem.Domain
                     BookingStateId = 1,
                     IsDeleted = false,
                     bokingDateTime = DateTime.Now,
-                    LockerId = loockerId,
-                    SemsterId = semeterId
+                    LockerId = loocker.Id,
+                    SemsterId = semeter.Id
                 };
-                _context.Add(bookInfo);
-                _context.SaveChanges();
-                return "1";
+                _context.AddAsync(bookInfo);
+                _context.SaveChangesAsync();
+                return  "1";
             }
             catch (Exception ex)
             {

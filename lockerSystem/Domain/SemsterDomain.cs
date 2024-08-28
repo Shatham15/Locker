@@ -120,7 +120,7 @@ namespace lockerSystem.Domain
         }
         public async Task<tblSemster> getActiveSemster()
         {
-            return _context.tblSemster.FirstOrDefault(x => x.IsActive);
+            return await _context.tblSemster.FirstOrDefaultAsync(x => x.IsActive);
 
         }
 

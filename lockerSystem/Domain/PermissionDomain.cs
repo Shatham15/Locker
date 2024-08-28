@@ -99,6 +99,7 @@ namespace lockerSystem.Domain
             {
                 tblPermission userPermission = getUserModelById(user.Guid);
                 userPermission.RoleId = user.roleId;
+                // هذه على عنصر واحد 
                 _Context.Update(userPermission);
                 _Context.SaveChanges();
                 return "1";

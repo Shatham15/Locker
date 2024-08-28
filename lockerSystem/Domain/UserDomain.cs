@@ -44,6 +44,11 @@ namespace lockerSystem.Domain
         {
             return _context.tblUser.FirstOrDefault(x => x.email == UserName);// select * from tblUser
         }
+        public async Task<tblUser> GetlUserByUserNamAsynce(string UserName)
+
+        {
+            return await _context.tblUser.FirstOrDefaultAsync(x => x.email == UserName);// select * from tblUser
+        }
         public  UserViweModele GetUsersForLogin(UserViweModele UsertInfo)
         {
            var data=  _context.tblUser.FirstOrDefault(x => x.email == UsertInfo.email && x.password == UsertInfo.password  )  ;// select * from tblUser
