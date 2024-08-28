@@ -24,6 +24,7 @@ namespace lockerSystem.ViewsModels
         public string phone { get; set; }
         [DisplayName("حالة الطلب")]
         public tblBookingState BookingState { get; set; }
+        
         public int BookingStateId { get; set; }
         [DisplayName("الخزانة")]
         public tblLocker Locker { get; set; }
