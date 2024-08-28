@@ -30,11 +30,11 @@ namespace lockerSystem.Domain
             }
             ).ToListAsync();
         }
-        public string addPermission(PermissionViewsModels permission)
+        public async Task<string> addPermission(PermissionViewsModels permission)
         {
             try
             {
-                var user = _UserDomain.GetlUserByUserName(permission.usrName);
+                var user = await _UserDomain.GetlUserByUserName(permission.usrName);
                 if (user != null)
                 {
                     var checkPermission = getUserModelByUserName(permission.usrName);

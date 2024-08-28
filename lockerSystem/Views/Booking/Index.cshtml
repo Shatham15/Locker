@@ -92,8 +92,6 @@
                                 @{
                                     foreach (var item in Model)
                                     {
-                                            if (item.LockerState.stateAr == "متاح" || item.LockerState.stateAr == "تالف")
-                                            {
                                         <tr>
                                             <td>@item.no</td>
                                             <td>@item.Floor.Building.NameAr</td>
@@ -102,13 +100,13 @@
 
                                             <td>
 
-                                                    <a asp-action="SubmitOrder" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
+                                                    <a asp-action="orders" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
                                             </td>
 
 
                                         </tr>
 
-                                        }
+
                                     }
                                         
                                 }

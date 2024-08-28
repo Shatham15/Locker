@@ -111,8 +111,8 @@ namespace lockerSystem.Domain
                     LockerId = loocker.Id,
                     SemsterId = semeter.Id
                 };
-                _context.AddAsync(bookInfo);
-                _context.SaveChangesAsync();
+               await _context.AddAsync(bookInfo);
+                await _context.SaveChangesAsync();
                 return  "1";
             }
             catch (Exception ex)

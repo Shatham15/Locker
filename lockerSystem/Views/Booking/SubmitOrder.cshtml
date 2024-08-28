@@ -37,6 +37,8 @@
         </div>
     </div>
 @if (ViewBag.locker != null){
+    
+    
  <div class="block mb-4">
      
     <div class="block-header border-bottom px-4 py-4">
@@ -66,8 +68,9 @@
                             @{
                                 foreach (LockerViewsModels item in ViewBag.locker)
                                 {
+                                    if(item.)
                                     <tr>
-                                       <td>@item. bokingDateTime</td>
+                                       
                                       <td>@item.no</td>
                                         <td>@item.Floor.Building.NameAr</td>
                                         <td>@item.Floor.no</td>
@@ -95,6 +98,7 @@
 </div>
 </div>
 }
+
 <script>
 
     $(document).ready(function () {
