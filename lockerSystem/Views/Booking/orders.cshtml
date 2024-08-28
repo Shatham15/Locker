@@ -46,8 +46,9 @@
                             @{
                                 foreach (var item in Model)
                                 {
-                                    <tr>
-                                        @* <td>@item. bokingDateTime</td>*@
+
+                                        <tr>
+                                            @* <td>@item. bokingDateTime</td>*@
                                         <td>@item.fullName</td>
                                         <td>@item.email</td>
                                         <td>@item.phone</td>
@@ -55,14 +56,8 @@
                                         <td>@item.Locker.Floor.no</td>
                                         <td>@item.Locker.no</td>
                                         <td>@item.colegename</td>
-                                        <td>
-                                            <a asp-action="edit" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> تعديل</a>
-
-                                        </td>
-
-
                                     </tr>
-     
+                                     
 
 
                                 }

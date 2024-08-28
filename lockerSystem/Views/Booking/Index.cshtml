@@ -1,4 +1,5 @@
-﻿@model IEnumerable<LockerViewsModels>
+﻿@model IEnumerable<LockerViewsModels>;
+    
 <script>
     @{
         if (@ViewData["Successful"] != null)
@@ -64,8 +65,9 @@
     </div>
 </div>
 @{
-if(Model != null)
+    if (Model != null)
 {
+
     <div class="block mb-4">
         <div class="block-header border-bottom px-4 py-4">
             <h5 class="m-0">الخزائن</h5>
@@ -90,6 +92,8 @@ if(Model != null)
                                 @{
                                     foreach (var item in Model)
                                     {
+                                            if (item.LockerState.stateAr == "متاح" || item.LockerState.stateAr == "تالف")
+                                            {
                                         <tr>
                                             <td>@item.no</td>
                                             <td>@item.Floor.Building.NameAr</td>
@@ -104,7 +108,7 @@ if(Model != null)
 
                                         </tr>
 
-
+                                        }
                                     }
                                         
                                 }
