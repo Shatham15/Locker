@@ -92,6 +92,7 @@
                                 @{
                                     foreach (var item in Model)
                                     {
+                                            if(item.LockerState.stateAr == "تالف" || item.LockerState.stateAr == "متاح"){
                                         <tr>
                                             <td>@item.no</td>
                                             <td>@item.Floor.Building.NameAr</td>
@@ -105,7 +106,7 @@
 
 
                                         </tr>
-
+                                        }
 
                                     }
                                         
