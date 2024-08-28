@@ -39,10 +39,10 @@ namespace lockerSystem.Domain
             return "addede";
         }
 
-        public  tblUser GetlUserByUserName(string UserName)
+        public async Task<tblUser> GetlUserByUserName(string UserName)
         
         {
-            return _context.tblUser.FirstOrDefault(x => x.email == UserName);// select * from tblUser
+            return await _context.tblUser.FirstOrDefaultAsync(x => x.email == UserName);// select * from tblUser
         }
         public async Task<tblUser> GetlUserByUserNamAsynce(string UserName)
 
@@ -63,7 +63,7 @@ namespace lockerSystem.Domain
 
             };
         }
-        public async Task<UserViweModele> GetlUserVMByUserName(string UserName)
+        public async Task<UserViweModele> GetlUserModelByUserName(string UserName)
 
         {
             tblUser userinfo = await _context.tblUser.FirstOrDefaultAsync(x => x.email == UserName);

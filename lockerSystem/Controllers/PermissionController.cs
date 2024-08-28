@@ -32,12 +32,12 @@ namespace lockerSystem.Controllers
         }
         [HttpPost]
         //Validation??
-        public IActionResult add(PermissionViewsModels permission)
+        public async Task<IActionResult> add(PermissionViewsModels permission)
         {
             ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
             if (ModelState.IsValid)
             {
-                string check = _domain.addPermission(permission);
+                string check = await _domain.addPermission(permission);
                 if (check == "1")
                     ViewData["Successful"] = "تمت الاضافة بنجاح";
                 else
@@ -93,7 +93,7 @@ namespace lockerSystem.Controllers
         }
         public async Task<UserViweModele> getUserInfo(string id)
         {
-            return await _userDomain.GetlUserVMByUserName(id);
+            return await _userDomain.GetlUserModelByUserName(id);
         }
 
 

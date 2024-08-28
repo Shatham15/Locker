@@ -75,7 +75,7 @@ namespace lockerSystem.Controllers
             ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Id", "no");
             ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Id", "no");
             ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Id", "stateAr");
-            _LockerDomain.editLocker(Locker);
+            await _LockerDomain.editLocker(Locker);
             return View(Locker);
         }
 
@@ -92,7 +92,7 @@ namespace lockerSystem.Controllers
                 ViewData["Falied"] = check;
 
 
-            _LockerDomain.deleteLocker(id);
+            await _LockerDomain.deleteLocker(id);
             return View();
         }
 

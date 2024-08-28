@@ -41,7 +41,7 @@ namespace lockerSystem.Controllers
             //ViewData["locker"];
             return View(await _lockerDomain.getLockerwithFilter(BuildingGuid, FloorGuid));
         }
-
+        [HttpGet]
         public async Task<IActionResult> orders()//index
         {
 
