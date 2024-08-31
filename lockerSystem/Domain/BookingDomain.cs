@@ -57,6 +57,32 @@ namespace lockerSystem.Domain
             }).ToListAsync();
 
         }
+        public async Task<IEnumerable<BookingViewsModels>> GetAllbybooking(string email)
+
+        {
+
+            return await _context.tblBooking.Include(x => x.BookingState).Include(y => y.Locker).ThenInclude(g => g.Floor).Where(x => x.IsDeleted == false && x.email == email).Select(x => new BookingViewsModels
+            {
+                Id = x.Id,
+                bokingDateTime = x.bokingDateTime,
+                Guid = x.Guid,
+                BookingState = x.BookingState,
+                fullName = x.fullName,
+                email = x.email,
+                phone = x.phone,
+                BookingStateId = x.BookingStateId,
+                IsDeleted = x.IsDeleted,
+                Locker = x.Locker,
+                LockerId = x.LockerId,
+                rejectionReason = x.rejectionReason,
+                Semster = x.Semster,
+                SemsterId = x.SemsterId,
+                floornumer = x.Locker.Floor.no,
+                colegename = x.Locker.Floor.Building.NameAr,
+
+            }).ToListAsync();
+
+        }
 
         //هذا الكود اللي تحت حاطته كومنت هو اللي انا اشتغلت عليه وبرضوا يطلع نفس الخطا اما الكود اللي تحته اللي مو محطوط فليه كومنت هذا الكود حقك انا اضفت المعلومات الثانيه اللي احنا نبي نخليها تطلع بس برضوا يطلع نفس الايرور
 
