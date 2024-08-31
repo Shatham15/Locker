@@ -44,6 +44,7 @@ namespace lockerSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> orders()//index
         {
+
             return View(await _domain.GetAllbooking());
         }
 
