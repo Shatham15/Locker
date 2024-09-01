@@ -9,7 +9,7 @@
             Swal.fire(result, '', 'success')
                 .then(
                     function () {
-                        window.location.href = '@Url.Action("Index", "Booking")';
+                        window.location.href = '@Url.Action("Info", "Booking")';
                     }
                 );
             </Text>
@@ -21,7 +21,7 @@
             Swal.fire(result, '', 'error')
                 .then(
                     function () {
-                        window.location.href = '@Url.Action("Index", "Booking")';
+                        window.location.href = '@Url.Action("Info", "Booking")';
                     }
                 );
             </Text>
@@ -59,7 +59,7 @@
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary px-5">عرض الخزائن</button>
                     </div>
-                </form>
+                </form>  
             </div>
         </div>
     </div>
@@ -92,7 +92,7 @@
                                 @{
                                     foreach (var item in Model)
                                     {
-                                            if(item.LockerState.stateAr == "تالف" || item.LockerState.stateAr == "متاح"){
+                                            if( item.LockerState.stateAr == "متاح"){
                                         <tr>
                                             <td>@item.no</td>
                                             <td>@item.Floor.Building.NameAr</td>
@@ -101,7 +101,7 @@
 
                                             <td>
 
-                                                    <a asp-action="orders" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
+                                                    <a asp-action="add" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
                                             </td>
 
 

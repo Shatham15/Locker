@@ -1,76 +1,82 @@
-﻿@model IEnumerable<BookingViewsModels>
+﻿@model IEnumerable<BookingViewsModels>;
 
-    <div class="block mb-4">
-<div class="block-header border-bottom px-4 py-3">
-  @*   <h5 class="m-0">المستخدمين</h5>  *@
-@*    <h5>عرض معلومات الحجز</h5> *@
-    @* <div class="d-flex gap-2"> 
-       <div class="form-group">
-            <input type="text" class="form-control table__quick_search"
-                   placeholder="البحث السريع ...">
+@* 
+<div class="block mb-4">
+    
+   <div class="card"> *@
+<div class="block mb-4">
+    <div class="block-header border-bottom px-4 py-3">
+        @* <h5 class="m-0">المستخدمين</h5> *@
+         <h5>عرض معلومات الحجز</h5>
+        <div class="d-flex gap-2">
+            <div class="form-group">
+                <input type="text" class="form-control table__quick_search"
+                       placeholder="البحث السريع ...">
+            </div>
+            <a asp-action="Index" class="btn btn-primary">حجز خزانة</a>
+            <a asp-controller="Home" asp-action="Index"  class="btn btn-primary"> الصفحة الرئيسية</a>
         </div>
-        <a asp-action="Index" class="btn btn-primary">حجز خزانة</a>
-        <a asp-controller="Home" asp-action="Index" class="btn btn-primary"> الصفحة الرئيسية</a>  *@
-    </div>
-</div>
+    </div> 
 
-<div class="card-body">
-    <div class="row"> 
-        @*  <h5>عرض معلومات الحجز</h5> *@
+ @* ///dkidi *@
+    
+    <div class="card-body">
+        <div class="row">
+          @*  <h5>عرض معلومات الحجز</h5> *@
 
-        <div class="col-md-12">
-            <div class="table-responsive">
-                <table class="table table-hover table-striped table-bordered" id="myTable">
-                    <thead>
-                        <tr>
-                            <th>@Html.DisplayNameFor(m => m.fullName)</th>
-                            <th> @Html.DisplayNameFor(m => m.email)</th>
-                            <th> @Html.DisplayNameFor(m => m.phone)</th>
-                            <th>  @Html.DisplayNameFor(m => m.BookingState.NameAr) </th>
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-bordered" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.fullName)</th>
+                                <th> @Html.DisplayNameFor(m => m.email)</th>
+                                <th> @Html.DisplayNameFor(m => m.phone)</th>
+                                <th>  @Html.DisplayNameFor(m => m.BookingState.NameAr) </th>
 
-                            <th>@Html.DisplayNameFor(m => m.floornumer) </th>
-                            <th>@Html.DisplayNameFor(m => m.Locker.no)</th>
-                            <th>@Html.DisplayNameFor(m => m.colegename)  </th>
-                            <th></th>
+                                <th>@Html.DisplayNameFor(m => m.Locker.Floor.no) </th>
+                                <th>@Html.DisplayNameFor(m => m.Locker.no)</th>
+                                <th>@Html.DisplayNameFor(m => m.colegename)  </th>
+                                <th></th>
 
 
-                        </tr>
-                    </thead>
-                    <tbody>
+                           </tr>
+                        </thead>
+                        <tbody>
                             @{
-                               
-                                    foreach(var item in Model){
-                                
-
-                                <tr>
+                                foreach (var item in Model)
+                                {
                                    
-                                    <td>@item.fullName</td>
-                                    <td>@item.email</td>
-                                    <td>@item.phone</td>
-                                    <td>@item.BookingState.NameAr</td>
-                                    <td>@item.floornumer</td>
-                                    <td>@item.Locker.no</td>
-                                    <td>@item.colegename</td>
-                                    
-                                    
-                                    
-                                    <td>
-                                    </td>
 
-                                   
-                                </tr>
+                                        <tr>
+                                            @* <td>@item. bokingDateTime</td>*@
+                                        <td>@item.fullName</td>
+                                        <td>@item.email</td>
+                                        <td>@item.phone</td>
+                                        <td>@item.BookingState.NameAr</td>
+                                        <td>@item.Locker.Floor.no</td>
+                                        <td>@item.Locker.no</td>
+                                        <td>@item.colegename</td>
+                                    </tr>
+                                     
+
+
+                                }
+                                            
+
                             }
-                            }
+
                         </tbody>
                     </table>
-                    
-                    <a asp-action="orders" class="btn btn-sm btn-success"> تأكيد الحجز</a>
-
+                       
+                
+                       
                 </div>
 
             </div>
 
         </div>
-    </div>
+    </div >            
 
-</div> 
+
+</div>

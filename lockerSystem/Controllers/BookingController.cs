@@ -1,6 +1,7 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security;
@@ -8,6 +9,8 @@ using System.Security.Claims;
 
 namespace lockerSystem.Controllers
 {
+    [Authorize]
+
     public class BookingController : Controller
     {
         private readonly BookingDomain _domain;
@@ -42,13 +45,14 @@ namespace lockerSystem.Controllers
             return View(await _lockerDomain.getLockerwithFilter(BuildingGuid, FloorGuid));
         }
         [HttpGet]
-        public async Task<IActionResult> orders()//index
+        public async Task<IActionResult> Info()//index
         {
-            return View(await _domain.GetAllbooking());
+            var email = User.FindFirst(ClaimTypes.Email).Value;
+            return View(await _domain.GetAllbybooking(email));
         }
 
         [HttpGet]
-        public async Task<IActionResult> SubmitOrder(Guid id)//add
+        public async Task<IActionResult> add(Guid id)//add
         {
             string Successful = "";
             string Falied = "";
