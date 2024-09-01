@@ -18,10 +18,24 @@ namespace lockerSystem.ViewsModels
         public int FloorId { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("حالة الخزنة")]
+
+
         public tblLockerState LockerState { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [DisplayName("حالة الخزنة")]
         public int LockerStateId { get; set; }
+
+        //[Required(ErrorMessage = "هذا الحقل مطلوب")]
+        //[DisplayName("اسم الحاله باللغه العربيه ")]
+
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [DisplayName("حالة الخزنة بالعربية")]
+        public string stateAr { get; set; }
+
+
+        //[Required(ErrorMessage = "هذا الحقل مطلوب")]
+        //[DisplayName("اسم الحاله باللغه الانجليزيه ")]
+        public string stateEn { get; set; }
 
         public tblBuilding Building { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
