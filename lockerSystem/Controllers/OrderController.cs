@@ -31,7 +31,7 @@ namespace lockerSystem.Controllers
             var bookings = await _bookingDomain.GetBookingByGuid(id);
             return View(bookings);
         }
-      
+      //
         [HttpGet]
         public async Task<IActionResult> Accept(Guid id)
         {
