@@ -45,14 +45,14 @@ namespace lockerSystem.Controllers
             return View(await _lockerDomain.getLockerwithFilter(BuildingGuid, FloorGuid));
         }
         [HttpGet]
-        public async Task<IActionResult> orders()//index
+        public async Task<IActionResult> Info()//index
         {
             var email = User.FindFirst(ClaimTypes.Email).Value;
             return View(await _domain.GetAllbybooking(email));
         }
 
         [HttpGet]
-        public async Task<IActionResult> SubmitOrder(Guid id)//add
+        public async Task<IActionResult> add(Guid id)//add
         {
             string Successful = "";
             string Falied = "";

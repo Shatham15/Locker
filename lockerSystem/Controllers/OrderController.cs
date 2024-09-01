@@ -45,6 +45,11 @@ namespace lockerSystem.Controllers
             {
 
                 bookingViewModel.BookingStateId = 2;
+                if (bookingViewModel.BookingStateId == 2) {
+
+                    bookingViewModel.Locker.LockerStateId= 2;
+
+                }
           
                 string check = await _bookingDomain.UpdateBooking(bookingViewModel);
 
@@ -70,6 +75,12 @@ namespace lockerSystem.Controllers
             }
             if (ModelState.IsValid)
             {
+                if (bookingViewModel.BookingStateId == 2)
+                {
+
+                    bookingViewModel.Locker.LockerStateId = 3;
+
+                }
 
                 bookingViewModel.BookingStateId = 3;
 
