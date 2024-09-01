@@ -12,12 +12,14 @@ namespace lockerSystem.Controllers
         private readonly BuildingDomain _BuildingDomain;
         private readonly FloorDomain _FloorDomain;
         private readonly LockerStateDomain _LockerStateDomain;
+
         public LockerController(LockerDomain LockerDomain, BuildingDomain buildingDomain, FloorDomain floorDomain,  LockerStateDomain LockerStateDomain)
         {
             _BuildingDomain = buildingDomain;
             _FloorDomain = floorDomain;
             _LockerDomain = LockerDomain;
             _LockerStateDomain = LockerStateDomain;
+
         }
 
 
@@ -56,9 +58,9 @@ namespace lockerSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Id", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Id", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Id", "stateAr");
+            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Guid", "no");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Guid", "no");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Guid", "stateAr");
             return View(await _LockerDomain.getLockerById(id));
         }
         [HttpPost]
@@ -72,9 +74,9 @@ namespace lockerSystem.Controllers
             else
                 ViewData["Falied"] = check;
 
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Id", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Id", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Id", "stateAr");
+            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Guid", "no");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Guid", "no");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Guid", "stateAr");
             await _LockerDomain.editLocker(Locker);
             return View(Locker);
         }

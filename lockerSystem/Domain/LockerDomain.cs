@@ -10,7 +10,8 @@ namespace lockerSystem.Domain
         private readonly BuildingDomain _BuildingDomain;  
         private readonly FloorDomain _FloorDomain;
         private readonly SemsterDomain _SemsterDomain;
-       
+        private readonly LockerStateDomain _LockerStateDomain;
+
 
         public LockerDomain(LockerSystemContext context)
         {
@@ -27,7 +28,8 @@ namespace lockerSystem.Domain
                 Floor = x.Floor,
                 FloorId = x.FloorId,
                 LockerState = x.LockerState,
-                LockerStateId = x.LockerStateId
+                LockerStateId = x.LockerStateId,
+                //LockerStateId = x.stateAr
 
 
 
@@ -51,7 +53,7 @@ namespace lockerSystem.Domain
                 Lockerinfo.no = Locker.no;
                 Lockerinfo.FloorId = Locker.FloorId;
                 _context.Add(Lockerinfo);
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -103,7 +105,7 @@ namespace lockerSystem.Domain
                 LockerByGuid.no = Locker.no;
                 LockerByGuid.FloorId = Locker.FloorId;
                 _context.Update(LockerByGuid);
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
