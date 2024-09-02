@@ -1,0 +1,100 @@
+﻿@model BookingViewsModels
+
+<script>
+    @{
+        if (ViewData["Successful"] != null)
+        {
+            <text>
+                            var result = '@Html.Raw(ViewData["Successful"])';
+            Swal.fire(result, '', 'success')
+                .then(
+                    function () {
+                        window.location.href = '@Url.Action("Index", "Order")';
+                    }
+                );
+            </text>
+        }
+        else if (ViewData["Failed"] != null)
+        {
+            <text>
+                            var result = '@Html.Raw(ViewData["Failed"])';
+            Swal.fire(result, '', 'error');
+            </text>
+        }
+    }
+</script>
+
+@if (Model != null)
+{
+    <div class="block mb-4">
+        <div class="block-header border-bottom px-4 py-4">
+            <h5 class="m-0">تفاصيل الحجز</h5>
+        </div>
+        <div class="block-body py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">@Html.DisplayNameFor(m => m.fullName)</label>
+                        <div class="col-md-8">
+                            <label class="form-control-plaintext">@Model.fullName</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">@Html.DisplayNameFor(m => m.email)</label>
+                        <div class="col-md-8">
+                            <label class="form-control-plaintext">@Model.email</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">@Html.DisplayNameFor(m => m.phone)</label>
+                        <div class="col-md-8">
+                            <label class="form-control-plaintext">@Model.phone</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">@Html.DisplayNameFor(m => m.BookingState.NameAr)</label>
+                        <div class="col-md-8">
+                            <label class="form-control-plaintext">@Model.BookingState.NameAr</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">@Html.DisplayNameFor(m => m.Locker)</label>
+                        <div class="col-md-8">
+                            <label class="form-control-plaintext">@Model.Locker.no</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">@Html.DisplayNameFor(m => m.Semster)</label>
+                        <div class="col-md-8">
+                            <label class="form-control-plaintext">@Model.SemsterId</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">@Html.DisplayNameFor(m => m.colegename)</label>
+                        <div class="col-md-8">
+                            <label class="form-control-plaintext">@Model.colegename</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">@Html.DisplayNameFor(m => m.floornumer)</label>
+                        <div class="col-md-8">
+                            <label class="form-control-plaintext">@Model.floornumer</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">@Html.DisplayNameFor(m => m.bokingDateTime)</label>
+                        <div class="col-md-8">
+                            <label class="form-control-plaintext">@Model.bokingDateTime</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8 offset-md-4">
+                            <a asp-action="Accept" asp-route-id="@Model.Guid" class="btn btn-sm btn-success">قبول</a>
+                            <a asp-action="Reject" asp-route-id="@Model.Guid" class="btn btn-sm btn-danger">رفض</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
