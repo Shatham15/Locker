@@ -1,0 +1,46 @@
+﻿@model IEnumerable<lockerSystem.ViewsModels.SemsterViewsModels>;
+
+
+
+
+
+
+<div class="block mb-4">
+    <div class="block-header border-bottom px-4 py-3">
+        <h5 class="m-0">الفصول الدراسية</h5>
+        <div class="d-flex gap-2">
+            <div class="form-group">
+                <input type="text" class="form-control table__quick_search" placeholder="البحث السريع ...">
+            </div>
+            <a asp-action="Add" class="btn btn-primary">إضافة فصل دراسي</a>
+        </div>
+    </div>
+    <div class="block-body">
+        <table class="table table-hover js-dataTable">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.startSemster)</th>
+                    <th>@Html.DisplayNameFor(m => m.endSemster)</th>
+                    <th>@Html.DisplayNameFor(m => m.semsterNameAr)</th>
+                    <th>@Html.DisplayNameFor(m => m.semsterNameEn)</th>
+                    <th class=""></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr class="cursor-pointer">
+                        <td>@x.startSemster.ToString("yyyy-MM-dd")</td>
+                        <td>@x.endSemster.ToString("yyyy-MM-dd")</td>
+                        <td>@x.semsterNameAr</td>
+                        <td>@x.semsterNameEn</td>
+                        <td class="action_td text-end">
+                            <a asp-action="Edit" class="btn btn-sm btn-success" asp-route-id="@x.Guid">تعديل</a>
+                            <a asp-action="Delete" type="button" class="btn btn-sm btn-danger" asp-route-id="@x.Guid">حذف</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<lockerSystem.ViewsModels.ManagementViewsModels>;
+<!-- Start Page Wrap -->
+<section class="page_wrap">
+    <div class="page_content">
+
+        <div class="block mb-4">
+            <div class="block-header border-bottom px-4 py-3">
+                <h5 class="m-0">ادارة النظام</h5>
+                <div class="d-flex gap-2">
+                    <div class="form-group">
+                        <input type="text" class="form-control table__quick_search"
+                               placeholder="البحث السريع ...">
+                    </div>
+                    <a asp-action="add" class="btn btn-primary">اضافة </a>
+                </div>
+            </div>
+            <div class="block-body">
+                <table class="table table-hover js-dataTable">
+                    <thead>
+                        <tr>
+                            <th> @Html.DisplayNameFor(m => m.name)</th>
+                            <th> @Html.DisplayNameFor(m => m.value)</th>
+
+                            <th class=""></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var x in Model)
+                            {
+
+                                <tr class=" cursor-pointer">
+
+                                    <td>@x.name</td>
+                                    <td>@x.value</td>
+
+                                    <td class="action_td text-end">
+                                        <a asp-action="edit" class="btn btn-sm btn-success" asp-route-id="@x.Guid">تعديل</a>
+                                        <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@x.Guid">حذف</a>
+                                    </td>
+                                </tr>
+
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section><!-- End Page Wrap -->
