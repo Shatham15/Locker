@@ -13,6 +13,7 @@
         public int BookingStateId { get; set; }
         public tblLocker Locker { get; set; }
         public int LockerId { get; set; }
+
         public tblSemster Semster { get; set; }
         public int SemsterId { get; set; }
         public string? rejectionReason { get; set; }

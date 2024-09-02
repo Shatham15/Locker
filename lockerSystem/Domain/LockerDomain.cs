@@ -131,20 +131,44 @@ namespace lockerSystem.Domain
             }
 
         }
+        //public async Task<IEnumerable<LockerViewsModels>> getLockerwithFilter(Guid? BuildingGuid, Guid? FloorGuid)
+        //{
+        //    return await _context.tblLocker.Include(F => F.Floor).ThenInclude(B => B.Building).Include(LS => LS.LockerState).Where(x => x.Floor.Guid == FloorGuid).Select(x => new LockerViewsModels
+        //    {
+        //        Id = x.Id,
+        //        LockerState = x.LockerState,
+        //        Floor = x.Floor,
+        //        FloorId = x.FloorId,
+        //        Guid = x.Guid,
+        //        IsDeleted = x.IsDeleted,
+        //        LockerStateId = x.LockerStateId,
+        //        no = x.no
+        //    }).ToListAsync();
+        //}
         public async Task<IEnumerable<LockerViewsModels>> getLockerwithFilter(Guid? BuildingGuid, Guid? FloorGuid)
         {
-            return await _context.tblLocker.Include(F => F.Floor).ThenInclude(B => B.Building).Include(LS => LS.LockerState).Where(x => x.Floor.Guid == FloorGuid).Select(x => new LockerViewsModels
-            {
-                Id = x.Id,
-                LockerState = x.LockerState,
-                Floor = x.Floor,
-                FloorId = x.FloorId,
-                Guid = x.Guid,
-                IsDeleted = x.IsDeleted,
-                LockerStateId = x.LockerStateId,
-                no = x.no
-            }).ToListAsync();
+            var lockers = await _context.tblLocker
+                .Include(F => F.Floor)
+                    .ThenInclude(B => B.Building)
+                .Include(LS => LS.LockerState)
+                .Where(x => x.Floor.Guid == FloorGuid)
+                .Where(x => !(_context.tblBooking.Any(b => b.LockerId == x.Id && b.BookingStateId == 1))) // Exclude lockers with BookingStateId == 1
+                .Select(x => new LockerViewsModels
+                {
+                    Id = x.Id,
+                    LockerState = x.LockerState,
+                    Floor = x.Floor,
+                    FloorId = x.FloorId,
+                    Guid = x.Guid,
+                    IsDeleted = x.IsDeleted,
+                    LockerStateId = x.LockerStateId,
+                    no = x.no
+                })
+                .ToListAsync();
+
+            return lockers;
         }
+
 
     }
 }
