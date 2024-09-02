@@ -59,8 +59,10 @@ namespace lockerSystem.Controllers
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             if (ModelState.IsValid)
             {
+
                ViewBag.check = await _domain.AddBooking(id, User.FindFirst(ClaimTypes.Email).Value);
                 if (ViewBag.check == "1")
+                    
                     Successful = "تمت الاضافة بنجاح";
                 else
                     Falied = ViewBag.check;

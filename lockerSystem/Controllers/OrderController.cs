@@ -98,6 +98,8 @@ namespace lockerSystem.Controllers
 
             return View();
         }
+
+       
         //public async Task<IActionResult> Reject(Guid guid)
         //{
         //    var booking = await _bookingDomain.GetBookingByGuid(guid);
