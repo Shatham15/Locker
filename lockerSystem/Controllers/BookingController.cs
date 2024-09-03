@@ -46,10 +46,16 @@ namespace lockerSystem.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> Info()//index
+        public async Task<IActionResult> Info(string seaechString)//index
         {
             var email = User.FindFirst(ClaimTypes.Email).Value;
-            return View(await _domain.GetAllbybooking(email));
+            var b = await _domain.GetAllbybooking(email);
+            if (!String.IsNullOrEmpty(seaechString))
+            {
+                b = b.Where(n => n.colegename.Contains(seaechString)).ToList();
+
+            }
+            return View(b);
         }
 
         [HttpGet]

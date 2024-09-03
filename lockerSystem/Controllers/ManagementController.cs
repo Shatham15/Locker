@@ -13,10 +13,17 @@ namespace lockerSystem.Controllers
         {
             _managementdomain = managementdomain;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string seaechString)
         {
-            return View(await _managementdomain.GetAllMangement());
+            var management = await _managementdomain.GetAllMangement();
+            if (!String.IsNullOrEmpty(seaechString))
+            {
+                management = management.Where(n => n.name.Contains(seaechString)).ToList();
+
+            }
+            return View(management);
         }
+      
         [HttpGet]
         public async Task<IActionResult> add()
         {

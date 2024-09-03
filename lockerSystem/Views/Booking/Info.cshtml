@@ -10,11 +10,28 @@
          <h5>عرض معلومات الحجز</h5>
         <div class="d-flex gap-2">
             <div class="form-group">
-                <input type="text" class="form-control table__quick_search"
-                       placeholder="البحث السريع ...">
+
+                <form class="d-md-inline-flex" asp-action="Info" asp-controller="Booking">
+                    <div class="col-md-6">
+                        <input type="search" name="seaechString" class="form-control table__quick_search"
+                               placeholder="البحث السريع ...">
+                    </div>
+                    <div class="col-md-7">
+                        <button class="btn btn-primary" type="submit">البحث من خلال الأسم </button>
+                    </div>
+                </form>
+                
+
             </div>
+            <div class="col-md-3">
+                <a asp-action="Info" class="btn btn-primary">العودة الى القائمة </a>
+            </div>
+            <div class="col-md-4">
             <a asp-action="Index" class="btn btn-primary">حجز خزانة</a>
+            
+             
             <a asp-controller="Home" asp-action="Index"  class="btn btn-primary"> الصفحة الرئيسية</a>
+            </div>
         </div>
     </div> 
 
