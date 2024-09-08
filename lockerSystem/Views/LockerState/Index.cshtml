@@ -1,40 +1,29 @@
 ﻿@model IEnumerable<lockerSystem.ViewsModels.LockerStateViewsModels> ;
-@*احس ما يحتاج سويت اليرت؟؟*@
-<script>
-    @{
-        if (@ViewData["Successful"] != null)
-        {
-            <Text>
-                                               var result = '@Html.Raw(ViewData["Successful"])';
-            Swal.fire(result, '', 'success')
-                .then(
-                    function () {
-                        window.location.href = '@Url.Action("Index", "LockerState")';
-                    }
-                );
-            </Text>
-        }
-        else if (@ViewData["Falied"] != null)
-        {
-            <Text>
-                                               var result = '@Html.Raw(ViewData["Falied"])';
-            Swal.fire(result, '', 'error')
-                ;
-            </Text>
-        }
-    }
-</script>
+
 <div class="block mb-4">
-    <div class="block-header border-bottom px-4 py-3">
-        <h5 class="m-0">الحالات</h5>
-        <div class="d-flex gap-2">
-            <div class="form-group">
-                <input type="text" class="form-control table__quick_search"
-                       placeholder="البحث السريع ...">
+
+            <div class="block-header border-bottom px-4 py-3">
+
+                <h5 class="m-0">الحالات</h5>
+                <div class="d-flex gap-2">
+                    <div class="form-group">
+                        <form class="d-md-inline-flex" asp-action="Index" asp-controller="LockerState">
+                            <div class="col-md-6">
+                         <input type="search" name="seaechString" class="form-control table__quick_search"
+                               placeholder="البحث السريع ...">
+                               </div>
+                            <div class="col-md-8">
+                            <button class="btn btn-primary" type="submit">البحث من خلال الأسم </button>
+                            </div>
+                                        </form>
+
+                    </div>
+                                <div class="col-md-4">
+                        <a asp-action="Index" class="btn btn-primary">العودة الى القائمة </a>
+                                </div>
+                    <a asp-action="add" class="btn btn-primary">اضافة </a>
+                </div>
             </div>
-            <a asp-action="add" class="btn btn-primary">إضافة حاله</a>
-        </div>
-    </div>
     <div class="block-body">
         <table class="table table-hover js-dataTable">
             <thead>

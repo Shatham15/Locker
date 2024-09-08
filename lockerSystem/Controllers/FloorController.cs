@@ -14,9 +14,15 @@ namespace lockerSystem.Controllers
             _floorDomain = floorDomain;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string seaechString)
         {
-            return View(await _floorDomain.GetAllFloor());
+            var floor = await _floorDomain.GetAllFloor();
+            if (!String.IsNullOrEmpty(seaechString))
+            {
+                floor = floor.Where(n => n.BuildingName.Contains(seaechString)).ToList();
+
+            }
+            return View(floor);
         }
         public async Task<IActionResult> addFloor()
         {
