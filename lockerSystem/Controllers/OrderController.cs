@@ -20,11 +20,17 @@ namespace lockerSystem.Controllers
 
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string seaechString)
         {
+            //var bookings = await _bookingDomain.GetAllbooking();
+            //return View(bookings);
             var bookings = await _bookingDomain.GetAllbooking();
+            if (!String.IsNullOrEmpty(seaechString))
+            {
+                bookings = bookings.Where(n => n.fullName.Contains(seaechString)).ToList();
+
+            }
             return View(bookings);
-            // return View(await _domain.GetAllbooking());
         }
         public async Task<IActionResult> details(Guid id)
         {
