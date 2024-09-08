@@ -1,36 +1,26 @@
 ﻿ @model IEnumerable<lockerSystem.ViewsModels.FloorViewsModels> ;
-<script>
-    @{
-        if (@ViewData["Successful"] != null)
-        {
-            <Text>
-                                                    var result = '@Html.Raw(ViewData["Successful"])';
-                    Swal.fire(result, '', 'success')
-                        .then(
-                            function () {
-                                window.location.href = '@Url.Action("Index", "Floor")';
-                            }
-                        );
-            </Text>
-        }
-        else if (@ViewData["Falied"] != null)
-        {
-            <Text>
-                                                    var result = '@Html.Raw(ViewData["Falied"])';
-                    Swal.fire(result, '', 'error');
-            </Text>
-        }
-    }
-</script>
 <div class="block mb-4">
+
     <div class="block-header border-bottom px-4 py-3">
+
         <h5 class="m-0">الطوابق</h5>
         <div class="d-flex gap-2">
             <div class="form-group">
-                <input type="text" class="form-control table__quick_search"
-                       placeholder="البحث السريع ...">
+                <form class="d-md-inline-flex" asp-action="Index" asp-controller="Floor">
+                    <div class="col-md-6">
+                        <input type="search" name="seaechString" class="form-control table__quick_search"
+                               placeholder="البحث السريع ...">
+                    </div>
+                    <div class="col-md-8">
+                        <button class="btn btn-primary" type="submit">البحث  برقم الطابق </button>
+                    </div>
+                </form>
+
             </div>
-            <a asp-action="addFloor" class="btn btn-primary">إضافة طابق</a>
+            <div class="col-md-4">
+                <a asp-action="Index" class="btn btn-primary">العودة الى القائمة </a>
+            </div>
+            <a asp-action="add" class="btn btn-primary">اضافة </a>
         </div>
     </div>
     <div class="block-body">

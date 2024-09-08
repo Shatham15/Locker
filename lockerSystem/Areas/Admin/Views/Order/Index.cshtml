@@ -1,40 +1,28 @@
 ﻿@model IEnumerable<BookingViewsModels>
 <div class="block mb-4">
-    @* <div class="block-header border-bottom px-4 py-4"> *@
-    @*  <h5 class="m-0">حجز جديد</h5>
-    </div>
-    <div class="block-body py-5">
-    <div class="row justify-content-center">
-    <div class="col-md-8"> *@
-    @* asp-items="@(new SelectList(Model.Locker.Floor.Building.NameAr, "Id","NameAr"))" *@
-    @*   <form asp-action="Index"> *@
-    @*    <div class="row"> *@
-    <!-- START ITEM -->
-    @*  <div class="col-md-6">
-    <div class="mb-4">
-    <label class="mb-1">  اختر المبنى</label>
-    <select class="form-control" name="BuildingGuid" id="BuildingId" asp-items="@ViewBag.Building">
-    </select>
-    </div>
-    </div> *@
-    <!-- END ITEM -->
-    <!-- START ITEM -->
-    @*  <div class="col-md-6">
-    <div class="mb-4">
-    <label class="mb-1"> اختر الطابق</label>
-    <select class="form-control" name="FloorGuid" id="FloorId"></select>
-    </div>
-    </div> <!-- END ITEM -->
-    </div> *@
 
-    @* <div class="d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary px-5">عرض الخزائن</button>
-    </div>
-    </form> *@
-</div>
+    <div class="block-header border-bottom px-4 py-3">
+
+        <h5 class="m-0">الطوابق</h5>
+        <div class="d-flex gap-2">
+            <div class="form-group">
+                <form class="d-md-inline-flex" asp-action="Index" asp-controller="Order">
+                    <div class="col-md-6">
+                        <input type="search" name="seaechString" class="form-control table__quick_search"
+                               placeholder="البحث السريع ...">
+                    </div>
+                    <div class="col-md-8">
+                        <button class="btn btn-primary" type="submit">البحث  برقم الطابق </button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-md-4">
+                <a asp-action="Index" class="btn btn-primary">العودة الى القائمة </a>
+            </div>
+            <a asp-action="add" class="btn btn-primary">اضافة </a>
         </div>
     </div>
-</div>
 @{
     if (Model != null)
     {

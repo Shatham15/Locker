@@ -23,7 +23,7 @@ namespace lockerSystem.Controllers
             }
             return View(management);
         }
-      
+       
         [HttpGet]
         public async Task<IActionResult> add()
         {
