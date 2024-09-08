@@ -33,6 +33,7 @@
                     <th> @Html.DisplayNameFor(m => m.NameAr)</th>
                     <th> @Html.DisplayNameFor(m => m.NameEn)</th>
                     <th> @Html.DisplayNameFor(m => m.no)</th>
+                    <th> @Html.DisplayNameFor(m => m.gender)</th>
                     <th class=""></th>
                 </tr>
             </thead>
@@ -44,6 +45,7 @@
                         <td>@x.NameAr</td>
                         <td>@x.NameEn</td>
                         <td>@x.no</td>
+                        <td>@x.gender</td>
                         
                         <td class="action_td text-end">
                             <a asp-action="Edit" asp-route-id="@x.Guid"  class="btn btn-sm btn-success">تعديل</a>

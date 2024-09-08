@@ -37,9 +37,9 @@
         <table class="table table-hover js-dataTable">
             <thead>
                 <tr>
+                    <th> @Html.DisplayNameFor(m => m.BuildingName)</th>
+                    <th> @Html.DisplayNameFor(m => m.FloorNo)</th>
                     <th> @Html.DisplayNameFor(m => m.no)</th>
-                    <th> @Html.DisplayNameFor(m => m.FloorId)</th>
-                    <th> @Html.DisplayNameFor(m => m.BuildingId)</th>
                     <th> @Html.DisplayNameFor(m => m.stateAr)</th>
                     @* <th> @Html.DisplayNameFor(m => m.userType)</th> *@
                     <th class=""></th>
@@ -49,9 +49,9 @@
                 @foreach (var x in Model)
                 {
                     <tr class="cursor-pointer">
+                        <td>@x.BuildingName</td>
+                        <td>@x.Floor.no</td>
                         <td>@x.no</td>
-                        <td>@x.no</td>
-                        <td>@x.BuildingId</td>
                         <td>@x.stateAr</td>
                         @*  <td>@x.userType</td> *@
                         <td class="action_td text-end">

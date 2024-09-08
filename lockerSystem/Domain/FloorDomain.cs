@@ -17,8 +17,8 @@ namespace lockerSystem.Domain
 
             return await _context.tblFloor.Include(x => x.Building).Where(d => d.IsDeleted == false).Select(x => new FloorViewsModels
             {
-                // Id = x.Id,
-                no = x.no,
+                FloorId = x.Id,
+                FloorNo = x.no,
                 BuildingId = x.BuildingId,
                 Building = x.Building,
                 BuildingName = x.Building.NameAr,
@@ -33,7 +33,7 @@ namespace lockerSystem.Domain
             {
                 // Check if the floor already exists in the specified building
                 var existingFloor = await _context.tblFloor
-                    .FirstOrDefaultAsync(f => f.no == floor.no
+                    .FirstOrDefaultAsync(f => f.no == floor.FloorNo
                     && f.BuildingId == floor.BuildingId && f.IsDeleted == false);
 
                 if (existingFloor != null)
@@ -42,7 +42,7 @@ namespace lockerSystem.Domain
                 }
 
                 tblFloor floorinfo = new tblFloor();
-                floorinfo.no = floor.no;
+                floorinfo.no = floor.FloorNo;
                 floorinfo.BuildingId = floor.BuildingId;
                 _context.Add(floorinfo);
                 _context.SaveChanges();
@@ -60,7 +60,7 @@ namespace lockerSystem.Domain
             FloorViewsModels floorViewsModels = new FloorViewsModels
             {
                 // Id = FloorById.Id,
-                no = FloorById.no,
+                FloorNo = FloorById.no,
                 BuildingId = FloorById.BuildingId,
                 Building = FloorById.Building,
                 Guid = FloorById.Guid
@@ -74,7 +74,7 @@ namespace lockerSystem.Domain
             FloorViewsModels floorViewsModels = new FloorViewsModels
             {
                 // Id = FloorById.Id,
-                no = FloorById.no,
+                FloorNo = FloorById.no,
                 BuildingId = FloorById.BuildingId,
                 Building = FloorById.Building,
                 Guid = FloorById.Guid
@@ -91,7 +91,7 @@ namespace lockerSystem.Domain
             return await _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id && !x.IsDeleted).Select(x => new FloorViewsModels
             {
                 // Id = x.Id,
-                no = x.no,
+                FloorNo = x.no,
                 BuildingId = x.BuildingId,
                 Building = x.Building,
                 Guid = x.Guid
@@ -109,7 +109,7 @@ namespace lockerSystem.Domain
                 var floorByGuid = await getFloorModelById(floor.Guid);
 
                 var existingFloor = await _context.tblFloor
-                    .FirstOrDefaultAsync(f => f.no == floor.no && f.BuildingId == floor.BuildingId && f.IsDeleted == false);
+                    .FirstOrDefaultAsync(f => f.no == floor.FloorNo && f.BuildingId == floor.BuildingId && f.IsDeleted == false);
 
                 if (existingFloor != null)
                 {
@@ -117,7 +117,7 @@ namespace lockerSystem.Domain
                 }
 
 
-                floorByGuid.no = floor.no;
+                floorByGuid.no = floor.FloorNo;
                 floorByGuid.BuildingId = floor.BuildingId;
                 _context.Update(floorByGuid);
                 await _context.SaveChangesAsync();

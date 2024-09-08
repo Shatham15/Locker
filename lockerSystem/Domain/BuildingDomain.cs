@@ -24,7 +24,8 @@ namespace lockerSystem.Domain
                 NameAr=x.NameAr,
                 NameEn=x.NameEn,
                 Guid=x.Guid,
-             
+                gender = x.gender,
+
             }).ToListAsync();// select * from tblBuilding
         }
         public async Task<string> addBuilding(BuildingViewsModels Building)
@@ -46,6 +47,8 @@ namespace lockerSystem.Domain
                 Buildinginfo.NameAr = Building.NameAr;
                 Buildinginfo.NameEn = Building.NameEn;
                 Buildinginfo.Guid = Building.Guid;
+                Buildinginfo.gender = Building.gender;
+
 
                 _context.Add(Buildinginfo);
                 await _context.SaveChangesAsync();
@@ -66,7 +69,8 @@ namespace lockerSystem.Domain
                 NameAr = Buildinginfo.NameAr,
                 NameEn = Buildinginfo.NameEn,
                 Guid = Buildinginfo.Guid,
-                
+                gender = Buildinginfo.gender,
+
             }; return  models;
             
 
@@ -82,6 +86,7 @@ namespace lockerSystem.Domain
                 NameAr = Buildinginfo.NameAr,
                 NameEn = Buildinginfo.NameEn,
                 Guid = Buildinginfo.Guid,
+                gender = Buildinginfo.gender,
 
             }; 
             return models.NameAr;
@@ -113,7 +118,8 @@ namespace lockerSystem.Domain
                 Buildinginfo.no = Building.no;
                 Buildinginfo.NameEn = Building.NameEn;
                 Buildinginfo.NameAr = Building.NameAr;
-                
+                Buildinginfo.gender = Building.gender;
+
 
 
                 _context.Update(Buildinginfo);

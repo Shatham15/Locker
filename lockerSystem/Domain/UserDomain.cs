@@ -23,7 +23,8 @@ namespace lockerSystem.Domain
                 fullName = X.fullName,
                 password = X.password,
                 phone = X.phone,
-                userType = X.userType
+                userType = X.userType,
+                gender = X.gender,
             });// select * from tblUser
         }
         public string addUser(UserViweModele user)
@@ -34,6 +35,7 @@ namespace lockerSystem.Domain
             userinfo.email = user.email;
             userinfo.phone = user.phone;
             userinfo.userType = user.userType;
+            userinfo.gender = user.gender;
             _context.Add(userinfo);
             _context.SaveChanges();
             return "addede";
@@ -58,8 +60,9 @@ namespace lockerSystem.Domain
                 fullName = data.fullName,
                 Id = data.Id,
                 phone = data.phone,
-                email = data.email
-                
+                email = data.email,
+                gender = data.gender
+
 
             };
         }
@@ -75,7 +78,8 @@ namespace lockerSystem.Domain
                     fullName = userinfo.fullName,
                     Id = userinfo.Id,
                     phone = userinfo.phone,
-                    email = userinfo.email
+                    email = userinfo.email,
+                    gender = userinfo.gender
                 };
             }
         }
