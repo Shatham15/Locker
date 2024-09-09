@@ -191,7 +191,7 @@ namespace lockerSystem.Migrations
                         column: x => x.RoleId,
                         principalTable: "tblRole",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -214,13 +214,13 @@ namespace lockerSystem.Migrations
                         column: x => x.FloorId,
                         principalTable: "tblFloor",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_tblLocker_tblLockerState_LockerStateId",
                         column: x => x.LockerStateId,
                         principalTable: "tblLockerState",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -250,19 +250,19 @@ namespace lockerSystem.Migrations
                         column: x => x.BookingStateId,
                         principalTable: "tblBookingState",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_tblBooking_tblLocker_LockerId",
                         column: x => x.LockerId,
                         principalTable: "tblLocker",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_tblBooking_tblSemster_SemsterId",
                         column: x => x.SemsterId,
                         principalTable: "tblSemster",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
