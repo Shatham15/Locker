@@ -4,10 +4,27 @@
     if (Model != null)
     {
         <div class="block mb-4">
-            <div class="block-header border-bottom px-4 py-4">
-                <h5 class="m-0">الحجوزات</h5>
+            <div class="block-header border-bottom px-4 py-3">
+            <h5 class="m-0">الحجوزات</h5>
+            <div class="d-flex gap-2">
+                <div class="form-group">
+                    <form class="d-md-inline-flex" asp-action="Index" asp-controller="Order">
+                        <div class="col-md-6">
+                            <input type="search" name="seaechString" class="form-control table__quick_search"
+                                   placeholder="البحث السريع ...">
+                        </div>
+                        <div class="col-md-8">
+                            <button class="btn btn-primary" type="submit">البحث من خلال الأسم </button>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="col-md-4">
+                    <a asp-action="Index" class="btn btn-primary">العودة الى القائمة </a>
+                </div>
+                </div>
             </div>
-            <div class="block-body py-5">
+            <div class="block-body">
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -19,10 +36,6 @@
                                         <th> @Html.DisplayNameFor(m => m.BookingState.NameAr)</th>
 
                                         <th> @Html.DisplayNameFor(m => m.bokingDateTime)</th>
-
-
-
-
 
                                         <th></th>
 
