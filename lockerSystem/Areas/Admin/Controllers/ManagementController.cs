@@ -1,11 +1,13 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lockerSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ManagementController : Controller
     {
         private readonly ManagementDomain _managementdomain;

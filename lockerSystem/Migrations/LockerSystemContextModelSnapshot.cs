@@ -400,19 +400,19 @@ namespace lockerSystem.Migrations
                     b.HasOne("lockerSystem.Models.tblBookingState", "BookingState")
                         .WithMany("Bookings")
                         .HasForeignKey("BookingStateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("lockerSystem.Models.tblLocker", "Locker")
                         .WithMany()
                         .HasForeignKey("LockerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("lockerSystem.Models.tblSemster", "Semster")
                         .WithMany()
                         .HasForeignKey("SemsterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("BookingState");
@@ -427,7 +427,7 @@ namespace lockerSystem.Migrations
                     b.HasOne("lockerSystem.Models.tblBuilding", "Building")
                         .WithMany("Floor")
                         .HasForeignKey("BuildingId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Building");
@@ -438,13 +438,13 @@ namespace lockerSystem.Migrations
                     b.HasOne("lockerSystem.Models.tblFloor", "Floor")
                         .WithMany("Lockers")
                         .HasForeignKey("FloorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("lockerSystem.Models.tblLockerState", "LockerState")
                         .WithMany("Lockers")
                         .HasForeignKey("LockerStateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Floor");
@@ -457,7 +457,7 @@ namespace lockerSystem.Migrations
                     b.HasOne("lockerSystem.Models.tblRole", "Role")
                         .WithMany("Permission")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Role");

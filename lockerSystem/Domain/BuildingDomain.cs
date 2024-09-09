@@ -52,6 +52,8 @@ namespace lockerSystem.Domain
 
                 _context.Add(Buildinginfo);
                 await _context.SaveChangesAsync();
+                var BuildingLog = new BuildingLog();
+                BuildingLog.Building_Id= Buildinginfo.Id;
                 return "1";
             }
             catch (Exception ex)
@@ -124,6 +126,8 @@ namespace lockerSystem.Domain
 
                 _context.Update(Buildinginfo);
               await  _context.SaveChangesAsync();
+                var BuildingLog = new BuildingLog();
+                BuildingLog.Building_Id = Buildinginfo.Id;
                 return "1";
             }
             catch (Exception ex)
@@ -146,6 +150,8 @@ namespace lockerSystem.Domain
 
                 _context.Update(Buildinginfo);
               await  _context.SaveChangesAsync();
+                var BuildingLog = new BuildingLog();
+                BuildingLog.Building_Id = Buildinginfo.Id;
                 return "1";
             }
             catch (Exception ex)
