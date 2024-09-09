@@ -16,7 +16,8 @@ namespace lockerSystem.Domain
         public async Task<IEnumerable<FloorViewsModels>> GetAllFloor()
         {
 
-            return await _context.tblFloor.Include(x => x.Building).Where(d => d.Building.IsDeleted == false).Select(x => new FloorViewsModels
+            return await _context.tblFloor.Include(x => x.Building).Where(d => d.IsDeleted == false 
+            && d.Building.IsDeleted == false).Select(x => new FloorViewsModels
             {
                 FloorId = x.Id,
                 FloorNo = x.no,
