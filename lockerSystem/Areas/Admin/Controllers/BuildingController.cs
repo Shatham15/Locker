@@ -1,14 +1,16 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace lockerSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
+    [Authorize(Roles = "Admin")]
     public class BuildingController : Controller
     {
+        
         private readonly BuildingDomain _BuildingDomain;
         public BuildingController(BuildingDomain BuildingDomain)
         {//kjj
@@ -32,6 +34,7 @@ namespace lockerSystem.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> add(BuildingViewsModels Building)
         {
             try

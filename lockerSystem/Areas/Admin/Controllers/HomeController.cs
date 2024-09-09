@@ -13,12 +13,11 @@ namespace lockerSystem.Areas.Admin.Controllers
             _logger = logger;
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, student")]
         public IActionResult Index()
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             return View();
@@ -29,7 +28,7 @@ namespace lockerSystem.Areas.Admin.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
+        [Authorize(Roles = "Admin, student")]
         public IActionResult authorization()
         {
             return View();
