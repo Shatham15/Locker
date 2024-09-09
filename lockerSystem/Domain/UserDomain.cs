@@ -14,9 +14,9 @@ namespace lockerSystem.Domain
             _context = context;
         }
         //lll
-        public IEnumerable<UserViweModele> GetAllUsers()
+        public async Task<IEnumerable<UserViweModele>> GetAllUsers()
         {
-            return _context.tblUser.Select(X => new UserViweModele
+            return await _context.tblUser.Select(X => new UserViweModele
             {
                 Id = X.Id,
                 email = X.email,
@@ -24,9 +24,9 @@ namespace lockerSystem.Domain
                 password = X.password,
                 phone = X.phone,
                 userType = X.userType
-            });// select * from tblUser
+            }).ToListAsync();// select * from tblUser
         }
-        public string addUser(UserViweModele user)
+        public async Task<string> addUser(UserViweModele user)
         {
             tblUser userinfo = new tblUser();
             userinfo.fullName = user.fullName;
@@ -35,7 +35,7 @@ namespace lockerSystem.Domain
             userinfo.phone = user.phone;
             userinfo.userType = user.userType;
             _context.Add(userinfo);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return "addede";
         }
 
@@ -49,12 +49,12 @@ namespace lockerSystem.Domain
         {
             return await _context.tblUser.FirstOrDefaultAsync(x => x.email == UserName);// select * from tblUser
         }
-        public  UserViweModele GetUsersForLogin(UserViweModele UsertInfo)
+        public async Task<UserViweModele> GetUsersForLogin(UserViweModele UsertInfo)
         {
-           var data=  _context.tblUser.FirstOrDefault(x => x.email == UsertInfo.email && x.password == UsertInfo.password  )  ;// select * from tblUser
+           var  data = await _context.tblUser.FirstOrDefaultAsync( x => x.email == UsertInfo.email && x.password == UsertInfo.password  )  ;// select * from tblUser
             
-            return new UserViweModele
-            { userType = data.userType,
+            return  new  UserViweModele
+            {  userType = data.userType,
                 fullName = data.fullName,
                 Id = data.Id,
                 phone = data.phone,
