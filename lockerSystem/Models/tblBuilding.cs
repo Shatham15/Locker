@@ -17,6 +17,8 @@ namespace lockerSystem.Models
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
 
         public int no { get; set; }
+
+        public string gender { get; set; }
         public ICollection<tblFloor> Floor { get;}
 
 

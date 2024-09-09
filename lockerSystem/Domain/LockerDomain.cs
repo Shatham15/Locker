@@ -29,7 +29,9 @@ namespace lockerSystem.Domain
                 FloorId = x.FloorId,
                 LockerState = x.LockerState,
                 LockerStateId = x.LockerStateId,
-                //LockerStateId = x.stateAr
+                FloorNo = x.Floor.no,
+               stateAr = x.LockerState.stateAr,
+               BuildingName = x.Floor.Building.NameAr,
 
 
 
@@ -52,6 +54,7 @@ namespace lockerSystem.Domain
                 tblLocker Lockerinfo = new tblLocker();
                 Lockerinfo.no = Locker.no;
                 Lockerinfo.FloorId = Locker.FloorId;
+                Lockerinfo.LockerStateId = Locker.LockerStateId;
                 _context.Add(Lockerinfo);
                 _context.SaveChangesAsync();
                 return "1";
@@ -104,6 +107,8 @@ namespace lockerSystem.Domain
                 var LockerByGuid = await getLockerModelById(Locker.Guid);
                 LockerByGuid.no = Locker.no;
                 LockerByGuid.FloorId = Locker.FloorId;
+                LockerByGuid.LockerStateId= Locker.LockerStateId;
+
                 _context.Update(LockerByGuid);
                 _context.SaveChangesAsync();
                 return "1";
