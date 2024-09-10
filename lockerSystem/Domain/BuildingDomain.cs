@@ -1,6 +1,8 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System;
 
 
 namespace lockerSystem.Domain
@@ -51,6 +53,10 @@ namespace lockerSystem.Domain
                 await _context.SaveChangesAsync();
                 var BuildingLog = new BuildingLog();
                 BuildingLog.Building_Id= Buildinginfo.Id;
+                BuildingLog.operationType = "Add";
+                BuildingLog.generatedBy = ClaimTypes.GivenName;
+                BuildingLog.date_time = DateTime.UtcNow;
+                //BuildingLog.additionalInfo = ;
                 return "1";
             }
             catch (Exception ex)
@@ -122,6 +128,10 @@ namespace lockerSystem.Domain
               await  _context.SaveChangesAsync();
                 var BuildingLog = new BuildingLog();
                 BuildingLog.Building_Id = Buildinginfo.Id;
+                BuildingLog.operationType = "Edit";
+                BuildingLog.generatedBy = ClaimTypes.GivenName;
+                BuildingLog.date_time = DateTime.UtcNow;
+                //BuildingLog.additionalInfo = ;
                 return "1";
             }
             catch (Exception ex)
@@ -146,6 +156,10 @@ namespace lockerSystem.Domain
               await  _context.SaveChangesAsync();
                 var BuildingLog = new BuildingLog();
                 BuildingLog.Building_Id = Buildinginfo.Id;
+                BuildingLog.operationType = "Delete";
+                BuildingLog.generatedBy = ClaimTypes.GivenName;
+                BuildingLog.date_time = DateTime.UtcNow;
+                //BuildingLog.additionalInfo = ;
                 return "1";
             }
             catch (Exception ex)

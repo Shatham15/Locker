@@ -111,9 +111,9 @@ namespace lockerSystem.Areas.Admin.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         principal);
                     if (Role == "Admin")
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
                     else
-                        return RedirectToAction("authorization", "Home");
+                        return RedirectToAction("Index", "Home");
 
                 }
             }

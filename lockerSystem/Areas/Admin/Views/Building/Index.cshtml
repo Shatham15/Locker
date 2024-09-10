@@ -6,20 +6,23 @@
         <div class="d-flex gap-2">
             <div class="form-group">
                 <div class="row">
-                <div class="col-md-6">
-                <form class="d-flex " asp-action="Index" asp-controller="Building">
-                    <input type="search" name="seaechString" class="form-control me-1"
-                           placeholder="البحث السريع ...">
-                   <button class="btn btn-dark" type="submit">Search By Code</button>
+                    <div class="col-md-6">
+                        <form class="d-md-inline-flex" asp-action="Index" asp-controller="Building">
+                            <div class="col-md-6">
+                                <input type="search" name="seaechString" class="form-control table__quick_search"
+                                       placeholder="البحث السريع ...">
+                            </div>
+                            <div class="col-md-8">
+                                <button class="btn btn-primary" type="submit">بحث بواسطة الرمز</button>
+                            </div>
+                        </form>
+                    </div>
 
-                </form>
-                </div>
-
-                <div class="col-md-3">
-                        <a asp-action="Index" class="btn btn-dark">Back To Full List</a>
+                    <div class="col-md-4">
+                        <a asp-action="Index" class="btn btn-primary">الرجوع الى القائمة</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
             <a asp-action="add" class="btn btn-primary">إضافة مبنى</a>
 
@@ -44,9 +47,9 @@
                         <td>@x.NameAr</td>
                         <td>@x.NameEn</td>
                         <td>@x.no</td>
-                        
+
                         <td class="action_td text-end">
-                            <a asp-action="Edit" asp-route-id="@x.Guid"  class="btn btn-sm btn-success">تعديل</a>
+                            <a asp-action="Edit" asp-route-id="@x.Guid" class="btn btn-sm btn-success">تعديل</a>
                             <a asp-action="Delete" asp-route-id="@x.Guid" class="btn btn-sm btn-danger">حذف</a>
                         </td>
                     </tr>
@@ -55,21 +58,6 @@
 
             </tbody>
         </table>
-        <script>
-            $(document).ready(function () {
-                $(".navbar-toggler").click(function () {
-                    if ($(".side-menu").hasClass("collapsed") == true) {
-                        $(".side-menu").removeClass("collapsed");
-                    } else {
-                        $(".side-menu").addClass("collapsed");
-                    }
-                });
-                $(".collapse_option").click(function () {
-                    $(this).toggleClass("active");
-                })
-                $('#myTable').DataTable();
-            });
-        </script>
+     
     </div>
 </div>
-
