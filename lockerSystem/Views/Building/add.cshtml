@@ -5,7 +5,7 @@
         if (@ViewData["Successful"] != null)
         {
             <Text>
-                                                                        var result = '@Html.Raw(ViewData["Successful"])';
+                                var result = '@Html.Raw(ViewData["Successful"])';
             Swal.fire(result, '', 'success')
                 .then(
                     function () {
@@ -17,22 +17,23 @@
         else if (@ViewData["Falied"] != null)
         {
             <Text>
-                                                                        var result = '@Html.Raw(ViewData["Falied"])';
+                                   var result = '@Html.Raw(ViewData["Falied"])';
             Swal.fire(result, '', 'error')
-                ;
+           ;
             </Text>
         }
     }
 </script>
+
 <div class="block mb-4">
     <div class="block-header border-bottom px-4 py-4">
-        <h5 class="m-0"> تعديل مبنى</h5>
+        <h5 class="m-0">إضافة مبنى</h5>
     </div>
     <div class="block-body py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form asp-action="Edit" >
-                    <input hidden asp-for="Guid" />
+               
+                <form asp-action="add" id=" addBuildingForm">
                     <div class="row">
                         <!-- START ITEM -->
                         <div class="col-md-6">
@@ -58,6 +59,7 @@
                                 <input asp-for="no" type="number" class="form-control">
                                 <span asp-validation-for="no" class="text-danger"></span>
 
+
                             </div>
                         </div><!-- END ITEM -->
                         <!-- START ITEM -->
@@ -79,13 +81,15 @@
                             </div>
                         </div><!-- END ITEM -->
 
+                        
+
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit"  class="btn btn-primary px-5" title="save">تعديل</button>
+                        <button type="submit" asp-route-for="Index" class="btn btn-primary px-5" title="save">إضافة</button>
                     </div>
                 </form>
-
-
+              
+              
 
 
             </div>

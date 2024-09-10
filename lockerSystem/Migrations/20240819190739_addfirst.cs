@@ -168,7 +168,7 @@ namespace lockerSystem.Migrations
                         column: x => x.BuildingId,
                         principalTable: "tblBuilding",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(

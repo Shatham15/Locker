@@ -25,6 +25,10 @@ namespace lockerSystem.ViewsModels
         [Range(1,999999999999999999)]
 
         public int no { get; set; }
+
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [DisplayName("نوع المبنى")]
+        public string gender { get; set; }
         public ICollection<tblFloor>  Floor { get; }
     }
 }

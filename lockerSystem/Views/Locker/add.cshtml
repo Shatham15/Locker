@@ -34,8 +34,8 @@
 
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="BuildingId" class="mb-1"> </label>
-                                <select asp-for="BuildingId" type="number" class="form-control" asp-items="@ViewBag.Building">
+                                <label asp-for="BuildingName" class="mb-1"> </label>
+                                <select asp-for="BuildingId" type="text" class="form-control" asp-items="@ViewBag.Building">
                                 </select>
                                 <span asp-validation-for="BuildingId" class="text-danger"></span>
 
@@ -45,7 +45,7 @@
                         <!-- START ITEM -->
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="FloorId" class="mb-1"> </label>
+                                <label asp-for="FloorNo" class="mb-1"> </label>
                                 <select asp-for="FloorId" type="number" class="form-control" asp-items="@ViewBag.Floor">
                                 </select>
                                 <span asp-validation-for="FloorId" class="text-danger"></span>

@@ -65,7 +65,7 @@
                     @*     }
                     } *@
                     <li>
-                        <a href="orders.html" class="active">
+                        <a href="@Url.Action("Info","Booking")" class="active">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21 10H13V11C13 11.6 12.6 12 12 12C11.4 12 11 11.6 11 11V10H3C2.4 10 2 10.4 2 11V13H22V11C22 10.4 21.6 10 21 10Z"
@@ -77,10 +77,12 @@
                                       d="M18.1 21H5.9C5.4 21 4.9 20.6 4.8 20.1L3 13H21L19.2 20.1C19.1 20.6 18.6 21 18.1 21ZM13 18V15C13 14.4 12.6 14 12 14C11.4 14 11 14.4 11 15V18C11 18.6 11.4 19 12 19C12.6 19 13 18.6 13 18ZM17 18V15C17 14.4 16.6 14 16 14C15.4 14 15 14.4 15 15V18C15 18.6 15.4 19 16 19C16.6 19 17 18.6 17 18ZM9 18V15C9 14.4 8.6 14 8 14C7.4 14 7 14.4 7 15V18C7 18.6 7.4 19 8 19C8.6 19 9 18.6 9 18Z"
                                       fill="currentColor"></path>
                             </svg>
-                            <span>الطلبات</span>
+                            <span >الحجوزات</span>
+
+                    
                         </a>
                     </li>
-                    <li class="sub_menu">
+                   @*  <li class="sub_menu">
                         <a href="JavaScript:void(0)">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
                                 <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd"
@@ -90,33 +92,33 @@
                                       stroke="currentColor" stroke-width="1.5"></path>
                                 <path d="M14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12Z"
                                       stroke="currentColor" stroke-width="1.5"></path>
-                            </svg>
-                            <span>إدارة</span>
+                            </svg> *@
+                           @*  <span>إدارة</span>
                         </a>
                         @*   @if (User.Identity.IsAuthenticated)
                         {
                             if (User.FindFirst(ClaimTypes.Role).Value == "Admin")
                             { *@
-                                <ul>
+                                @* <ul> *@
 
-                                    <li><a href="@Url.Action("Index","User")"><span>المستخدمين</span></a></li>
-                                    <li><a href="@Url.Action("Index","Management")"><span>النظام</span></a></li>
-                                    <li><a href="@Url.Action("Index","Permission")"><span>الصلاحيات</span></a></li>
+                                   @*  <li><a href="@Url.Action("Index","User")"><span>المستخدمين</span></a></li>
+                                   @*  <li><a href="@Url.Action("Index","Management")"><span>النظام</span></a></li> *@
+                                    @* <li><a href="@Url.Action("Index","Permission")"><span>الصلاحيات</span></a></li> *@
 @*                                     <li><a href="@Url.Action("Index","Building")"><span>المباني</span></a></li>
- *@                                    <li><a href="@Url.Action("Index","Floor")"><span> الطوابق</span></a></li>
+ *@                                    @* <li><a href="@Url.Action("Index","Floor")"><span> الطوابق</span></a></li>
                                     <li><a href="@Url.Action("Index","Locker")"><span> الخزانات</span></a></li>
                                     <li><a href="@Url.Action("Index","LockerState")"><span> حالات الخزانة</span></a></li>
                                     <li><a href="@Url.Action("Index","Semster")"><span>الفصول</span></a></li>
-                                    <li><a href="@Url.Action("Index","Order")"><span>الحجوزات</span></a></li>
+                                    <li><a href="@Url.Action("Index","Order")"><span>الحجوزات</span></a></li>  *@
 
 
-                                </ul>
+                               @*  </ul> *@
                         @*     }
 
                         } *@
-                    </li>
-                </ul>
-            </div>
+                    @* </li>
+                </ul> *@
+             </div> 
             <div class="btm_link">
                 <button class="btn" >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +149,7 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="nav-item">
+                   @*  <li class="nav-item">
                         <div class="input-group overflow-hiddin bg-dark-rgb border-0 br-10">
                             <span class="input-group-text" id="basic-addon1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -159,9 +161,9 @@
                                     <path d="M20.2 20.2l1.8 1.8" />
                                 </svg>
                             </span>
-                            <input type="text" class="form-control header__search_input ps-0" placeholder="البحث ...">
-                        </div>
-                    </li>
+                           @*  <input type="text" class="form-control header__search_input ps-0" placeholder="البحث ..."> *@
+                        @* </div>
+                    </li> *@ 
                 </ul>
                 <ul class="nav d-flex">
                     <li class="nav-item dropdown ms-2">

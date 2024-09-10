@@ -93,6 +93,7 @@ namespace lockerSystem.Controllers
                     {
                     new Claim(ClaimTypes.Name, User.fullName),
                                         new Claim(ClaimTypes.Email, User.email),
+                                        new Claim(ClaimTypes.Gender, User.gender),
 
                     new Claim(ClaimTypes.Role, Role),
                     new Claim(ClaimTypes.NameIdentifier, User.Id.ToString()),

@@ -8,6 +8,7 @@
         public string password { get; set; }    
         public string phone { get; set; }
         public string userType { get; set; }
-     
+        public string gender { get; set; }
+
     }
 }

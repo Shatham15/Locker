@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using lockerSystem.Migrations;
 namespace lockerSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -96,6 +97,7 @@ namespace lockerSystem.Areas.Admin.Controllers
                     {
                     new Claim(ClaimTypes.Name, User.fullName),
                                         new Claim(ClaimTypes.Email, User.email),
+                                        new Claim(ClaimTypes.Gender, User.gender),
 
                     new Claim(ClaimTypes.Role, Role),
                     new Claim(ClaimTypes.NameIdentifier, User.Id.ToString()),

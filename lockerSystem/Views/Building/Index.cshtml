@@ -10,7 +10,7 @@
                         <form class="d-md-inline-flex" asp-action="Index" asp-controller="Building">
                             <div class="col-md-6">
                                 <input type="search" name="seaechString" class="form-control table__quick_search"
-                                       placeholder="البحث السريع ...">
+                                   placeholder="البحث السريع ...">
                             </div>
                             <div class="col-md-8">
                                 <button class="btn btn-primary" type="submit">بحث بواسطة الرمز</button>
@@ -37,7 +37,6 @@
                     <th> @Html.DisplayNameFor(m => m.NameEn)</th>
                     <th> @Html.DisplayNameFor(m => m.no)</th>
                     <th> @Html.DisplayNameFor(m => m.gender)</th>
-
                     <th class=""></th>
                 </tr>
             </thead>
@@ -50,7 +49,7 @@
                         <td>@x.NameEn</td>
                         <td>@x.no</td>
                         <td>@x.gender</td>
-
+                        
                         <td class="action_td text-end">
                             <a asp-action="Edit" asp-route-id="@x.Guid" class="btn btn-sm btn-success">تعديل</a>
                             <a asp-action="Delete" asp-route-id="@x.Guid" class="btn btn-sm btn-danger">حذف</a>
@@ -61,6 +60,20 @@
 
             </tbody>
         </table>
-     
+        <script>
+            $(document).ready(function () {
+                $(".navbar-toggler").click(function () {
+                    if ($(".side-menu").hasClass("collapsed") == true) {
+                        $(".side-menu").removeClass("collapsed");
+                    } else {
+                        $(".side-menu").addClass("collapsed");
+                    }
+                });
+                $(".collapse_option").click(function () {
+                    $(this).toggleClass("active");
+                })
+                $('#myTable').DataTable();
+            });
+        </script>
     </div>
 </div>

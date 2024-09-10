@@ -1,6 +1,7 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace lockerSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class LockerStateController : Controller
     {
         private readonly LockerStateDomain _LockerStateDomain;
