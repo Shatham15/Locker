@@ -27,6 +27,7 @@ namespace lockerSystem.Controllers
             _lockerDomain = lockerDomain;
         }
         [HttpGet]
+     
         public async Task<IActionResult> Index(string Successful, string Falied)//index search
         {
             ViewData["Successful"] = Successful;
@@ -60,6 +61,7 @@ namespace lockerSystem.Controllers
             if (ModelState.IsValid)
             {
                ViewBag.check = await _domain.AddBooking(id, User.FindFirst(ClaimTypes.Email).Value);
+                
                 if (ViewBag.check == "1")
                     Successful = "تمت الاضافة بنجاح";
                 else
