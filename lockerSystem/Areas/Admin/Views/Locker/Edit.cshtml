@@ -1,0 +1,92 @@
+﻿@model LockerViewsModels
+<script>
+    @{
+        if (@ViewData["Successful"] != null)
+        {
+            <Text>
+                                                                    var result = '@Html.Raw(ViewData["Successful"])';
+            Swal.fire(result, '', 'success')
+                .then(
+                    function () {
+                        window.location.href = '@Url.Action("Index", "Locker")';
+                    }
+                );
+            </Text>
+        }
+        else if (@ViewData["Falied"] != null)
+        {
+            <Text>
+                                                                    var result = '@Html.Raw(ViewData["Falied"])';
+            Swal.fire(result, '', 'error');
+            </Text>
+        }
+    }
+</script>
+<div class="block mb-4">
+    <div class="block-header border-bottom px-4 py-4">
+        <h5 class="m-0">تعديل معلومات الخزنة</h5>
+    </div>
+    <div class="block-body py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form asp-action="Edit">
+                    <input hidden asp-for="Guid" />
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="BuildingId" class="mb-1"> </label>
+                                <select asp-for="BuildingId" type="number" class="form-control" asp-items="@ViewBag.Building">
+                                </select>
+                                <span asp-validation-for="BuildingId" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="FloorId" class="mb-1"> </label>
+                                <select asp-for="FloorId" type="number" class="form-control" asp-items="@ViewBag.Floor">
+                                </select>
+                                <span asp-validation-for="FloorId" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="no" class="mb-1"> </label>
+                                <input asp-for="no" type="number" class="form-control">
+                                <span asp-validation-for="no" class="text-danger"></span>
+                            </div>
+                        </div><!-- END ITEM -->
+                        
+                        <!-- START ITEM -->
+
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="LockerState" class="mb-1"> </label>
+                                <select asp-for="LockerStateId" type="text" class="form-control" asp-items="@ViewBag.LockerState">
+                                </select>
+                                <span asp-validation-for="LockerStateId" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+                        
+                        <!-- END ITEM -->
+                        
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary px-5" title="save">تعديل</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

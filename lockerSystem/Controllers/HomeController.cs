@@ -5,9 +5,11 @@ using System.Diagnostics;
 
 namespace lockerSystem.Controllers
 {
+    //[Authorize(Roles = "Admin , student")]
+
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        public readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {

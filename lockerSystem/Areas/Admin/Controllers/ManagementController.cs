@@ -1,10 +1,13 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace lockerSystem.Controllers
+namespace lockerSystem.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ManagementController : Controller
     {
         private readonly ManagementDomain _managementdomain;
@@ -13,9 +16,15 @@ namespace lockerSystem.Controllers
         {
             _managementdomain = managementdomain;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string seaechString)
         {
-            return View(await _managementdomain.GetAllMangement());
+            var management = await _managementdomain.GetAllMangement();
+            if (!String.IsNullOrEmpty(seaechString))
+            {
+                management = management.Where(n => n.name.Contains(seaechString)).ToList();
+
+            }
+            return View(management);
         }
         [HttpGet]
         public async Task<IActionResult> add()

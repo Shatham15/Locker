@@ -1,6 +1,8 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System;
 
 
 namespace lockerSystem.Domain
@@ -24,7 +26,8 @@ namespace lockerSystem.Domain
                 NameAr=x.NameAr,
                 NameEn=x.NameEn,
                 Guid=x.Guid,
-             
+                gender = x.gender,
+
             }).ToListAsync();// select * from tblBuilding
         }
         public async Task<string> addBuilding(BuildingViewsModels Building)
@@ -46,9 +49,17 @@ namespace lockerSystem.Domain
                 Buildinginfo.NameAr = Building.NameAr;
                 Buildinginfo.NameEn = Building.NameEn;
                 Buildinginfo.Guid = Building.Guid;
+                Buildinginfo.gender = Building.gender;
+
 
                 _context.Add(Buildinginfo);
                 await _context.SaveChangesAsync();
+                var BuildingLog = new BuildingLog();
+                BuildingLog.Building_Id= Buildinginfo.Id;
+                BuildingLog.operationType = "Add";
+                BuildingLog.generatedBy = ClaimTypes.GivenName;
+                BuildingLog.date_time = DateTime.UtcNow;
+                //BuildingLog.additionalInfo = ;
                 return "1";
             }
             catch (Exception ex)
@@ -66,7 +77,8 @@ namespace lockerSystem.Domain
                 NameAr = Buildinginfo.NameAr,
                 NameEn = Buildinginfo.NameEn,
                 Guid = Buildinginfo.Guid,
-                
+                gender = Buildinginfo.gender,
+
             }; return  models;
             
 
@@ -82,6 +94,7 @@ namespace lockerSystem.Domain
                 NameAr = Buildinginfo.NameAr,
                 NameEn = Buildinginfo.NameEn,
                 Guid = Buildinginfo.Guid,
+                gender = Buildinginfo.gender,
 
             }; 
             return models.NameAr;
@@ -113,11 +126,18 @@ namespace lockerSystem.Domain
                 Buildinginfo.no = Building.no;
                 Buildinginfo.NameEn = Building.NameEn;
                 Buildinginfo.NameAr = Building.NameAr;
-                
+                Buildinginfo.gender = Building.gender;
+
 
 
                 _context.Update(Buildinginfo);
               await  _context.SaveChangesAsync();
+                var BuildingLog = new BuildingLog();
+                BuildingLog.Building_Id = Buildinginfo.Id;
+                BuildingLog.operationType = "Edit";
+                BuildingLog.generatedBy = ClaimTypes.GivenName;
+                BuildingLog.date_time = DateTime.UtcNow;
+                //BuildingLog.additionalInfo = ;
                 return "1";
             }
             catch (Exception ex)
@@ -140,6 +160,12 @@ namespace lockerSystem.Domain
 
                 _context.Update(Buildinginfo);
               await  _context.SaveChangesAsync();
+                var BuildingLog = new BuildingLog();
+                BuildingLog.Building_Id = Buildinginfo.Id;
+                BuildingLog.operationType = "Delete";
+                BuildingLog.generatedBy = ClaimTypes.GivenName;
+                BuildingLog.date_time = DateTime.UtcNow;
+                //BuildingLog.additionalInfo = ;
                 return "1";
             }
             catch (Exception ex)

@@ -1,0 +1,122 @@
+﻿@model UserViweModele
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم  بالنظام</title>
+
+    <!-- Favico -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Assets/imgs/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Assets/imgs/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Assets/imgs/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/Assets/imgs/favicon/site.webmanifest">
+    <link rel="mask-icon" href="~/Assets/imgs/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="~/Assets/css/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/Assets/css/root.css">
+    <link href="~/lib/sweetalert2/sweetalert2.css" rel="stylesheet" />
+    <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/lib/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/Assets/js/jquery-3.4.1.min.js"></script>
+    <!--------- CSS Liberaries ---------->
+    <!-- Data Table -->
+    <!-- <link rel="stylesheet" href="Assets/lib/DataTable/css/select.dataTables.min.css" /> -->
+    <!-- <link rel="stylesheet" href="Assets/lib/DataTable/css/datatables_customization.css" /> -->
+    <!-- customization -->
+    <link rel="stylesheet" href="~/Assets/css/app_rtl.css">
+
+</head>
+@* <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>تسجيل الدخول</title>
+    <!---------------------------------CSS------------------------------------------->
+    <link href="https://fonts.googleapis.com/css?family=Tajawal&display=swap" rel="stylesheet">
+    <link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/stylesheet.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/datatables.min.css")" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.4/css/boxicons.min.css" rel="stylesheet">
+    <!-----------------------------------JS------------------------------------------>
+    <script src="@Url.Content("~/js/jquery-3.4.1.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.unobtrusive-ajax.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/lib/popper/popper.min.js")"></script>
+    <script src="@Url.Content("~/js/datatables.min.js")"></script>
+</head> *@
+<body class="vertical-layout vertical-menu-modern boxicon-layout no-card-shadow 1-column  navbar-sticky footer-static bg-full-screen-image  blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- lock screen starts -->
+                <div class="row" style="margin-bottom:200px"></div>
+                <section class="row flexbox-container">
+                    <div class="col-xl-3 col-3 px-0"></div>
+                    <div class="col-xl-6 col-6 px-0">
+                        <div class="card bg-authentication ">
+                            <div class="row m-0">
+                                <div class="col-md-3 col-12 px-0"></div>
+                                <!-- left lock screen section -->
+                                <div class="col-md-12 col-12 px-0">
+                                    <div class="card disable-rounded-right mb-0 p-2">
+                                        <div class="card-header pb-1">
+                                            <div class="card-title">
+                                                <h4 class="text-center mb-2">تسجيل الدخول</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <p id="Error" class="card-text danger" style="color:red">
+                                                    @ViewData["Login_error"]
+                                                </p>
+                                                <form asp-action="Login">
+                                                    <div class="form-group mb-50">
+                                                        <label class="text-bold-600" for="exampleInputEmail1">اسم المستخدم</label>
+                                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="اسم المستخدم" asp-for="email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="text-bold-600" for="exampleInputPassword1">كلمةالمرور</label>
+                                                        <input type="password" class="form-control" id="exampleInputPassword1" asp-for="password" placeholder="كلمة المرور">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary glow position-relative w-100">تسجيل الدخول<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
+                                                    <div class="text-center mb-1">
+                                                        <a href="Accounts/ForgetPassword" class="card-link">
+                                                            <p>
+                                                                هل نسيت كلمة المرور
+                                                            </p>
+                                                        </a>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- right image section -->
+                                @*<div class="col-md-6 d-md-block d-none text-center align-self-center">
+                                <img class="img-fluid" src="~/app-assets/images/329346.svg" alt="branding logo" width="350">
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- lock screen ends -->
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

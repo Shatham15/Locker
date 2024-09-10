@@ -23,6 +23,10 @@ namespace lockerSystem.ViewsModels
         [DisplayName("نوع المستخدم")]
         public string userType { get; set; }
 
-       
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [DisplayName("نوع جنس المستخدم")]
+        public string gender { get; set; }
+
+
     }
 }

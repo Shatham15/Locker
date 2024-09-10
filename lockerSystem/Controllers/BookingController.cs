@@ -44,25 +44,34 @@ namespace lockerSystem.Controllers
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr", BuildingGuid);
             //ViewData["locker"];
             return View(await _lockerDomain.getLockerwithFilter(BuildingGuid, FloorGuid));
+
         }
         [HttpGet]
-        public async Task<IActionResult> orders()//index
+        public async Task<IActionResult> Info(string seaechString)//index
         {
             var email = User.FindFirst(ClaimTypes.Email).Value;
-            return View(await _domain.GetAllbybooking(email));
+            var b = await _domain.GetAllbybooking(email);
+            if (!String.IsNullOrEmpty(seaechString))
+            {
+                b = b.Where(n => n.colegename.Contains(seaechString)).ToList();
+
+            }
+            return View(b);
         }
 
         [HttpGet]
-        public async Task<IActionResult> SubmitOrder(Guid id)//add
+        public async Task<IActionResult> add(Guid id)//add
         {
             string Successful = "";
             string Falied = "";
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             if (ModelState.IsValid)
             {
+
                ViewBag.check = await _domain.AddBooking(id, User.FindFirst(ClaimTypes.Email).Value);
                 
                 if (ViewBag.check == "1")
+                    
                     Successful = "تمت الاضافة بنجاح";
                 else
                     Falied = ViewBag.check;

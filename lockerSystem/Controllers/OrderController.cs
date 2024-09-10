@@ -20,18 +20,24 @@ namespace lockerSystem.Controllers
 
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string seaechString)
         {
+            //var bookings = await _bookingDomain.GetAllbooking();
+            //return View(bookings);
             var bookings = await _bookingDomain.GetAllbooking();
+            if (!String.IsNullOrEmpty(seaechString))
+            {
+                bookings = bookings.Where(n => n.fullName.Contains(seaechString)).ToList();
+
+            }
             return View(bookings);
-            // return View(await _domain.GetAllbooking());
         }
         public async Task<IActionResult> details(Guid id)
         {
             var bookings = await _bookingDomain.GetBookingByGuid(id);
             return View(bookings);
         }
-      
+      //
         [HttpGet]
         public async Task<IActionResult> Accept(Guid id)
         {
@@ -45,6 +51,11 @@ namespace lockerSystem.Controllers
             {
 
                 bookingViewModel.BookingStateId = 2;
+                if (bookingViewModel.BookingStateId == 2) {
+
+                    bookingViewModel.Locker.LockerStateId= 2;
+
+                }
           
                 string check = await _bookingDomain.UpdateBooking(bookingViewModel);
 
@@ -70,6 +81,12 @@ namespace lockerSystem.Controllers
             }
             if (ModelState.IsValid)
             {
+                if (bookingViewModel.BookingStateId == 2)
+                {
+
+                    bookingViewModel.Locker.LockerStateId = 3;
+
+                }
 
                 bookingViewModel.BookingStateId = 3;
 
@@ -87,6 +104,8 @@ namespace lockerSystem.Controllers
 
             return View();
         }
+
+       
         //public async Task<IActionResult> Reject(Guid guid)
         //{
         //    var booking = await _bookingDomain.GetBookingByGuid(guid);

@@ -50,6 +50,177 @@ namespace lockerSystem.Migrations
                     b.ToTable("BookingLog");
                 });
 
+            modelBuilder.Entity("lockerSystem.Models.BuildingLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Building_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("additionalInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("date_time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("generatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("operationType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BuildingLog");
+                });
+
+            modelBuilder.Entity("lockerSystem.Models.FloorLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Floor_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("additionalInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("date_time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("generatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("operationType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FloorLog");
+                });
+
+            modelBuilder.Entity("lockerSystem.Models.LockerLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Locker_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("additionalInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("date_time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("generatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("operationType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("lockerLog");
+                });
+
+            modelBuilder.Entity("lockerSystem.Models.LockerStateLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Locker_state_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("additionalInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("date_time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("generatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("operationType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("lockerStateLog");
+                });
+
+            modelBuilder.Entity("lockerSystem.Models.PermissionLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Permission_Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("date_time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("generatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("generatedTo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("operationType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("permissionType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PermissionLog");
+                });
+
+            modelBuilder.Entity("lockerSystem.Models.SemesterLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Semester_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("additionalInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("date_time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("generatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("operationType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SemesterLog");
+                });
+
             modelBuilder.Entity("lockerSystem.Models.tblBooking", b =>
                 {
                     b.Property<int>("Id")
@@ -151,6 +322,9 @@ namespace lockerSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("no")
@@ -373,6 +547,9 @@ namespace lockerSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("password")

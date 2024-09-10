@@ -15,9 +15,16 @@ namespace lockerSystem.Controllers
 
             _LockerStateDomain = LockerStateDomain;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string seaechString)
         {
-            return View(await _LockerStateDomain.GetLockerState());
+            var state = await _LockerStateDomain.GetLockerState();
+            if (!String.IsNullOrEmpty(seaechString))
+            {
+                state = state.Where(n => n.stateAr.Contains(seaechString)
+                || n.stateEn.Contains(seaechString)).ToList();
+
+            }
+            return View(state);
         }
         [HttpGet]
         public async Task<IActionResult> add()

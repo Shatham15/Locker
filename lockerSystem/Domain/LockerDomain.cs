@@ -10,7 +10,8 @@ namespace lockerSystem.Domain
         private readonly BuildingDomain _BuildingDomain;  
         private readonly FloorDomain _FloorDomain;
         private readonly SemsterDomain _SemsterDomain;
-       
+        private readonly LockerStateDomain _LockerStateDomain;
+
 
         public LockerDomain(LockerSystemContext context)
         {
@@ -27,7 +28,10 @@ namespace lockerSystem.Domain
                 Floor = x.Floor,
                 FloorId = x.FloorId,
                 LockerState = x.LockerState,
-                LockerStateId = x.LockerStateId
+                LockerStateId = x.LockerStateId,
+                FloorNo = x.Floor.no,
+               stateAr = x.LockerState.stateAr,
+               BuildingName = x.Floor.Building.NameAr,
 
 
 
@@ -50,8 +54,9 @@ namespace lockerSystem.Domain
                 tblLocker Lockerinfo = new tblLocker();
                 Lockerinfo.no = Locker.no;
                 Lockerinfo.FloorId = Locker.FloorId;
+                Lockerinfo.LockerStateId = Locker.LockerStateId;
                 _context.Add(Lockerinfo);
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -102,8 +107,10 @@ namespace lockerSystem.Domain
                 var LockerByGuid = await getLockerModelById(Locker.Guid);
                 LockerByGuid.no = Locker.no;
                 LockerByGuid.FloorId = Locker.FloorId;
+                LockerByGuid.LockerStateId= Locker.LockerStateId;
+
                 _context.Update(LockerByGuid);
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -129,20 +136,44 @@ namespace lockerSystem.Domain
             }
 
         }
+        //public async Task<IEnumerable<LockerViewsModels>> getLockerwithFilter(Guid? BuildingGuid, Guid? FloorGuid)
+        //{
+        //    return await _context.tblLocker.Include(F => F.Floor).ThenInclude(B => B.Building).Include(LS => LS.LockerState).Where(x => x.Floor.Guid == FloorGuid).Select(x => new LockerViewsModels
+        //    {
+        //        Id = x.Id,
+        //        LockerState = x.LockerState,
+        //        Floor = x.Floor,
+        //        FloorId = x.FloorId,
+        //        Guid = x.Guid,
+        //        IsDeleted = x.IsDeleted,
+        //        LockerStateId = x.LockerStateId,
+        //        no = x.no
+        //    }).ToListAsync();
+        //}
         public async Task<IEnumerable<LockerViewsModels>> getLockerwithFilter(Guid? BuildingGuid, Guid? FloorGuid)
         {
-            return await _context.tblLocker.Include(F => F.Floor).ThenInclude(B => B.Building).Include(LS => LS.LockerState).Where(x => x.Floor.Guid == FloorGuid).Select(x => new LockerViewsModels
-            {
-                Id = x.Id,
-                LockerState = x.LockerState,
-                Floor = x.Floor,
-                FloorId = x.FloorId,
-                Guid = x.Guid,
-                IsDeleted = x.IsDeleted,
-                LockerStateId = x.LockerStateId,
-                no = x.no
-            }).ToListAsync();
+            var lockers = await _context.tblLocker
+                .Include(F => F.Floor)
+                    .ThenInclude(B => B.Building)
+                .Include(LS => LS.LockerState)
+                .Where(x => x.Floor.Guid == FloorGuid)
+                .Where(x => !(_context.tblBooking.Any(b => b.LockerId == x.Id && b.BookingStateId == 1))) // Exclude lockers with BookingStateId == 1
+                .Select(x => new LockerViewsModels
+                {
+                    Id = x.Id,
+                    LockerState = x.LockerState,
+                    Floor = x.Floor,
+                    FloorId = x.FloorId,
+                    Guid = x.Guid,
+                    IsDeleted = x.IsDeleted,
+                    LockerStateId = x.LockerStateId,
+                    no = x.no
+                })
+                .ToListAsync();
+
+            return lockers;
         }
+
 
     }
 }

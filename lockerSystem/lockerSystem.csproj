@@ -6,11 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Booking\orderInfo.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\Booking\orderInfo.cshtml" />
     <None Include="wwwroot\Assets\.DS_Store" />
     <None Include="wwwroot\Assets\css\.DS_Store" />
     <None Include="wwwroot\Assets\fonts\.DS_Store" />
@@ -57,14 +52,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.17" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Booking\orderInfo.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Booking\orderInfo.cshtml" />
   </ItemGroup>
 
 </Project>

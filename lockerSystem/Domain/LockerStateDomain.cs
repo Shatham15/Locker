@@ -16,7 +16,7 @@ namespace lockerSystem.Domain
 
             return await _context.tblLockerState.Where(x => x.IsDeleted == false).Select(x => new LockerStateViewsModels
             {
-                //  Id = x.Id,
+                LockerStateId = x.Id,
                 Guid = x.Guid,
                 IsDeleted = x.IsDeleted,
                 stateAr = x.stateAr,

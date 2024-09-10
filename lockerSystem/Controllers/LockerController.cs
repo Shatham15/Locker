@@ -12,12 +12,14 @@ namespace lockerSystem.Controllers
         private readonly BuildingDomain _BuildingDomain;
         private readonly FloorDomain _FloorDomain;
         private readonly LockerStateDomain _LockerStateDomain;
+
         public LockerController(LockerDomain LockerDomain, BuildingDomain buildingDomain, FloorDomain floorDomain,  LockerStateDomain LockerStateDomain)
         {
             _BuildingDomain = buildingDomain;
             _FloorDomain = floorDomain;
             _LockerDomain = LockerDomain;
             _LockerStateDomain = LockerStateDomain;
+
         }
 
 
@@ -28,9 +30,9 @@ namespace lockerSystem.Controllers
         }
         public async Task<IActionResult> add()
         {
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Guid", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Guid", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Guid", "stateAr");
+            ViewBag.Floor = new SelectList(await _FloorDomain.GetAllFloor(), "FloorId", "FloorNo");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "BuildingId", "NameAr");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "LockerStateId", "stateAr");
 
             return View();
         }
@@ -39,9 +41,9 @@ namespace lockerSystem.Controllers
 
         public async Task<IActionResult> add(LockerViewsModels Locker)
         {
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Guid", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Guid", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Guid", "stateAr");
+            ViewBag.Floor = new SelectList(await _FloorDomain.GetAllFloor(), "FloorId", "FloorNo");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "BuildingId", "NameAr");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "LockerStateId", "stateAr");
             if (ModelState.IsValid)
             {
                 string check = await _LockerDomain.addLocker(Locker);
@@ -56,9 +58,9 @@ namespace lockerSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Id", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Id", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Id", "stateAr");
+            ViewBag.Floor = new SelectList(await _FloorDomain.GetAllFloor(), "FloorId", "FloorNo");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "BuildingId", "NameAr");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "LockerStateId", "stateAr");
             return View(await _LockerDomain.getLockerById(id));
         }
         [HttpPost]
@@ -72,9 +74,9 @@ namespace lockerSystem.Controllers
             else
                 ViewData["Falied"] = check;
 
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Id", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Id", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Id", "stateAr");
+            ViewBag.Floor = new SelectList(await _FloorDomain.GetAllFloor(), "FloorId", "FloorNo");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "BuildingId", "NameAr");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "LockerStateId", "stateAr");
             await _LockerDomain.editLocker(Locker);
             return View(Locker);
         }

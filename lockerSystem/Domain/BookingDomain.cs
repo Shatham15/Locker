@@ -21,7 +21,7 @@ namespace lockerSystem.Domain
         private readonly SemsterDomain _SemsterDomain;
         private readonly LockerDomain _LockerDomain;
 
-        //
+        
         public BookingDomain(LockerSystemContext context, BuildingDomain buildingDomain, FloorDomain floorDomain, UserDomain userDomain, SemsterDomain semsterDomain, LockerDomain lockerDomain)
         {
             _context = context;
@@ -84,40 +84,6 @@ namespace lockerSystem.Domain
 
         }
 
-        //هذا الكود اللي تحت حاطته كومنت هو اللي انا اشتغلت عليه وبرضوا يطلع نفس الخطا اما الكود اللي تحته اللي مو محطوط فليه كومنت هذا الكود حقك انا اضفت المعلومات الثانيه اللي احنا نبي نخليها تطلع بس برضوا يطلع نفس الايرور
-
-        //public string addBooking(BookingViewsModels booking)
-        //{
-        //    try
-        //    {
-
-
-        //                tblBooking booking1 = new tblBooking();
-        //                booking1.fullName = booking.fullName;
-        //                booking1.email = booking.email;
-        //                booking1.phone = booking.phone;
-        //                booking1.BookingState.NameAr = booking.BookingState.NameAr;
-        //                booking1.Locker.no = booking.Locker.no;
-        //                booking1.Locker.Floor.no = booking.Locker.Floor.no;
-        //                booking1.colegename = booking.colegename;
-
-
-
-        //                _context.Add(booking1);
-        //                _context.SaveChanges();
-        //                return "1";
-
-
-
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return "حدث خطأ أثناء معالجة طلبك, الرجاء المحاولة في وقت لاحق";
-        //    }
-
-
-        //}
         public async Task<string> AddBooking(Guid lookerGuid, string userName)
         {
             try
@@ -148,11 +114,7 @@ namespace lockerSystem.Domain
 
 
         }
-        //public tblBooking getUserModelByUserName(string UserName)
-        //{
-        //    var UserById = _context.tblBooking.Include(b => b.fullName).FirstOrDefault(x => x.fullName == UserName && x.IsDeleted == false);
-        //    return UserById;
-        //}
+       
         public IEnumerable<tblBooking> getBook()
         {
             return _context.tblBooking;

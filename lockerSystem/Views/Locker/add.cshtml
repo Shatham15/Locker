@@ -34,8 +34,8 @@
 
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="BuildingId" class="mb-1"> </label>
-                                <select asp-for="BuildingId" type="number" class="form-control" asp-items="@ViewBag.Building">
+                                <label asp-for="BuildingName" class="mb-1"> </label>
+                                <select asp-for="BuildingId" type="text" class="form-control" asp-items="@ViewBag.Building">
                                 </select>
                                 <span asp-validation-for="BuildingId" class="text-danger"></span>
 
@@ -45,7 +45,7 @@
                         <!-- START ITEM -->
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="FloorId" class="mb-1"> </label>
+                                <label asp-for="FloorNo" class="mb-1"> </label>
                                 <select asp-for="FloorId" type="number" class="form-control" asp-items="@ViewBag.Floor">
                                 </select>
                                 <span asp-validation-for="FloorId" class="text-danger"></span>
@@ -66,58 +66,18 @@
 
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="LockerState" class="mb-1"> </label>
+                                <label asp-for="LockerStateId" class="mb-1"> </label>
                                 <select asp-for="LockerStateId" type="text" class="form-control" asp-items="@ViewBag.LockerState">
                                 </select>
                                 <span asp-validation-for="LockerStateId" class="text-danger"></span>
 
                             </div>
                         </div>
-                        @* <div class="col-md-6">
-                            <div class="mb-4">
-                                <label asp-for="LockerState" class="mb-1"></label>
-                                <select asp-for="LockerState" class="form-control" asp-items="ViewBag.LockerStates">
-                                    <option value="">اختر حالة</option>
-                                </select>
-                                <span asp-validation-for="LockerState" class="text-danger"></span>
-                            </div>
-                        </div> *@<!-- END ITEM -->
-                        <!-- START ITEM -->
-
                        
-                        @*خليه اذا خذ رقم اللوكر يظهر هو في اي طابق ويظهر حالته*@
-
-                        <!-- END ITEM -->
-                        <!-- START ITEM -->
-                        @*  <div class="col-md-6">
-                        <div class="mb-4">
-                        <label asp-for="password" class="mb-1"> </label>
-                        <input asp-for="password" type="password" class="form-control">
-                        <span asp-validation-for="password" class="text-danger"></span>
-
-                        </div>
-                        </div> *@<!-- END ITEM -->
-                        <!-- START ITEM -->
-                        @* <div class="col-md-6">
-                        <div class="mb-4">
-                        <label asp-for="phone" class="mb-1"> </label>
-                        <input asp-for="phone" type="number" class="form-control">
-                        <span asp-validation-for="phone" class="text-danger"></span>
-
-                        </div>
-                        </div> *@<!-- END ITEM -->
-                        <!-- START ITEM -->
-                        @* <div class="col-md-6">
-                        <div class="mb-4">
-                        <label asp-for="userType" class="mb-1"> </label>
-                        <input asp-for="userType" type="text" class="form-control">
-                        <span asp-validation-for="userType" class="text-danger"></span>
-
-                        </div>
-                        </div> *@<!-- END ITEM -->
+           
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary px-5" title="save">حفظ</button>
+                        <button type="submit" asp-route-for="Index" class="btn btn-primary px-5" title="save">حفظ</button>
                     </div>
                 </form>
 

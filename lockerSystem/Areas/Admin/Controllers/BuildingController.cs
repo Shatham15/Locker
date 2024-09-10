@@ -1,14 +1,16 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-
-//sha
-namespace lockerSystem.Controllers
+namespace lockerSystem.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class BuildingController : Controller
     {
+        
         private readonly BuildingDomain _BuildingDomain;
         public BuildingController(BuildingDomain BuildingDomain)
         {//kjj
@@ -18,9 +20,10 @@ namespace lockerSystem.Controllers
         public async Task<IActionResult> Index(string seaechString)
         {
             var building = await _BuildingDomain.GetAllBuildings();
-            if (!String.IsNullOrEmpty(seaechString)) {
+            if (!String.IsNullOrEmpty(seaechString))
+            {
                 building = building.Where(n => n.code.Contains(seaechString)).ToList();
-            
+
             }
             return View(building);
 
@@ -31,6 +34,7 @@ namespace lockerSystem.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> add(BuildingViewsModels Building)
         {
             try
@@ -76,7 +80,7 @@ namespace lockerSystem.Controllers
             return View(Building);
 
 
-          
+
         }
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
@@ -93,7 +97,7 @@ namespace lockerSystem.Controllers
                 {
                     //_BuildingDomain.editBuilding(Building);
 
-                    string check =await _BuildingDomain.editBuilding(Building);
+                    string check = await _BuildingDomain.editBuilding(Building);
 
                     if (check == "1")
 
@@ -119,15 +123,16 @@ namespace lockerSystem.Controllers
 
 
                 }
-                
+
             }
 
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 ViewData["Falied"] = "حدث خطأ أثناء معالجتك طلبك الرجاء المحاولة في وقت لاحق";
             }
             return View(Building);
         }
-       
+
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -153,5 +158,4 @@ namespace lockerSystem.Controllers
         }
 
     }
-   
 }

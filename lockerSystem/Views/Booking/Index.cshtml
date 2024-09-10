@@ -9,7 +9,7 @@
             Swal.fire(result, '', 'success')
                 .then(
                     function () {
-                        window.location.href = '@Url.Action("orders", "Booking")';
+                        window.location.href = '@Url.Action("Info", "Booking")';
                     }
                 );
             </Text>
@@ -21,7 +21,7 @@
             Swal.fire(result, '', 'error')
                 .then(
                     function () {
-                        window.location.href = '@Url.Action("orders", "Booking")';
+                        window.location.href = '@Url.Action("Info", "Booking")';
                     }
                 );
             </Text>
@@ -101,7 +101,7 @@
 
                                             <td>
 
-                                                    <a asp-action="SubmitOrder" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
+                                                    <a asp-action="add" asp-route-id="@item.Guid" class="btn btn-sm btn-success"> حجز</a>
                                             </td>
 
 

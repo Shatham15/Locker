@@ -19,21 +19,24 @@ namespace lockerSystem.Controllers
             _userDomain = userDomain;
             _permissionDomain = permissionDomain;
         }
-        public IActionResult Index()
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Index()
         {
-            return View(_userDomain.GetAllUsers());
+            return View( await _userDomain.GetAllUsers());
         }
         [HttpGet]
-        public IActionResult add()
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> add()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult add(UserViweModele user)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> add(UserViweModele user)
         {
             if (ModelState.IsValid)
             {
-                _userDomain.addUser(user);
+               await _userDomain.addUser(user);
                 return RedirectToAction("Index");
             }
             return View(user);
@@ -44,13 +47,13 @@ namespace lockerSystem.Controllers
         //
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
             try
             {
                 if (User.Identity.IsAuthenticated){
-                    string UserName = User.FindFirst(ClaimTypes.Name).Value;
-                    return RedirectToAction("Index", "Home");
+                    string UserName =  User.FindFirst(ClaimTypes.Name).Value;
+                    return  RedirectToAction("Index", "Home");
 
                 }
                 else {
@@ -72,7 +75,7 @@ namespace lockerSystem.Controllers
         {
             try
             {
-                UserViweModele User = _userDomain.GetUsersForLogin(UserInfo);
+                UserViweModele User = await _userDomain.GetUsersForLogin(UserInfo);
                 if (User==null)
                 {
                     ViewData["Login_error"] = "خطأ: اسم المستخدم أو كلمة المرور غير صحيحة";
@@ -90,6 +93,7 @@ namespace lockerSystem.Controllers
                     {
                     new Claim(ClaimTypes.Name, User.fullName),
                                         new Claim(ClaimTypes.Email, User.email),
+                                        new Claim(ClaimTypes.Gender, User.gender),
 
                     new Claim(ClaimTypes.Role, Role),
                     new Claim(ClaimTypes.NameIdentifier, User.Id.ToString()),
@@ -105,9 +109,9 @@ namespace lockerSystem.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         principal);
                     if(Role == "Admin")
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
                     else
-                        return RedirectToAction("authorization", "Home");
+                        return RedirectToAction("Index", "Home");
 
                 }
             }

@@ -33,6 +33,28 @@
                     <input hidden asp-for="Guid" />
                     <div class="row">
 
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="BuildingName" class="mb-1"> </label>
+                                <select asp-for="BuildingName" type="number" class="form-control" asp-items="@ViewBag.Building">
+                                </select>
+                                <span asp-validation-for="BuildingName" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+                        <!-- START ITEM -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label asp-for="FloorNo" class="mb-1"> </label>
+                                <select asp-for="FloorId" type="number" class="form-control" asp-items="@ViewBag.Floor">
+                                </select>
+                                <span asp-validation-for="FloorId" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
                         <!-- START ITEM -->
                         <div class="col-md-6">
                             <div class="mb-4">
@@ -41,16 +63,7 @@
                                 <span asp-validation-for="no" class="text-danger"></span>
                             </div>
                         </div><!-- END ITEM -->
-                        <!-- START ITEM -->
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <label asp-for="FloorId" class="mb-1"> </label>
-                                <select asp-for="FloorId" type="number" class="form-control" asp-items="@ViewBag.Floor">
-                                </select>
-                                <span asp-validation-for="FloorId" class="text-danger"></span>
-
-                            </div>
-                        </div>
+                        
                         <!-- START ITEM -->
 
                         <div class="col-md-6">
@@ -63,37 +76,9 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <label asp-for="BuildingId" class="mb-1"> </label>
-                                <select asp-for="BuildingId" type="number" class="form-control" asp-items="@ViewBag.Building">
-                                </select>
-                                <span asp-validation-for="BuildingId" class="text-danger"></span>
-
-                            </div>
-                        </div>
+                        
                         <!-- END ITEM -->
-                        @*  <!-- START ITEM -->
-                        <div class="col-md-6">
-                        <div class="mb-4">
-                        <label asp-for="password" class="mb-1"> </label>
-                        <input asp-for="password" type="password" class="form-control">
-                        </div>
-                        </div><!-- END ITEM --> *@
-                        <!-- START ITEM -->
-                        @*   <div class="col-md-6">
-                        <div class="mb-4">
-                        <label asp-for="phone" class="mb-1"> </label>
-                        <input asp-for="phone" type="number" class="form-control">
-                        </div>
-                        </div><!-- END ITEM --> *@
-                        <!-- START ITEM -->
-                        @*  <div class="col-md-6">
-                        <div class="mb-4">
-                        <label asp-for="userType" class="mb-1"> </label>
-                        <input asp-for="userType" type="text" class="form-control">
-                        </div>
-                        </div><!-- END ITEM --> *@
+                        
                     </div>
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary px-5" title="save">تعديل</button>
