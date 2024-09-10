@@ -1,12 +1,13 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 namespace lockerSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
+    [Authorize(Roles = "Admin")]
     public class FloorController : Controller
     {
         private readonly FloorDomain _floorDomain;

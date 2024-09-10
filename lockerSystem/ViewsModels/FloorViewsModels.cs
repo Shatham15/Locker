@@ -22,5 +22,6 @@ namespace lockerSystem.ViewsModels
         [DisplayName("اسم المبنى")]
         public string BuildingName { get; set; }
         public ICollection<tblLocker> Lockers { get; }
+        public string gender { get; set; }
     }
 }

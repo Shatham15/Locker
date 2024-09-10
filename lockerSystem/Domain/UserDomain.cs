@@ -24,9 +24,8 @@ namespace lockerSystem.Domain
                 password = X.password,
                 phone = X.phone,
                 userType = X.userType,
-                gender = X.gender 
-
-            });// select * from tblUser
+                gender = X.gender,
+            }).ToListAsync();// select * from tblUser
         }
         public async Task<string> addUser(UserViweModele user)
         {
