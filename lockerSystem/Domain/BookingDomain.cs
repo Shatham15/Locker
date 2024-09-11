@@ -105,6 +105,17 @@ namespace lockerSystem.Domain
                 };
                await _context.AddAsync(bookInfo);
                 await _context.SaveChangesAsync();
+
+                //var bookingLog = new BookingLog();
+                //bookingLog.Booking_Id = bookInfo.Id;
+                //bookingLog.bookBy = bookInfo.fullName;
+                //// bookingLog.modifyBy =  bookInfo.email;
+                //bookingLog.bookingStatues = bookInfo.BookingState.NameAr;
+                //bookingLog.date_time = DateTime.Now;
+
+                //await _context.AddAsync(bookingLog);
+                //await _context.SaveChangesAsync();
+
                 return  "1";
             }
             catch (Exception ex)
@@ -167,6 +178,16 @@ namespace lockerSystem.Domain
                 stateInfo.BookingStateId = bookingViewModel.BookingStateId;
                 _context.Update(stateInfo);
                 await _context.SaveChangesAsync();
+
+                //var bookingLog = new BookingLog();
+                //bookingLog.Booking_Id = stateInfo.Id;
+                //bookingLog.bookBy = stateInfo.fullName;
+                //// bookingLog.modifyBy =  stateInfo.email;
+                //bookingLog.bookingStatues = stateInfo.BookingState.NameAr;
+                //bookingLog.date_time = DateTime.Now;
+
+                // _context.Update(bookingLog);
+                //await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)

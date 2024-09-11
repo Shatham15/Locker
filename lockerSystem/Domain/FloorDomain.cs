@@ -49,8 +49,8 @@ namespace lockerSystem.Domain
                 _context.Add(floorinfo);
                 _context.SaveChanges();
 
-                var floorLog = new FloorLog();
-                floorLog.Floor_Id = floorinfo.Id;
+                //var floorLog = new FloorLog();
+                //floorLog.Floor_Id = floorinfo.Id;
 
 
                 return "1";
