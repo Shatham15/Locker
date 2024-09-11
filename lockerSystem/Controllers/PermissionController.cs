@@ -2,6 +2,7 @@
 using lockerSystem.Models;
 using lockerSystem.ViewModels;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,7 +10,7 @@ using System.Security;
 
 namespace lockerSystem.Controllers
 {
-    //اضيفي async  على كل الفنكشن؟؟
+    [Authorize(Roles = "Admin")]
     public class PermissionController : Controller
     {
         private readonly PermissionDomain _domain;
@@ -25,16 +26,17 @@ namespace lockerSystem.Controllers
             return View(await _domain.getpermissions());
         }
         [HttpGet]
-        public IActionResult add()
+        public async Task<IActionResult> add()
         {
-            ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");//اي اسم
+            ViewBag.roles = new SelectList(await _domain.getRoles(), "Id", "RoleNameAr");//اي اسم
             return View();
         }
         [HttpPost]
-        //Validation??
+        [ValidateAntiForgeryToken]
+     
         public async Task<IActionResult> add(PermissionViewsModels permission)
         {
-            ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
+            ViewBag.roles = new SelectList(await _domain.getRoles(), "Id", "RoleNameAr");
             if (ModelState.IsValid)
             {
                 string check = await _domain.addPermission(permission);
@@ -47,17 +49,17 @@ namespace lockerSystem.Controllers
 
         }
         [HttpGet]
-        public IActionResult Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
+            ViewBag.roles = new SelectList(await _domain.getRoles(), "Id", "RoleNameAr");
             return View(_domain.getUserById(id));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult Edit(PermissionViewsModels permission)
+        public async Task<IActionResult>  Edit(PermissionViewsModels permission)
         {
-            ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
+            ViewBag.roles = new SelectList(await _domain.getRoles(), "Id", "RoleNameAr");
 
             if (ModelState.IsValid)
             {

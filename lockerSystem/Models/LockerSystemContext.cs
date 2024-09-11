@@ -16,7 +16,16 @@ namespace lockerSystem.Models
         public DbSet<tblManagement> tblManagement { get; set; }
         public DbSet<tblSemster> tblSemster { get; set; }
         public DbSet<tblUser> tblUser { get; set; }
-       
+        public DbSet<BookingLog> BookingLog { get; set; }
+        public DbSet<BuildingLog> BuildingLog { get; set; }
+        public DbSet<FloorLog> FloorLog { get; set; }
+        public DbSet<LockerLog> lockerLog { get; set; }
+        public DbSet<LockerStateLog> lockerStateLog { get; set; }
+        public DbSet<PermissionLog> PermissionLog { get; set; }
+        public DbSet<SemesterLog> SemesterLog { get; set; }
+
+
+
 
 
 
@@ -37,6 +46,5 @@ namespace lockerSystem.Models
            .Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DBCS"));
         }
-        public DbSet<lockerSystem.Models.BookingLog>? BookingLog { get; set; }
     }
 }
