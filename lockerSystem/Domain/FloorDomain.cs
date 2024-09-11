@@ -119,7 +119,7 @@ namespace lockerSystem.Domain
         }
         public async Task<IEnumerable<FloorViewsModels>> getFloorByBuildinGuid(Guid id)
         {
-            return await _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id && !x.IsDeleted).Select(x => new FloorViewsModels
+            return await _context.tblFloor.Include(s => s.Building).Where(x => x.Building.Guid == id && !x.IsDeleted && !x.Building.IsDeleted).Select(x => new FloorViewsModels
             {
                 // Id = x.Id,
                 FloorNo = x.no,
