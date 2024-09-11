@@ -1,9 +1,11 @@
 ﻿using lockerSystem.Domain;
+using lockerSystem.Migrations;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 namespace lockerSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -11,6 +13,7 @@ namespace lockerSystem.Areas.Admin.Controllers
     public class FloorController : Controller
     {
         private readonly FloorDomain _floorDomain;
+        private readonly UserDomain _userDomain;
         public FloorController(FloorDomain floorDomain)
         {
             _floorDomain = floorDomain;
@@ -18,7 +21,8 @@ namespace lockerSystem.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(string seaechString)
         {
-            var floor = await _floorDomain.GetAllFloor();
+            string gender = User.FindFirst("Gender").Value;
+            var floor = await _floorDomain.GetAllFloorByGender(gender);
             if (!String.IsNullOrEmpty(seaechString))
             {
                 floor = floor.Where(n => n.BuildingName.Contains(seaechString)).ToList();
@@ -28,14 +32,17 @@ namespace lockerSystem.Areas.Admin.Controllers
         }
         public async Task<IActionResult> addFloor()
         {
-            ViewBag.Building = new SelectList(await _floorDomain.GetBuilding(), "Id", "NameAr");
+            string gender = User.FindFirst("Gender").Value;
+
+            ViewBag.Building = new SelectList(await _floorDomain.GetBuildingByGender(gender), "Id", "NameAr");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> addFloor(FloorViewsModels floor)
         {
-            ViewBag.Building = new SelectList(await _floorDomain.GetBuilding(), "Id", "NameAr");
+            string gender = User.FindFirst("Gender").Value;
+            ViewBag.Building = new SelectList(await _floorDomain.GetBuildingByGender(gender), "Id", "NameAr");
             if (ModelState.IsValid)
             {
                 string check = await _floorDomain.addFloor(floor);
@@ -50,13 +57,16 @@ namespace lockerSystem.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            ViewBag.Building = new SelectList(await _floorDomain.GetBuilding(), "Id", "NameAr");//نفس الاسم اللي بالداتا
+            string gender = User.FindFirst("Gender").Value;
+            ViewBag.Building = new SelectList(await _floorDomain.GetBuildingByGender(gender), "Id", "NameAr");//نفس الاسم اللي بالداتا
             return View(await _floorDomain.getFloorById(id));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(FloorViewsModels floor)
         {
+            string gender = User.FindFirst("Gender").Value;
+
             if (ModelState.IsValid)
             {
                 string check = await _floorDomain.editFloor(floor);
@@ -67,7 +77,7 @@ namespace lockerSystem.Areas.Admin.Controllers
                     ViewData["Falied"] = check;
 
             }
-            ViewBag.Building = new SelectList(await _floorDomain.GetBuilding(), "Id", "NameAr");//نفس الاسم اللي بالداتا
+            ViewBag.Building = new SelectList(await _floorDomain.GetBuildingByGender(gender), "Id", "NameAr");//نفس الاسم اللي بالداتا
 
             return View(floor);
         }

@@ -1,7 +1,9 @@
 ﻿using lockerSystem.Migrations;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace lockerSystem.Domain
 {
@@ -17,7 +19,7 @@ namespace lockerSystem.Domain
         {
 
             return await _context.tblFloor.Include(x => x.Building).Where(d => d.IsDeleted == false 
-            && d.Building.IsDeleted == false).Select(x => new FloorViewsModels
+            && d.Building.IsDeleted == false ).Select(x => new FloorViewsModels
             {
                 FloorId = x.Id,
                 FloorNo = x.no,
@@ -25,10 +27,26 @@ namespace lockerSystem.Domain
                 Building = x.Building,
                 BuildingName = x.Building.NameAr,
                 Guid = x.Guid,
+               
            
             }).ToListAsync();
         }
+        public async Task<IEnumerable<FloorViewsModels>> GetAllFloorByGender(string gender)
+        {
 
+            return await _context.tblFloor.Include(x => x.Building).Where(d => d.IsDeleted == false
+            && d.Building.IsDeleted == false && d.Building.gender == gender).Select(x => new FloorViewsModels
+            {
+                FloorId = x.Id,
+                FloorNo = x.no,
+                BuildingId = x.BuildingId,
+                Building = x.Building,
+                BuildingName = x.Building.NameAr,
+                Guid = x.Guid,
+
+
+            }).ToListAsync();
+        }
         public async Task<string> addFloor(FloorViewsModels floor)
         {
             try
@@ -46,11 +64,15 @@ namespace lockerSystem.Domain
                 tblFloor floorinfo = new tblFloor();
                 floorinfo.no = floor.FloorNo;
                 floorinfo.BuildingId = floor.BuildingId;
+               
                 _context.Add(floorinfo);
                 _context.SaveChanges();
 
                 var floorLog = new FloorLog();
                 floorLog.Floor_Id = floorinfo.Id;
+                floorLog.operationType = "Add";
+                floorLog.generatedBy = ClaimTypes.GivenName;
+                floorLog.date_time = DateTime.UtcNow;
 
 
                 return "1";
@@ -70,7 +92,8 @@ namespace lockerSystem.Domain
                 FloorNo = FloorById.no,
                 BuildingId = FloorById.BuildingId,
                 Building = FloorById.Building,
-                Guid = FloorById.Guid
+                Guid = FloorById.Guid,
+                gender = FloorById.Building.gender,
             };
             return floorViewsModels;
         }
@@ -84,7 +107,8 @@ namespace lockerSystem.Domain
                 FloorNo = FloorById.no,
                 BuildingId = FloorById.BuildingId,
                 Building = FloorById.Building,
-                Guid = FloorById.Guid
+                Guid = FloorById.Guid,
+                gender = FloorById.Building.gender,
             };
             return floorViewsModels;
         }
@@ -101,15 +125,21 @@ namespace lockerSystem.Domain
                 FloorNo = x.no,
                 BuildingId = x.BuildingId,
                 Building = x.Building,
-                Guid = x.Guid
+                Guid = x.Guid,
+                gender = x.Building.gender,
             }).ToListAsync();
         }
 
-      
         public async Task<IEnumerable<tblBuilding>> GetBuilding()
         {
             return await _context.tblBuilding
                 .Where(b => b.IsDeleted == false) // Filter for non-deleted buildings
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<tblBuilding>> GetBuildingByGender(string gender)
+        {
+            return await _context.tblBuilding
+                .Where(b => b.IsDeleted == false && b.gender == gender) // Filter for non-deleted buildings
                 .ToListAsync();
         }
         public async Task<string> editFloor(FloorViewsModels floor)
@@ -126,11 +156,17 @@ namespace lockerSystem.Domain
                     return "رقم الطابق موجود بالفعل في هذا المبنى.";
                 }
 
-
                 floorByGuid.no = floor.FloorNo;
                 floorByGuid.BuildingId = floor.BuildingId;
+                
+
                 _context.Update(floorByGuid);
                 await _context.SaveChangesAsync();
+                var floorLog = new FloorLog();
+                floorLog.Floor_Id = floorByGuid.Id;
+                floorLog.operationType = "Add";
+                floorLog.generatedBy = ClaimTypes.GivenName;
+                floorLog.date_time = DateTime.UtcNow;
                 return "1";
             }
             catch (Exception ex)
@@ -147,6 +183,12 @@ namespace lockerSystem.Domain
                 floor.IsDeleted = true;
                 _context.Update(floor);
                 _context.SaveChanges();
+                var floorLog = new FloorLog();
+                floorLog.Floor_Id = floor.Id;
+                floorLog.operationType = "Add";
+                floorLog.generatedBy = ClaimTypes.GivenName;
+                floorLog.date_time = DateTime.UtcNow;
+
                 return "1";
             }
             catch (Exception ex)
