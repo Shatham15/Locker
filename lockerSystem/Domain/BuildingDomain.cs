@@ -60,6 +60,8 @@ namespace lockerSystem.Domain
                 BuildingLog.generatedBy = ClaimTypes.GivenName;
                 BuildingLog.date_time = DateTime.UtcNow;
                 //BuildingLog.additionalInfo = ;
+                _context.Add(BuildingLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -138,6 +140,8 @@ namespace lockerSystem.Domain
                 BuildingLog.generatedBy = ClaimTypes.GivenName;
                 BuildingLog.date_time = DateTime.UtcNow;
                 //BuildingLog.additionalInfo = ;
+                _context.Add(BuildingLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -152,7 +156,7 @@ namespace lockerSystem.Domain
 
         public async Task<string> DeleteBuilding(Guid Id)
 
-        {
+        { 
             try
             {
                 tblBuilding Buildinginfo = await getBuildingByGuid(Id);
@@ -166,6 +170,8 @@ namespace lockerSystem.Domain
                 BuildingLog.generatedBy = ClaimTypes.GivenName;
                 BuildingLog.date_time = DateTime.UtcNow;
                 //BuildingLog.additionalInfo = ;
+                _context.Add(BuildingLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
