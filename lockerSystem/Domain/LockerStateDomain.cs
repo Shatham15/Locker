@@ -1,6 +1,7 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace lockerSystem.Domain
 {
@@ -46,6 +47,12 @@ namespace lockerSystem.Domain
 
                 _context.Add(Stateinfo);
                 _context.SaveChanges();
+                var stateLog = new LockerStateLog();
+                stateLog.Locker_state_Id = Stateinfo.Id;
+                stateLog.operationType = "Add";
+                stateLog.generatedBy = ClaimTypes.GivenName;
+                stateLog.date_time = DateTime.UtcNow;
+
                 return "1";
             }
             catch (Exception ex)
@@ -93,6 +100,11 @@ namespace lockerSystem.Domain
 
                 _context.Update(Stateinfo);
                 await _context.SaveChangesAsync();
+                var stateLog = new LockerStateLog();
+                stateLog.Locker_state_Id = Stateinfo.Id;
+                stateLog.operationType = "Add";
+                stateLog.generatedBy = ClaimTypes.GivenName;
+                stateLog.date_time = DateTime.UtcNow;
                 return "1";
             }
             catch (Exception ex)
@@ -113,6 +125,11 @@ namespace lockerSystem.Domain
 
                 _context.Update(Stateinfo);
                 _context.SaveChanges();
+                var stateLog = new LockerStateLog();
+                stateLog.Locker_state_Id = Stateinfo.Id;
+                stateLog.operationType = "Add";
+                stateLog.generatedBy = ClaimTypes.GivenName;
+                stateLog.date_time = DateTime.UtcNow;
                 return "1";
             }
             catch (Exception ex)

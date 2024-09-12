@@ -108,9 +108,6 @@ namespace lockerSystem.Domain
         {
             return await _context.tblBuilding.FirstOrDefaultAsync(x => x.Guid == id);
 
-
-
-
         }
         public async Task<string> editBuilding(BuildingViewsModels Building)
         {

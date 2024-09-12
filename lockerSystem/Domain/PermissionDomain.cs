@@ -1,10 +1,10 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace lockerSystem.Domain
 {
-    //اضيفي async  على كل الفنكشن؟؟
     public class PermissionDomain
     {
         private readonly LockerSystemContext _Context;
@@ -62,7 +62,7 @@ namespace lockerSystem.Domain
 
 
         }
-        public IEnumerable<tblRole> getRoles()
+        public async Task<IEnumerable<tblRole>> getRoles()
         {
             return _Context.tblRole;
 

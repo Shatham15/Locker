@@ -26,16 +26,16 @@ namespace lockerSystem.Areas.Admin.Controllers
             return View(await _domain.getpermissions());
         }
         [HttpGet]
-        public IActionResult add()
+        public async Task<IActionResult> add()
         {
-            ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");//اي اسم
+            ViewBag.roles = new SelectList(await _domain.getRoles(), "Id", "RoleNameAr");//اي اسم
             return View();
         }
         [HttpPost]
         //Validation??
         public async Task<IActionResult> add(PermissionViewsModels permission)
         {
-            ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
+            ViewBag.roles = new SelectList(await _domain.getRoles(), "Id", "RoleNameAr");
             if (ModelState.IsValid)
             {
                 string check = await _domain.addPermission(permission);
@@ -48,17 +48,17 @@ namespace lockerSystem.Areas.Admin.Controllers
 
         }
         [HttpGet]
-        public IActionResult Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
+            ViewBag.roles = new SelectList(await _domain.getRoles(), "Id", "RoleNameAr");
             return View(_domain.getUserById(id));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult Edit(PermissionViewsModels permission)
+        public async Task<IActionResult> Edit(PermissionViewsModels permission)
         {
-            ViewBag.roles = new SelectList(_domain.getRoles(), "Id", "RoleNameAr");
+            ViewBag.roles = new SelectList(await _domain.getRoles(), "Id", "RoleNameAr");
 
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace lockerSystem.Areas.Admin.Controllers
 
         }
         //تغير اسم الفنكشن الى دليت؟؟
-        public IActionResult removePermission(Guid id)
+        public async Task<IActionResult> removePermission(Guid id)
         {  
             string check = _domain.removeUser(id);
             if (check == "1")
