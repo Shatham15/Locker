@@ -1,12 +1,15 @@
 ﻿using lockerSystem.Domain;
+using lockerSystem.Migrations;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using System.Security.Claims;
 namespace lockerSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class LockerController : Controller
     {
         private readonly LockerDomain _LockerDomain;
@@ -14,7 +17,7 @@ namespace lockerSystem.Areas.Admin.Controllers
         private readonly FloorDomain _FloorDomain;
         private readonly LockerStateDomain _LockerStateDomain;
 
-        public LockerController(LockerDomain LockerDomain, BuildingDomain buildingDomain, FloorDomain floorDomain,  LockerStateDomain LockerStateDomain)
+        public LockerController(LockerDomain LockerDomain, BuildingDomain buildingDomain, FloorDomain floorDomain, LockerStateDomain LockerStateDomain)
         {
             _BuildingDomain = buildingDomain;
             _FloorDomain = floorDomain;
@@ -25,15 +28,22 @@ namespace lockerSystem.Areas.Admin.Controllers
 
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? searchNumber)
         {
-            return View(await _LockerDomain.GetAllLockers());
+            var locker = await _LockerDomain.GetAllLockers();
+            if (searchNumber.HasValue)
+            {
+                locker = locker.Where(l => l.no == searchNumber.Value).ToList();
+
+            }
+            //return View(await _LockerDomain.GetAllLockers());
+            return View(locker);
         }
         public async Task<IActionResult> add()
         {
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Guid", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Guid", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Guid", "stateAr");
+            ViewBag.Floor = new SelectList(await _FloorDomain.GetAllFloor(), "FloorId", "FloorNo");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "BuildingId", "NameAr");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "LockerStateId", "stateAr");
 
             return View();
         }
@@ -42,9 +52,9 @@ namespace lockerSystem.Areas.Admin.Controllers
 
         public async Task<IActionResult> add(LockerViewsModels Locker)
         {
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Guid", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Guid", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Guid", "stateAr");
+            ViewBag.Floor = new SelectList(await _FloorDomain.GetAllFloor(), "FloorId", "FloorNo");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "BuildingId", "NameAr");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "LockerStateId", "stateAr");
             if (ModelState.IsValid)
             {
                 string check = await _LockerDomain.addLocker(Locker);
@@ -59,9 +69,9 @@ namespace lockerSystem.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Guid", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Guid", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Guid", "stateAr");
+            ViewBag.Floor = new SelectList(await _FloorDomain.GetAllFloor(), "FloorId", "FloorNo");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "BuildingId", "NameAr");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "LockerStateId", "stateAr");
             return View(await _LockerDomain.getLockerById(id));
         }
         [HttpPost]
@@ -75,9 +85,9 @@ namespace lockerSystem.Areas.Admin.Controllers
             else
                 ViewData["Falied"] = check;
 
-            ViewBag.Floor = new SelectList(await _LockerDomain.GetFloor(), "Guid", "no");
-            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "Guid", "no");
-            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "Guid", "stateAr");
+            ViewBag.Floor = new SelectList(await _FloorDomain.GetAllFloor(), "FloorId", "FloorNo");
+            ViewBag.Building = new SelectList(await _BuildingDomain.GetAllBuildings(), "BuildingId", "NameAr");
+            ViewBag.LockerState = new SelectList(await _LockerStateDomain.GetLockerState(), "LockerStateId", "stateAr");
             await _LockerDomain.editLocker(Locker);
             return View(Locker);
         }

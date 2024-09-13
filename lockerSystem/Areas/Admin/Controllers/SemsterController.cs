@@ -1,13 +1,16 @@
 ﻿using lockerSystem.Domain;
 using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 
 namespace lockerSystem.Areas.Admin.Controllers
 {
+
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class SemsterController : Controller
     {
         private readonly SemsterDomain _SemsterDomain;
@@ -16,9 +19,16 @@ namespace lockerSystem.Areas.Admin.Controllers
 
             _SemsterDomain = SemsterDomain;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _SemsterDomain.GetAllSemsters());
+            var semster = await _SemsterDomain.GetAllSemsters();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                semster = semster.Where(s => s.semsterNameAr.Contains(searchString)).ToList();
+
+            }
+            //return View(await _SemsterDomain.GetAllSemsters());
+            return View(semster);
         }
         [HttpGet]
         public async Task<IActionResult> add()
