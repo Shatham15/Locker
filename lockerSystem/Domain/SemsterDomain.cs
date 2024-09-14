@@ -1,6 +1,7 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 
 namespace lockerSystem.Domain
@@ -47,6 +48,13 @@ namespace lockerSystem.Domain
 
                 _context.Add(Semsterinfo);
                 await _context.SaveChangesAsync();
+                var SemesterLog = new SemesterLog();
+                SemesterLog.Semester_Id = Semsterinfo.Id;
+                SemesterLog.operationType = "Add";
+                SemesterLog.generatedBy = ClaimTypes.GivenName;
+                SemesterLog.date_time = DateTime.UtcNow;
+                _context.Add(SemesterLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -90,6 +98,13 @@ namespace lockerSystem.Domain
 
                 _context.Update(Semsterinfo);
                 await _context.SaveChangesAsync();
+                var SemesterLog = new SemesterLog();
+                SemesterLog.Semester_Id = Semsterinfo.Id;
+                SemesterLog.operationType = "Edit";
+                SemesterLog.generatedBy = ClaimTypes.GivenName;
+                SemesterLog.date_time = DateTime.UtcNow;
+                _context.Add(SemesterLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -105,10 +120,17 @@ namespace lockerSystem.Domain
         {
             try
             {
-                var semsterInfo = await getSemsterByGuid(id);
-                semsterInfo.IsActive = true;
-                _context.Update(semsterInfo);
-                _context.SaveChangesAsync();
+                var semsterinfo = await getSemsterByGuid(id);
+                semsterinfo.IsActive = true;
+                _context.Update(semsterinfo);
+                await _context.SaveChangesAsync();
+                var SemesterLog = new SemesterLog();
+                SemesterLog.Semester_Id = semsterinfo.Id;
+                SemesterLog.operationType = "Delete";
+                SemesterLog.generatedBy = ClaimTypes.GivenName;
+                SemesterLog.date_time = DateTime.UtcNow;
+                _context.Add(SemesterLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
