@@ -92,34 +92,37 @@ namespace lockerSystem.Domain
                 tblUser user = await _UserDomain.GetlUserByUserNamAsynce(userName);
                 var semeter = await _SemsterDomain.getActiveSemster();
                 var loocker = await _LockerDomain.getLockerModelById(lookerGuid);
-                tblBooking bookInfo = new tblBooking
+                var booking = await _context.tblBooking.FirstOrDefaultAsync(x => x.email == user.email && x.SemsterId == semeter.Id && x.BookingStateId != 3);
+                if (booking == null)
                 {
-                    fullName = user.fullName,
-                    email = user.email,
-                    phone = user.phone,
-                    BookingStateId = 1,
-                    
-                    IsDeleted = false,
-                    bokingDateTime = DateTime.Now,
-                    LockerId = loocker.Id,
-                    SemsterId = semeter.Id
-                };
-               await _context.AddAsync(bookInfo);
-                await _context.SaveChangesAsync();
+                    tblBooking bookInfo = new tblBooking
+                    {
+                        fullName = user.fullName,
+                        email = user.email,
+                        phone = user.phone,
+                        BookingStateId = 1,
+                        //colegename = user.CollegeName,
+                        IsDeleted = false,
+                        bokingDateTime = DateTime.Now,
+                        LockerId = loocker.Id,
+                        SemsterId = semeter.Id
+                    };
+                    await _context.AddAsync(bookInfo);
+                    await _context.SaveChangesAsync();
 
-                //var bookingLog = new BookingLog();
-                //bookingLog.Booking_Id = bookInfo.Id;
-                //bookingLog.bookBy = ClaimTypes.Email;
-                //// bookingLog.modifyBy =  bookInfo.email;
-                //bookingLog.bookingStatues = bookInfo.Book;
-                //bookingLog.date_time = DateTime.Now;
-
-                // _context.Add(bookingLog);
-                //await _context.SaveChangesAsync();
-
-                return  "1";
-            }
-            catch (Exception ex)
+                    var bookingLog = new BookingLog();
+                    bookingLog.Booking_Id = bookInfo.Id;
+                    bookingLog.bookBy = user.email;
+                    bookingLog.modifyBy =  bookInfo.email;
+                    bookingLog.bookingStatues = "1";
+                    bookingLog.date_time = DateTime.Now;
+                    _context.Add(bookingLog);
+                    await _context.SaveChangesAsync();
+                    return "1";
+                }
+                else
+                    return "لا يمكنك الحجز، يوجد لديك حجز مسبق";
+            }            catch (Exception ex)
             {
                 return "حدث خطأ أثناء معالجة طلبك, الرجاء المحاولة في وقت لاحق";
             }
@@ -197,13 +200,6 @@ namespace lockerSystem.Domain
                 return "فشلت عملية التحديث ";
             }
         }
-
-       
-    public async Task<IEnumerable<tblBuilding>> GetBuildingsByGenderAsync(string gender)
-        {
-            return await _context.tblBuilding.Where(b => b.gender == gender).ToListAsync();
-        }
-
     }
 }
 
