@@ -6,6 +6,7 @@ using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using Microsoft.VisualBasic;
+using System.Security.Claims;
 
 
 
@@ -108,12 +109,12 @@ namespace lockerSystem.Domain
 
                 //var bookingLog = new BookingLog();
                 //bookingLog.Booking_Id = bookInfo.Id;
-                //bookingLog.bookBy = bookInfo.fullName;
+                //bookingLog.bookBy = ClaimTypes.Email;
                 //// bookingLog.modifyBy =  bookInfo.email;
-                //bookingLog.bookingStatues = bookInfo.BookingState.NameAr;
+                //bookingLog.bookingStatues = bookInfo.Book;
                 //bookingLog.date_time = DateTime.Now;
 
-                //await _context.AddAsync(bookingLog);
+                // _context.Add(bookingLog);
                 //await _context.SaveChangesAsync();
 
                 return  "1";
@@ -198,6 +199,10 @@ namespace lockerSystem.Domain
         }
 
        
+    public async Task<IEnumerable<tblBuilding>> GetBuildingsByGenderAsync(string gender)
+        {
+            return await _context.tblBuilding.Where(b => b.gender == gender).ToListAsync();
+        }
 
     }
 }

@@ -41,11 +41,22 @@ namespace lockerSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(Guid? BuildingGuid, Guid? FloorGuid)
         {
+           
+           
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr", BuildingGuid);
             //ViewData["locker"];
             return View(await _lockerDomain.getLockerwithFilter(BuildingGuid, FloorGuid));
 
         }
+        public async Task<IActionResult> Index()
+        {
+            string email = User.FindFirst(ClaimTypes.Email).Value;
+            var a = await _domain.GetBuildingsByGenderAsync(email);
+            
+            return View(a);
+
+        }
+
         [HttpGet]
         public async Task<IActionResult> Info(string seaechString)//index
         {
@@ -64,6 +75,7 @@ namespace lockerSystem.Controllers
         {
             string Successful = "";
             string Falied = "";
+           
             ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
             if (ModelState.IsValid)
             {
