@@ -3,6 +3,7 @@ using lockerSystem.ViewsModels;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System;
+using Microsoft.AspNetCore.Http;
 
 
 namespace lockerSystem.Domain
@@ -10,6 +11,7 @@ namespace lockerSystem.Domain
     public class BuildingDomain
     {
         private readonly LockerSystemContext _context;
+        //private readonly IHttpContextAccessor _httpContextAccessor;
         public BuildingDomain(LockerSystemContext context)
         {
             _context = context;
