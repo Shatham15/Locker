@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="rtl" data-theme="light">
 
-<head>
-    <meta charset="UTF-8">
+@* <head>
+ *@@*     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم  بالنظام</title>
@@ -23,6 +23,13 @@
     <link rel="stylesheet" href="~/Assets/css/root.css">
     <link href="~/lib/sweetalert2/sweetalert2.css" rel="stylesheet" />
     <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Assets/css/app_rtl.css">
+
+    <!--------- Data Table CSS ---------->
+    <link href="~/Assets/lib/datatable/css/jquery.datatables.min.css" rel="stylesheet" />
+    <link href="~/Assets/lib/datatable/css/datatables_customization.css" rel="stylesheet" />
+    <link href="~/Assets/lib/datatable/css/select.datatables.min.css" rel="stylesheet" />
+
     <script src="~/lib/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
     <script src="~/Assets/js/jquery-3.4.1.min.js"></script>
@@ -32,26 +39,86 @@
     <!--------- JS Liberaries ---------->
     <script src="~/Assets/lib/DataTable/js/dataTables.min.js"></script>
     <script src="~/Assets/lib/datatable/js/datatables.select.min.js"></script>
+
     <!-- customization -->
     <script src="~/Assets/js/app.js"></script>
     <script src="~/Assets/js/bootstrap.min.js"></script>
     <script src="~/js/jquery.validate.min.js"></script>
     <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
-    @*     <script src="~/js/datatable.min.js"></script>
-    *@
+    <script src="~/js/datatable.min.js"></script>
     <script src="~/js/validation.js"></script>
     <script src="~/js/OrderScript.js"></script>
     <script src="~/js/site.js"></script>
-    <script src="~/Assets/lib/quicksearch/jquery.quicksearch.js"></script>
+    <script src="~/Assets/lib/quicksearch/jquery.quicksearch.js"></script> *@
     <!--------- CSS Liberaries ---------->
     <!-- Data Table -->
     <!-- <link rel="stylesheet" href="Assets/lib/DataTable/css/select.dataTables.min.css" /> -->
     <!-- <link rel="stylesheet" href="Assets/lib/DataTable/css/datatables_customization.css" /> -->
     <!-- customization -->
-    <link rel="stylesheet" href="~/Assets/css/app_rtl.css">
+ @*    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>لوحة التحكم  بالنظام</title>
+
+        <!-- Favico -->
+        <link rel="apple-touch-icon" sizes="180x180" href="~/Assets/imgs/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="~/Assets/imgs/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="~/Assets/imgs/favicon/favicon-16x16.png">
+        <link rel="manifest" href="~/Assets/imgs/favicon/site.webmanifest">
+        <link rel="mask-icon" href="~/Assets/imgs/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="~/Assets/css/bootstrap.rtl.min.css">
+        <link rel="stylesheet" href="~/Assets/css/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="~/Assets/css/root.css">
+
+
+
+
+
+
+        <!--------- CSS Liberaries ---------->
+        <!-- Data Table -->
+        <link rel="stylesheet" href="~/assets/lib/DataTable/css/select.dataTables.min.css" />
+        <link rel="stylesheet" href="~/assets/lib/DataTable/css/datatables_customization.css" />
+        <!-- customization -->
+        <link rel="stylesheet" href="~/assets/css/app_rtl.css">
+
+    </head> *@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم  بالنظام</title>
+
+    <!-- Favico -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Assets/imgs/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Assets/imgs/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Assets/imgs/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/Assets/imgs/favicon/site.webmanifest">
+    <link rel="mask-icon" href="~/Assets/imgs/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="~/Assets/css/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/Assets/css/root.css">
+
+
+
+
+
+
+    <!--------- CSS Liberaries ---------->
+    <!-- Data Table -->
+    <link rel="stylesheet" href="~/assets/lib/DataTable/css/select.dataTables.min.css" />
+    <link rel="stylesheet" href="~/assets/lib/DataTable/css/datatables_customization.css" />
+    <!-- customization -->
+    <link rel="stylesheet" href="~/assets/css/app_rtl.css">
 
 </head>
-
 <body>
 
     <main class="app_wrap">
@@ -259,7 +326,20 @@
     <script src="~/js/OrderScript.js"></script>
     <script src="~/js/site.js"></script> *@
 
+    <!-- main JS Scripts -->
+    <script src="~/Assets/js/jquery-3.4.1.min.js"></script>
+    <script src="~/Assets/js/popper.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!--------- JS Liberaries ---------->
+    <script src="~/Assets/lib/DataTable/js/dataTables.min.js"></script>
+
+    <!-- customization -->
+    <script src="~/Assets/js/app.js"></script>
+    <script src="~/assets/lib/quicksearch/jquery.quicksearch.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 

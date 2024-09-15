@@ -1,27 +1,5 @@
 ﻿@model lockerSystem.ViewModels.PermissionViewsModels
-<script>
-    @{
-        if (@ViewData["Successful"] != null)
-        {
-                    <Text>
-                                                    var result = '@Html.Raw(ViewData["Successful"])';
-                    Swal.fire(result, '', 'success')
-                        .then(
-                            function () {
-                                window.location.href = '@Url.Action("Index", "Permission")';
-                            }
-                        );
-                    </Text>
-        }
-        else if (@ViewData["Falied"] != null)
-        {
-                    <Text>
-                                                    var result = '@Html.Raw(ViewData["Falied"])';
-                    Swal.fire(result, '', 'error');
-                    </Text>
-        }
-    }
-</script>
+
 <div class="block mb-4">
     <div class="block-header border-bottom px-4 py-4">
         <h5 class="m-0">إضافة مستخدم </h5>
@@ -39,10 +17,11 @@
                 <div class="col-md-6">
                     <div class="mb-4">
                         <label id="UserNameCheck" asp-for="usrName" class="mb-1" style="color:red; display:none">هذا المستخدم غير موجود في قاعدة البيانات </label>
+                        <br/>
                         <label asp-for="usrName" class="mb-1"> </label>
                         <input id="UserNamecheck" type="text" class="form-control">
-                        <button type="submit" id="btnSerach" class="btn btn-primary px-5">بحث</button>
-                    </div>
+@*                         <button type="submit" id="btnSerach" class="btn btn-primary px-5">بحث</button>
+ *@                    </div>
                 </div><!-- END ITEM -->
                 <form asp-action="add">
                     <div class="row">
@@ -111,8 +90,32 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        @{
+            if (@ViewData["Successful"] != null)
+            {
+                <Text>
+                                                                    var result = '@Html.Raw(ViewData["Successful"])';
+                Swal.fire(result, '', 'success')
+                    .then(
+                        function () {
+                            window.location.href = '@Url.Action("Index", "Permission")';
+                        }
+                    );
+                </Text>
+            }
+            else if (@ViewData["Falied"] != null)
+            {
+                <Text>
+                                                                    var result = '@Html.Raw(ViewData["Falied"])';
+                Swal.fire(result, '', 'error');
+                </Text>
+            }
+        }
+    </script>
 <script>
-        $("#btnSerach").on("click", function () {
+        $("#UserNamecheck").on("change", function () {
             var UserName = $("#UserNamecheck").val();
             showValue(UserName);
     });
@@ -135,4 +138,5 @@
         });
     }
 </script>
+}
 
