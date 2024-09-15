@@ -52,7 +52,8 @@ namespace lockerSystem.Domain
                 stateLog.operationType = "Add";
                 stateLog.generatedBy = ClaimTypes.GivenName;
                 stateLog.date_time = DateTime.UtcNow;
-
+                _context.Add(stateLog);
+                _context.SaveChanges();
                 return "1";
             }
             catch (Exception ex)
@@ -102,9 +103,11 @@ namespace lockerSystem.Domain
                 await _context.SaveChangesAsync();
                 var stateLog = new LockerStateLog();
                 stateLog.Locker_state_Id = Stateinfo.Id;
-                stateLog.operationType = "Add";
+                stateLog.operationType = "Edit";
                 stateLog.generatedBy = ClaimTypes.GivenName;
                 stateLog.date_time = DateTime.UtcNow;
+                _context.Update(stateLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -127,9 +130,11 @@ namespace lockerSystem.Domain
                 _context.SaveChanges();
                 var stateLog = new LockerStateLog();
                 stateLog.Locker_state_Id = Stateinfo.Id;
-                stateLog.operationType = "Add";
+                stateLog.operationType = "Delete";
                 stateLog.generatedBy = ClaimTypes.GivenName;
                 stateLog.date_time = DateTime.UtcNow;
+                _context.Update(stateLog);
+                _context.SaveChanges();
                 return "1";
             }
             catch (Exception ex)

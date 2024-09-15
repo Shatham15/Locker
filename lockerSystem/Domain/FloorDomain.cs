@@ -73,7 +73,8 @@ namespace lockerSystem.Domain
                 floorLog.operationType = "Add";
                 floorLog.generatedBy = ClaimTypes.GivenName;
                 floorLog.date_time = DateTime.UtcNow;
-
+                _context.Add(floorLog);
+                _context.SaveChanges();
 
                 return "1";
             }
@@ -164,9 +165,11 @@ namespace lockerSystem.Domain
                 await _context.SaveChangesAsync();
                 var floorLog = new FloorLog();
                 floorLog.Floor_Id = floorByGuid.Id;
-                floorLog.operationType = "Add";
+                floorLog.operationType = "Edit";
                 floorLog.generatedBy = ClaimTypes.GivenName;
                 floorLog.date_time = DateTime.UtcNow;
+                _context.Add(floorLog);
+                _context.SaveChanges();
                 return "1";
             }
             catch (Exception ex)
@@ -185,10 +188,11 @@ namespace lockerSystem.Domain
                 _context.SaveChanges();
                 var floorLog = new FloorLog();
                 floorLog.Floor_Id = floor.Id;
-                floorLog.operationType = "Add";
+                floorLog.operationType = "Delete";
                 floorLog.generatedBy = ClaimTypes.GivenName;
                 floorLog.date_time = DateTime.UtcNow;
-
+                _context.Add(floorLog);
+                _context.SaveChanges();
                 return "1";
             }
             catch (Exception ex)
