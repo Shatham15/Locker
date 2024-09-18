@@ -2,7 +2,7 @@
 
 
 
-<div class="block mb-4">
+<div class="block mb-8">
     <div class="block-header border-bottom px-4 py-3">
         <h5 class="m-0">الصلاحيات </h5>
         <div class="d-flex gap-2">
@@ -10,7 +10,7 @@
                 <input type="text" class="form-control table__quick_search"
                        placeholder="البحث السريع ...">
             </div>
-            <a asp-action="add" class="btn btn-primary">إضافة صلاحية للمستخدم</a>
+           
         </div>
     </div>
     <div class="block-body">
@@ -33,6 +33,7 @@
                         <td>@x.roleName</td>
                         <td>
                             @*يبيلك تعدلين موقعهم بحيث يكونون في نهاية الصفحة من اليسار يعني حركيهم لليسار زيادة ؟؟*@
+                        <td class="action_td text-end">
                             <a asp-action="Edit" asp-route-id="@x.Guid" class="btn btn-sm btn-success">تعديل</a>
 
                             <a asp-action="removePermission" asp-route-id="@x.Guid" class="btn btn-sm btn-danger">حذف</a>

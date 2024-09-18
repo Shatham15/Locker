@@ -1,5 +1,5 @@
 ﻿ @model IEnumerable<lockerSystem.ViewsModels.FloorViewsModels> ;
-<div class="block mb-4">
+<div class="block mb-8">
 
     <div class="block-header border-bottom px-4 py-3">
 
@@ -7,13 +7,11 @@
         <div class="d-flex gap-2">
             <div class="form-group">
                 <form class="d-md-inline-flex" asp-action="Index" asp-controller="Floor">
-                    <div class="col-md-6">
+                   @*  <div class="col-md-8"> *@
                         <input type="search" name="seaechString" class="form-control table__quick_search"
                                placeholder="البحث السريع ...">
-                    </div>
-                    <div class="col-md-8">
-                        <button class="btn btn-primary" type="submit">البحث بإسم المبنى </button>
-                    </div>
+                   @*  </div> *@
+                    
                 </form>
 
             </div>
