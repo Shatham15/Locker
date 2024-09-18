@@ -33,7 +33,7 @@ namespace lockerSystem.Controllers
             ViewData["Successful"] = Successful;
             ViewData["Falied"] = Falied;
             //var booking = await _buildingDomain.GetAllBuildings();
-            ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr");
+            ViewBag.Building = new SelectList(await _buildingDomain.GetBuildingsByGenderAsync(User.FindFirst(ClaimTypes.Email).Value), "Guid", "NameAr");
             return View();
 
         }
@@ -48,14 +48,14 @@ namespace lockerSystem.Controllers
             return View(await _lockerDomain.getLockerwithFilter(BuildingGuid, FloorGuid));
 
         }
-        public async Task<IActionResult> Index()
-        {
-            string email = User.FindFirst(ClaimTypes.Email).Value;
-            var a = await _domain.GetBuildingsByGenderAsync(email);
+        //public async Task<IActionResult> Index()
+        //{
+        //    string email = User.FindFirst(ClaimTypes.Email).Value;
+        //    var a = await _domain.GetBuildingsByGenderAsync(email);
             
-            return View(a);
+        //    return View(a);
 
-        }
+        //}
 
         [HttpGet]
         public async Task<IActionResult> Info(string seaechString)//index

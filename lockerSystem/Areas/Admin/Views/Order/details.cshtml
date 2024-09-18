@@ -1,5 +1,5 @@
 ﻿@model BookingViewsModels
-
+@section Scripts {
 <script>
     @{
         if (ViewData["Successful"] != null)
@@ -23,6 +23,7 @@
         }
     }
 </script>
+}
 
 @if (Model != null)
 {

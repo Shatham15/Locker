@@ -15,6 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddHealthChecks();
 builder.Services.AddRazorPages();
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddDbContext<LockerSystemContext>(options =>

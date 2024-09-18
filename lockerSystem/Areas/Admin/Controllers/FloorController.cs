@@ -30,7 +30,7 @@ namespace lockerSystem.Areas.Admin.Controllers
             }
             return View(floor);
         }
-        public async Task<IActionResult> addFloor()
+        public async Task<IActionResult> add()
         {
             string gender = User.FindFirst("Gender").Value;
 
@@ -39,7 +39,7 @@ namespace lockerSystem.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> addFloor(FloorViewsModels floor)
+        public async Task<IActionResult> add(FloorViewsModels floor)
         {
             string gender = User.FindFirst("Gender").Value;
             ViewBag.Building = new SelectList(await _floorDomain.GetBuildingByGender(gender), "Id", "NameAr");

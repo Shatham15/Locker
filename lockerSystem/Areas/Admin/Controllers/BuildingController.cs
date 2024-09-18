@@ -4,6 +4,7 @@ using lockerSystem.ViewsModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Security.Claims;
 namespace lockerSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -37,6 +38,7 @@ namespace lockerSystem.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> add(BuildingViewsModels Building)
         {
+            var email = User.FindFirst(ClaimTypes.Email).Value;
             try
             {
 
@@ -91,6 +93,8 @@ namespace lockerSystem.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(BuildingViewsModels Building)
         {
+            var email = User.FindFirst(ClaimTypes.Email).Value;
+
             try
             {
                 if (ModelState.IsValid)
@@ -136,6 +140,8 @@ namespace lockerSystem.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
+            var email = User.FindFirst(ClaimTypes.Email).Value;
+
             try
             {
                 string check = await _BuildingDomain.DeleteBuilding(id);
