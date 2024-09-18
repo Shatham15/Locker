@@ -1,6 +1,8 @@
 ﻿using lockerSystem.Models;
 using lockerSystem.ViewsModels;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace lockerSystem.Domain
 {
@@ -56,7 +58,14 @@ namespace lockerSystem.Domain
                 Lockerinfo.FloorId = Locker.FloorId;
                 Lockerinfo.LockerStateId = Locker.LockerStateId;
                 _context.Add(Lockerinfo);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+                var LockerLog = new LockerLog();
+                LockerLog.Locker_Id = Lockerinfo.Id;
+                LockerLog.operationType = "Add";
+                LockerLog.generatedBy = ClaimTypes.GivenName;
+                LockerLog.date_time = DateTime.UtcNow;
+                _context.Add(LockerLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -110,7 +119,14 @@ namespace lockerSystem.Domain
                 LockerByGuid.LockerStateId= Locker.LockerStateId;
 
                 _context.Update(LockerByGuid);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+                var LockerLog = new LockerLog();
+                LockerLog.Locker_Id = LockerByGuid.Id;
+                LockerLog.operationType = "Edit";
+                LockerLog.generatedBy = ClaimTypes.GivenName;
+                LockerLog.date_time = DateTime.UtcNow;
+                _context.Add(LockerLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -127,7 +143,14 @@ namespace lockerSystem.Domain
                 tblLocker Locker = await getLockerModelById(id);
                 Locker.IsDeleted = true;
                 _context.Update(Locker);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
+                var LockerLog = new LockerLog();
+                LockerLog.Locker_Id = Locker.Id;
+                LockerLog.operationType = "Delete";
+                LockerLog.generatedBy = ClaimTypes.GivenName;
+                LockerLog.date_time = DateTime.UtcNow;
+                _context.Add(LockerLog);
+                await _context.SaveChangesAsync();
                 return "1";
             }
             catch (Exception ex)
@@ -136,20 +159,7 @@ namespace lockerSystem.Domain
             }
 
         }
-        //public async Task<IEnumerable<LockerViewsModels>> getLockerwithFilter(Guid? BuildingGuid, Guid? FloorGuid)
-        //{
-        //    return await _context.tblLocker.Include(F => F.Floor).ThenInclude(B => B.Building).Include(LS => LS.LockerState).Where(x => x.Floor.Guid == FloorGuid).Select(x => new LockerViewsModels
-        //    {
-        //        Id = x.Id,
-        //        LockerState = x.LockerState,
-        //        Floor = x.Floor,
-        //        FloorId = x.FloorId,
-        //        Guid = x.Guid,
-        //        IsDeleted = x.IsDeleted,
-        //        LockerStateId = x.LockerStateId,
-        //        no = x.no
-        //    }).ToListAsync();
-        //}
+       
         public async Task<IEnumerable<LockerViewsModels>> getLockerwithFilter(Guid? BuildingGuid, Guid? FloorGuid)
         {
             var lockers = await _context.tblLocker

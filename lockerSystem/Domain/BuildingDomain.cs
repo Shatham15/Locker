@@ -11,10 +11,11 @@ namespace lockerSystem.Domain
     public class BuildingDomain
     {
         private readonly LockerSystemContext _context;
-        //private readonly IHttpContextAccessor _httpContextAccessor;
-        public BuildingDomain(LockerSystemContext context)
+        private readonly UserDomain _UserDomain;
+        public BuildingDomain(LockerSystemContext context, UserDomain userDomain)
         {
             _context = context;
+            _UserDomain = userDomain;
         }
         public async Task<IEnumerable<BuildingViewsModels>> GetAllBuildings()
         {
@@ -28,6 +29,23 @@ namespace lockerSystem.Domain
                 NameAr=x.NameAr,
                 NameEn=x.NameEn,
                 Guid=x.Guid,
+                gender = x.gender,
+
+            }).ToListAsync();// select * from tblBuilding
+        }
+        public async Task<IEnumerable<BuildingViewsModels>> GetBuildingsByGenderAsync(string Email)
+        {
+            var userInfo = await _UserDomain.GetlUserByUserName(Email);
+
+            return await _context.tblBuilding.Where(x => x.IsDeleted == false && x.gender == userInfo.gender).Select(x => new BuildingViewsModels
+            {
+
+                BuildingId = x.Id,
+                code = x.code,
+                no = x.no,
+                NameAr = x.NameAr,
+                NameEn = x.NameEn,
+                Guid = x.Guid,
                 gender = x.gender,
 
             }).ToListAsync();// select * from tblBuilding
@@ -59,7 +77,7 @@ namespace lockerSystem.Domain
                 var BuildingLog = new BuildingLog();
                 BuildingLog.Building_Id= Buildinginfo.Id;
                 BuildingLog.operationType = "Add";
-                BuildingLog.generatedBy = ClaimTypes.GivenName;
+                BuildingLog.generatedBy = ClaimTypes.Email;
                 BuildingLog.date_time = DateTime.UtcNow;
                 //BuildingLog.additionalInfo = ;
                 _context.Add(BuildingLog);
@@ -136,7 +154,7 @@ namespace lockerSystem.Domain
                 var BuildingLog = new BuildingLog();
                 BuildingLog.Building_Id = Buildinginfo.Id;
                 BuildingLog.operationType = "Edit";
-                BuildingLog.generatedBy = ClaimTypes.GivenName;
+                BuildingLog.generatedBy = ClaimTypes.Email;
                 BuildingLog.date_time = DateTime.UtcNow;
                 //BuildingLog.additionalInfo = ;
                 _context.Add(BuildingLog);
@@ -166,7 +184,7 @@ namespace lockerSystem.Domain
                 var BuildingLog = new BuildingLog();
                 BuildingLog.Building_Id = Buildinginfo.Id;
                 BuildingLog.operationType = "Delete";
-                BuildingLog.generatedBy = ClaimTypes.GivenName;
+                BuildingLog.generatedBy = ClaimTypes.Email;
                 BuildingLog.date_time = DateTime.UtcNow;
                 //BuildingLog.additionalInfo = ;
                 _context.Add(BuildingLog);

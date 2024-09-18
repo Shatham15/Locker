@@ -4,20 +4,20 @@
         if (@ViewData["Successful"] != null)
         {
             <Text>
-                                                var result = '@Html.Raw(ViewData["Successful"])';
-                            Swal.fire(result, '', 'success')
-                                .then(
-                                    function () {
-                                window.location.href = '@Url.Action("Index", "Locker")';
-                                    }
-                                );
+                                                            var result = '@Html.Raw(ViewData["Successful"])';
+            Swal.fire(result, '', 'success')
+                .then(
+                    function () {
+                        window.location.href = '@Url.Action("Index", "Locker")';
+                    }
+                );
             </Text>
         }
         else if (@ViewData["Falied"] != null)
         {
             <Text>
-                                                var result = '@Html.Raw(ViewData["Falied"])';
-                            Swal.fire(result, '', 'error');
+                                                            var result = '@Html.Raw(ViewData["Falied"])';
+            Swal.fire(result, '', 'error');
             </Text>
         }
     }
@@ -34,8 +34,8 @@
 
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="BuildingId" class="mb-1"> </label>
-                                <select asp-for="BuildingId" type="number" class="form-control" asp-items="@ViewBag.Building">
+                                <label asp-for="BuildingName" class="mb-1"> </label>
+                                <select asp-for="BuildingId" type="text" class="form-control" asp-items="@ViewBag.Building">
                                 </select>
                                 <span asp-validation-for="BuildingId" class="text-danger"></span>
 
@@ -45,7 +45,7 @@
                         <!-- START ITEM -->
                         <div class="col-md-6">
                             <div class="mb-4">
-                                <label asp-for="FloorId" class="mb-1"> </label>
+                                <label asp-for="FloorNo" class="mb-1"> </label>
                                 <select asp-for="FloorId" type="number" class="form-control" asp-items="@ViewBag.Floor">
                                 </select>
                                 <span asp-validation-for="FloorId" class="text-danger"></span>
@@ -61,7 +61,6 @@
                                 <span asp-validation-for="no" class="text-danger"></span>
                             </div>
                         </div><!-- END ITEM -->
-                        
                         <!-- START ITEM -->
 
                         <div class="col-md-6">
@@ -73,8 +72,8 @@
 
                             </div>
                         </div>
-                       
-           
+
+
                     </div>
                     <div class="d-flex justify-content-end">
                         <button type="submit" asp-route-for="Index" class="btn btn-primary px-5" title="save">حفظ</button>

@@ -4,7 +4,7 @@
         if (@ViewData["Successful"] != null)
         {
             <Text>
-                                    var result = '@Html.Raw(ViewData["Successful"])';
+                                                var result = '@Html.Raw(ViewData["Successful"])';
             Swal.fire(result, '', 'success')
                 .then(
                     function () {
@@ -16,7 +16,7 @@
         else if (@ViewData["Falied"] != null)
         {
             <Text>
-                                    var result = '@Html.Raw(ViewData["Falied"])';
+                                                var result = '@Html.Raw(ViewData["Falied"])';
             Swal.fire(result, '', 'error');
             </Text>
         }
@@ -27,8 +27,23 @@
         <h5 class="m-0">الخزائن</h5>
         <div class="d-flex gap-2">
             <div class="form-group">
-                <input type="text" class="form-control table__quick_search"
-                       placeholder="البحث السريع ...">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="d-flex " asp-action="Index" asp-controller="Locker">
+                            <div class="col-md-6">
+                            <input type="search" name="searchNumber" class="form-control me-1"
+                                   placeholder="البحث السريع ...">
+
+                                </div>
+                            <div class="col-md-8">
+                                <button class="btn btn-primary" type="submit">بحث بواسطة رقم الخزنة</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <a asp-action="Index" class="btn btn-primary">الرجوع الى القائمة</a>
+                    </div>
+                </div>
             </div>
             <a asp-action="add" class="btn btn-primary">إضافة خزنة</a>
         </div>
@@ -37,9 +52,9 @@
         <table class="table table-hover js-dataTable">
             <thead>
                 <tr>
+                    <th> @Html.DisplayNameFor(m => m.BuildingName)</th>
+                    <th> @Html.DisplayNameFor(m => m.FloorNo)</th>
                     <th> @Html.DisplayNameFor(m => m.no)</th>
-                    <th> @Html.DisplayNameFor(m => m.FloorId)</th>
-                    <th> @Html.DisplayNameFor(m => m.BuildingId)</th>
                     <th> @Html.DisplayNameFor(m => m.stateAr)</th>
                     @* <th> @Html.DisplayNameFor(m => m.userType)</th> *@
                     <th class=""></th>
@@ -49,10 +64,10 @@
                 @foreach (var x in Model)
                 {
                     <tr class="cursor-pointer">
+                        <td>@x.BuildingName</td>
+                        <td>@x.Floor.no</td>
                         <td>@x.no</td>
-                        <td>@x.no</td>
-                        <td>@x.BuildingId</td>
-                        <td>@x.stateAr</td>
+                        <td>@x.LockerState.stateAr</td>
                         @*  <td>@x.userType</td> *@
                         <td class="action_td text-end">
                             <a asp-action="Edit" asp-route-id="@x.Guid" class="btn btn-sm btn-success">تعديل</a>
