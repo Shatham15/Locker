@@ -6,25 +6,21 @@
         <div class="d-flex gap-2">
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-6">
+                    @* <div class="col-md-4"> *@
                         <form class="d-md-inline-flex" asp-action="Index" asp-controller="Building">
-                            <div class="col-md-6">
+                            @* <div class="col-md-4"> *@
                                 <input type="search" name="seaechString" class="form-control table__quick_search"
                                        placeholder="البحث السريع ...">
-                            </div>
-                            <div class="col-md-8">
-                                <button class="btn btn-primary" type="submit">بحث بواسطة الرمز</button>
-                            </div>
+                          @*   </div> *@
+                           
                         </form>
-                    </div>
+                   @*  </div> *@
 
-                    <div class="col-md-4">
-                        <a asp-action="Index" class="btn btn-primary">الرجوع الى القائمة</a>
-                    </div>
+                    
                 </div>
             </div>
 
-            <a asp-action="add" class="btn btn-primary">إضافة مبنى</a>
+          
 
         </div>
     </div>

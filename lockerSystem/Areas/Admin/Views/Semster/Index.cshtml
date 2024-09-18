@@ -5,29 +5,48 @@
 
 
 
-<div class="block mb-4">
+        <div class="block mb-8">
+
+            <div class="block-header border-bottom px-4 py-3">
+
+                <h5 class="m-0">الفصول الدراسية </h5>
+                <div class="d-flex gap-2">
+                    <div class="form-group">
+                        <form class="d-md-inline-flex" asp-action="Index" asp-controller="Semster">
+                            @* <div class="col-md-8"> *@
+                            <input type="search" name="seaechString" class="form-control table__quick_search"
+                                   placeholder="البحث السريع ...">
+                            @*  </div> *@
+
+                        </form>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+@* div class="block mb-8">
     <div class="block-header border-bottom px-4 py-3">
         <h5 class="m-0">الفصول الدراسية</h5>
         <div class="d-flex gap-2">
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-6">
-                        <form class="d-flex " asp-action="Index" asp-controller="Semster">
+                   @*  <div class="col-md-8"> *@
+                        @* <form class="d-flex " asp-action="Index" asp-controller="Semster">
                             <input type="search" name="searchString" class="form-control me-1"
-                                   placeholder="البحث السريع ...">
-                            <button class="btn btn-dark" type="submit">بحث بواسطة اسم الفصل الدراسي</button>
+                                   placeholder="البحث السريع ..."/>
+                           
 
-                        </form>
-                    </div>
+                        </form> *@
+                    @* /div> *@
 
-                    <div class="col-md-3">
-                        <a asp-action="Index" class="btn btn-dark">الرجوع الى القائمة</a>
-                    </div>
+               @*     
                 </div>
             </div>
-            <a asp-action="Add" class="btn btn-primary">إضافة فصل دراسي</a>
+          
         </div>
-    </div>
+    </div> *@ 
     <div class="block-body">
         <table class="table table-hover js-dataTable">
             <thead>
@@ -47,6 +66,7 @@
                         <td>@x.endSemster.ToString("yyyy-MM-dd")</td>
                         <td>@x.semsterNameAr</td>
                         <td>@x.semsterNameEn</td>
+
                         <td class="action_td text-end">
                             <a asp-action="Edit" class="btn btn-sm btn-success" asp-route-id="@x.Guid">تعديل</a>
                             <a asp-action="Delete" type="button" class="btn btn-sm btn-danger" asp-route-id="@x.Guid">حذف</a>

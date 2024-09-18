@@ -22,30 +22,26 @@
         }
     }
 </script>
-<div class="block mb-4">
+<div class="block mb-8">
     <div class="block-header border-bottom px-4 py-3">
         <h5 class="m-0">الخزائن</h5>
         <div class="d-flex gap-2">
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-6">
+                   @*  <div class="col-md-6"> *@
                         <form class="d-flex " asp-action="Index" asp-controller="Locker">
-                            <div class="col-md-6">
+                            @* <div class="col-md-8"> *@
                             <input type="search" name="searchNumber" class="form-control me-1"
                                    placeholder="البحث السريع ...">
 
-                                </div>
-                            <div class="col-md-8">
-                                <button class="btn btn-primary" type="submit">بحث بواسطة رقم الخزنة</button>
-                            </div>
+                               @*  </div> *@
+                           
                         </form>
-                    </div>
-                    <div class="col-md-4">
-                        <a asp-action="Index" class="btn btn-primary">الرجوع الى القائمة</a>
-                    </div>
+                    @* </div> *@
+                   
                 </div>
             </div>
-            <a asp-action="add" class="btn btn-primary">إضافة خزنة</a>
+           
         </div>
     </div>
     <div class="block-body">
