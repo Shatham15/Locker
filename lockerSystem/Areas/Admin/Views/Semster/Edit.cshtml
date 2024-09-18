@@ -7,6 +7,7 @@
     <div class="block-body py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @section Scripts {
                 <script>
     @{
         if (@ViewData["Successful"] != null)
@@ -31,6 +32,7 @@
         }
     }
 </script>
+}
                 <form asp-action="Edit">
                     <input hidden asp-for="Guid" />
                     <div class="row">

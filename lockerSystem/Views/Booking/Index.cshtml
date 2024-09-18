@@ -1,33 +1,5 @@
 ﻿@model IEnumerable<LockerViewsModels>;
-    
-<script>
-    @{
-        if (@ViewData["Successful"] != null)
-        {
-            <Text>
-                                            var result = '@Html.Raw(ViewData["Successful"])';
-            Swal.fire(result, '', 'success')
-                .then(
-                    function () {
-                        window.location.href = '@Url.Action("Info", "Booking")';
-                    }
-                );
-            </Text>
-        }
-        else if (@ViewData["Falied"] != null)
-        {
-            <Text>
-                                               var result = '@Html.Raw(ViewData["Falied"])';
-            Swal.fire(result, '', 'error')
-                .then(
-                    function () {
-                        window.location.href = '@Url.Action("Info", "Booking")';
-                    }
-                );
-            </Text>
-        }
-    }
-</script>
+
 <div class="block mb-4">
     <div class="block-header border-bottom px-4 py-4">
         <h5 class="m-0">حجز جديد</h5>
@@ -123,6 +95,35 @@
     </div>
 }
 }
+@section Scripts {
+    <script>
+        @{
+            if (@ViewData["Successful"] != null)
+            {
+                <Text>
+                                                            var result = '@Html.Raw(ViewData["Successful"])';
+                Swal.fire(result, '', 'success')
+                    .then(
+                        function () {
+                            window.location.href = '@Url.Action("Info", "Booking")';
+                        }
+                    );
+                </Text>
+            }
+            else if (@ViewData["Falied"] != null)
+            {
+                <Text>
+                                                               var result = '@Html.Raw(ViewData["Falied"])';
+                Swal.fire(result, '', 'error')
+                    .then(
+                        function () {
+                            window.location.href = '@Url.Action("Info", "Booking")';
+                        }
+                    );
+                </Text>
+            }
+        }
+    </script>
 <script>
 
     $(document).ready(function () {
@@ -146,4 +147,4 @@
         });
     }
 </script>
-
+}
