@@ -43,7 +43,7 @@ namespace lockerSystem.Controllers
         {
            
            
-            ViewBag.Building = new SelectList(await _buildingDomain.GetAllBuildings(), "Guid", "NameAr", BuildingGuid);
+            ViewBag.Building = new SelectList(await _buildingDomain.GetBuildingsByGenderAsync(User.FindFirst(ClaimTypes.Email).Value), "Guid", "NameAr", BuildingGuid);
             //ViewData["locker"];
             return View(await _lockerDomain.getLockerwithFilter(BuildingGuid, FloorGuid));
 
