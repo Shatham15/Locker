@@ -64,7 +64,7 @@ namespace lockerSystem.Domain
                 gender = data.gender
 
 
-            };
+            };//
         }
         public async Task<UserViweModele> GetlUserModelByUserName(string UserName)
 
