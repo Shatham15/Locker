@@ -59,7 +59,7 @@ namespace lockerSystem.Areas.Admin.Controllers
             {
                 string check = await _LockerDomain.addLocker(Locker);
                 if (check == "1")
-                    ViewData["Successful"] = "تمت عملية الاضافه بنجاح";
+                    ViewData["Successful"] = "تمت الاضافة بنجاح";
                 else
                     ViewData["Falied"] = check;
             }
@@ -81,7 +81,7 @@ namespace lockerSystem.Areas.Admin.Controllers
             string check = await _LockerDomain.editLocker(Locker);
             if (check == "1")
 
-                ViewData["Successful"] = " تمت عملية التعديل بنجاح";
+                ViewData["Successful"] = " تم التعديل بنجاح";
             else
                 ViewData["Falied"] = check;
 
@@ -98,7 +98,7 @@ namespace lockerSystem.Areas.Admin.Controllers
             string check = await _LockerDomain.deleteLocker(id);
             if (check == "1")
 
-                ViewData["Successful"] = " تمت عملية الحذف بنجاح";
+                ViewData["Successful"] = " تم الحذف بنجاح";
 
             else
 

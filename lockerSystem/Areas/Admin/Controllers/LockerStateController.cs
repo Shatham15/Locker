@@ -42,7 +42,7 @@ namespace lockerSystem.Areas.Admin.Controllers
             {
                 string check = await _LockerStateDomain.addLockerState(state);
                 if (check == "1")
-                    ViewData["Successful"] = "تمت الاضافه بنجاح";
+                    ViewData["Successful"] = "تمت الاضافة بنجاح";
                 else
                     ViewData["Falied"] = check;
             }

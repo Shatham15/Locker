@@ -11,27 +11,17 @@
          <h5>عرض معلومات الحجز</h5>
         @* <div class="d-flex gap-2"> *@
             <div class="form-group">
-                @* <form class="d-md-inline-flex" asp-action="Info" asp-controller="Booking"> *@
+                <form class="d-md-inline-flex" asp-action="Info" asp-controller="Booking"> 
                     <div class="col-md-12">
                         <input type="search" name="seaechString" class="form-control table__quick_search"
                                placeholder="البحث السريع ...">
                     </div>
-                    <div class="col-md-8">
-                        <button class="btn btn-primary" type="submit">البحث من خلال رقم الخزنة </button>
-                    </div>
+                    
                 </form>
                 
 
             </div>
-            <div class="col-md-3">
-                <a asp-action="Info" class="btn btn-primary">العودة الى القائمة </a>
-            </div>
-            <div class="col-md-4">
-            <a asp-action="Index" class="btn btn-primary">حجز خزانة</a>
             
-             
-            <a asp-controller="Home" asp-action="Index"  class="btn btn-primary"> الصفحة الرئيسية</a>
-            </div>
         </div>
     </div> 
 
@@ -54,6 +44,7 @@
                                 <th>@Html.DisplayNameFor(m => m.Locker.Floor.no) </th>
                                 <th>@Html.DisplayNameFor(m => m.Locker.no)</th>
                                 <th>@Html.DisplayNameFor(m => m.colegename)  </th>
+                                <th>@Html.DisplayNameFor(m => m.rejectionReason)  </th>
                                 <th></th>
 
 
@@ -74,6 +65,7 @@
                                         <td>@item.Locker.Floor.no</td>
                                         <td>@item.Locker.no</td>
                                         <td>@item.colegename</td>
+                                        <td>@item.rejectionReason</td>
                                     </tr>
                                      
 

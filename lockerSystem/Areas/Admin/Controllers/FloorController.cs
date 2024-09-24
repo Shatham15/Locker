@@ -47,7 +47,7 @@ namespace lockerSystem.Areas.Admin.Controllers
             {
                 string check = await _floorDomain.addFloor(floor);
                 if (check == "1")
-                    ViewData["Successful"] = "تمت عملية الاضافه ";
+                    ViewData["Successful"] = "تمت الاضافة بنجاح ";
                 else
                     ViewData["Falied"] = check;
             }
@@ -72,7 +72,7 @@ namespace lockerSystem.Areas.Admin.Controllers
                 string check = await _floorDomain.editFloor(floor);
                 if (check == "1")
 
-                    ViewData["Successful"] = " تمت عملية التعديل ";
+                    ViewData["Successful"] = " تم التعديل بنجاح ";
                 else
                     ViewData["Falied"] = check;
 
@@ -87,7 +87,7 @@ namespace lockerSystem.Areas.Admin.Controllers
             string check = await _floorDomain.deleteFloor(id);
             if (check == "1")
 
-                ViewData["Successful"] = " تمت عملية الحذف ";
+                ViewData["Successful"] = " تم الحذف بنجاح ";
 
             else
 
